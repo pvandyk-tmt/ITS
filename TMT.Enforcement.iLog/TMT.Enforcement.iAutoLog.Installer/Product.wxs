@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="TMT.Enforcement.iAutoLog.Installer" Language="1033" Version="1.0.6.0" Manufacturer="TMT" UpgradeCode="60D12D3E-7B36-49A0-9F6A-24BA278D38EB">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<PropertyRef Id="NETFRAMEWORK45" />
+		<Condition Message="[ProductName] requires Microsoft .NET Framework 4.5 or greater"><![CDATA[Installed OR NETFRAMEWORK45]]></Condition>
+		<MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<Media Id='1' Cabinet='ilog.cab' EmbedCab='yes' />
+		<Upgrade Id='544C6BD3-39E0-4AA3-A204-E7C29F396B34'>
+			<UpgradeVersion OnlyDetect='no' Property='SELFFOUND'
+					Minimum='1.0' IncludeMinimum='yes'
+					Maximum='99.0' IncludeMaximum='yes' />
+			<UpgradeVersion OnlyDetect='yes' Property='NEWERFOUND'
+					Minimum='1.0' IncludeMinimum='no' />
+		</Upgrade>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="DesktopFolder" Name="Desktop" />
+
+			<Directory Id="ProgramMenuFolder" Name="Programs">
+				<Directory Id="ApplicationProgramsFolder" Name="TMT">
+					<Component Id="ProgramMenuDir" Guid="{77F4DD40-237D-46EF-87BB-BE6B0A98165D}">
+						<RemoveFolder Id="ProgramMenuDir" On="uninstall"/>
+						<RegistryValue Root="HKCU" Key="Software\TMT\iAutoLog" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+					</Component>
+				</Directory>
+			</Directory>
+
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="TMTDIR" Name="TMT">
+					<Directory Id="iAutoLogFolder" Name="iAutoLog">
+						<Directory Id="iAutoLogResourcesFolder" Name="Resources"/>
+						<Directory Id="iAutoLogConfigFolder" Name="Config"/>
+						<Directory Id="iAutoLogReportsFolder" Name="Reports"/>
+					</Directory>
+				</Directory>
+			</Directory>
+
+		</Directory>
+
+		<Feature Id="MainTree" Title="TMT" Level="1" ConfigurableDirectory="TMTDIR">
+			<Feature Id="iAutoLog" Title="iAutoLog" Level="1" Absent="allow" Description="iAutoLog">
+				<ComponentGroupRef Id="iAutoLogComponent"/>
+				<!--<ComponentGroupRef Id="iLogResourcesComponent"/>-->
+				<ComponentGroupRef Id="iAutoLogConfigComponent"/>
+				<ComponentGroupRef Id="iAutoLogReportsComponent"/>
+			</Feature>
+		</Feature>
+		<UIRef Id="WixUI_FeatureTree" />
+	</Product>
+	<Fragment>
+		<!--<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="DesktopFolder" Name="Desktop" />
+
+			<Directory Id="ProgramMenuFolder" Name="Programs">
+				<Directory Id="ApplicationProgramsFolder" Name="TMT">         
+			
+					<Directory Id="iLogResourcesFolder" Name="Resources"/>
+					<Directory Id="iLogConfigFolder" Name="Config"/>
+					<Directory Id="iLogReportsFolder" Name="Reports"/>
+					<Component Id="ProgramMenuDir" Guid="{cf04e577-c00d-4bfa-b6ac-3e17f49876f7}">
+						<RemoveFolder Id="ProgramMenuDir" On="uninstall"/>
+						<RegistryValue Root="HKCU" Key="Software\TMT\iLog" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+
+		<Feature Id="MainTree" Title="TMT" Level="1" ConfigurableDirectory="TMT">
+			<Feature Id="iLog" Title="iLog" Level="1" Absent="allow" Description="iLog">
+				<ComponentGroupRef Id="iLogComponent"/>
+				-->
+		<!--<ComponentGroupRef Id="iLogResourcesComponent"/>-->
+		<!--
+				-->
+		<!--<ComponentGroupRef Id="iLogConfigComponent"/>-->
+		<!--
+				<ComponentGroupRef Id="iLogReportsComponent"/>
+			</Feature>
+		</Feature>
+		<UIRef Id="WixUI_FeatureTree" />
+	</Product>
+	<Fragment>-->
+
+		<ComponentGroup Id="iAutoLogReportsComponent" Directory="iAutoLogReportsFolder">
+			<Component Id="Reports" Guid="{085E6F8B-F60A-4607-BF47-93123964993C}" KeyPath="yes">
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\Reports\AutoLogStatsReport.rdlc"/>
+			</Component>
+		</ComponentGroup>
+
+		<ComponentGroup Id="iAutoLogConfigComponent" Directory="iAutoLogConfigFolder">
+			<Component Id="Configs" Guid="{22069366-00B4-40A7-AA19-787B1DDF2490}" KeyPath="yes">
+				<File Source="C:\Code\Core\TMT.Core.Camera\bin\Release\Config\CameraConfig.xml"/>
+			</Component>
+		</ComponentGroup>
+
+		<!--<ComponentGroup Id="iLogResourcesComponent" Directory="iLogResourcesFolder">
+			<Component Id="Resources" Guid="{1f8b0d55-b834-4874-9dd8-15e4071b1721}" KeyPath="yes">
+				<File Source="$(var.SolutionDir)iLog\bin\$(var.TMT.Enforcement.iLog.Configuration)\Resources\app.ico"/>
+				<File Source="$(var.SolutionDir)iLog\bin\$(var.TMT.Enforcement.iLog.Configuration)\Resources\folder.ico"/>
+				<File Source="$(var.SolutionDir)iLog\bin\$(var.TMT.Enforcement.iLog.Configuration)\Resources\legend.jpg"/>
+			</Component>
+		</ComponentGroup>-->
+
+		<!--<ComponentGroup Id="iLogComponent" Directory="ENFORCEMENT">-->
+		<ComponentGroup Id="iAutoLogComponent" Directory="iAutoLogFolder">
+			<Component Id="iAutoLog" Guid="{9663F92F-9085-4869-918F-54E0A836B40B}">
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Enforcement.iAutoLog.exe" KeyPath="yes">          
+				</File>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Enforcement.iAutoLog.exe.config" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Core.Camera.Interfaces.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Enforcement.iLog.Controls.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Enforcement.iLog.Persistence.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Core.Camera.Base.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera\bin\Release\TMT.Core.Camera.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Core.Camera.Utils.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Core.Camera.RedRoom.Base.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Core.Camera.RedRoom.dll" />
+
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Atlas.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Autofac.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Autofac.xml"/>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Quartz.dll"/>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Common.Logging.Core.dll"/>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Common.Logging.Core.xml"/>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Common.Logging.dll"/>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Common.Logging.xml"/>
+
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Enforcement.ErrorWriting.dll"/>
+							
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\TMT.Core.dll" />
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Oracle.DataAccess.dll"/>
+
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Microsoft.ReportViewer.Common.dll"/>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Microsoft.ReportViewer.ProcessingObjectModel.dll"/>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Microsoft.ReportViewer.WinForms.dll"/>
+				<File Source="$(var.SolutionDir)TMT.Enforcement.iAutoLog\bin\$(var.TMT.Enforcement.iAutoLog.Configuration)\Microsoft.ReportViewer.WinForms.xml"/>
+				
+				<File Source="C:\Code\Core\TMT.Core.VideoSource.PreProcessor.Common.TVG\bin\Release\TMT.Core.VideoSource.PreProcessor.Common.TVG.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.Artemis\bin\Release\TMT.Core.Camera.Artemis.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.Aurecon.DOT\bin\Release\TMT.Core.Camera.Aurecon.DOT.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.DigiCam\bin\Release\TMT.Core.Camera.DigiCam.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam\bin\Release\TMT.Core.Camera.SafetyCam.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam.SOD\bin\Release\TMT.Core.Camera.SafetyCam.DOT.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam.DOTL\bin\Release\TMT.Core.Camera.SafetyCam.DOTL.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.TruCam\bin\Release\TMT.Core.Camera.TruCam.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.HandyCam\bin\Release\TMT.Core.Camera.VideoSource.TVG.dll" />
+
+				<File Source="C:\Code\Core\TMT.Core.Camera.TruCam\bin\Release\ltijmf.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam\bin\Release\readenc.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam\bin\Release\readenc5600.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam\bin\Release\readenc6000.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam\bin\Release\stcdecode.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam\bin\Release\stcdecode2.dll" />
+				<File Source="C:\Code\Core\TMT.Core.Camera.SafetyCam\bin\Release\stcdecode6216-4240-01-01.dll" />
+			</Component>
+
+		</ComponentGroup>
+
+	</Fragment>
+</Wix>

@@ -1,0 +1,9 @@
+﻿@{
+    var values = new [] { new { ID = (int)Kapsch.Core.Gateway.Models.Enums.PaymentMethod.Court, FormattedName = Kapsch.Core.Gateway.Models.Enums.PaymentMethod.Court.ToString() } } ;
+}
+
+<div class="form-group">
+    <h5>Payment Type</h5>
+    @Html.DropDownList("paymentMethod", new SelectList(values, "ID", "FormattedName", ""), new { @class = "form-control input-sm" })
+    <div class="hr-line-dashed"></div>
+</div>

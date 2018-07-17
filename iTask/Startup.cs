@@ -1,0 +1,60 @@
+﻿using Kapsch.ITS.App.Common;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+
+namespace iTask
+{
+    public class Startup : IShellApplication
+    {
+        public static Kapsch.ITS.App.Common.Models.AuthenticatedUser AuthenticatedUser;
+
+        public bool HasAccess(Kapsch.ITS.App.Common.Models.AuthenticatedUser authenticatedUser)
+        {
+            AuthenticatedUser = authenticatedUser;
+            return authenticatedUser.IsInRole("IMS Work Station: iApps - iCapture");
+        }
+
+        public void Show(Kapsch.ITS.App.Common.Models.AuthenticatedUser authenticatedUser)
+        {
+            AuthenticatedUser = authenticatedUser;
+            try
+            {
+                var mainWindow = new MainWindow();
+                mainWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                //go back to main screen
+            }
+        }
+
+        public string MenuLabel
+        {
+            get { return "iTask " + Version; }
+        }
+
+        public Bitmap MenuImage
+        {
+            get
+            {
+                Bitmap bitmap = new Bitmap(Application.GetResourceStream(new Uri("pack://application:,,,/iTask;component/Images/app.png")).Stream);
+
+                return bitmap;
+            }
+        }
+
+        private string Version
+        {
+            get
+            {
+                return Assembly.GetCallingAssembly().GetName().Version.ToString();
+            }
+        }
+    }
+}

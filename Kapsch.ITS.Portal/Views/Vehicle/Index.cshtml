@@ -1,0 +1,173 @@
+﻿@model Kapsch.Gateway.Models.Shared.PaginationListModel<Kapsch.EVR.Gateway.Models.Vehicle.VehicleModel>
+
+<script>
+    $("#breadcrumbText").html("Vehicle Testing / <b>Search Inspection Bookings</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search Inspection Bookings</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+
+                        
+
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-4 col-md-2 control-label">VIN</label>
+                            <div class="col-sm-6 col-md-4">
+                                <input type="text" id="vehicleIDNumber" class="form-control" style="text-transform:uppercase" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 col-md-2 control-label">Engine Number</label>
+                            <div class="col-sm-6 col-md-4">
+                                <input type="text" id="engineNumber" class="form-control" style="text-transform:uppercase" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 col-sm-offset-4 col-md-2 col-md-offset-2">
+                                <input type="button" value="Search" class="btn btn-primary" onclick="doSearch()" style="width:100%" />
+                            </div>
+                            <div class="col-sm-3 col-md-2">
+                                <a class="btn btn-primary" href="@Url.Action("CreateVehicle", "Vehicle")" style="width:100%">
+                                    New
+                                </a>
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                    <div id="searchResults" class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script>
+
+        var searchUrl = '@Url.Action("ListVehicles", "Vehicle")';
+        var editUrl = '@Url.Action("VehicleDetails", "Vehicle")';
+        var viewUrl = '@Url.Action("VehicleDetails", "Vehicle")';
+        var page = 1;
+        var grid = null;
+
+        $(function () {
+            
+            grid = $("#jqGrid").jqGrid({
+                url: searchUrl,
+                mtype: "POST",
+                postData: {
+                    vehicleIDNumber: function () { return $("#vehicleIDNumber").val().toUpperCase() },
+                    engineNumber: function () { return $("#engineNumber").val().toUpperCase() }
+                },
+                height: 450,
+                autowidth: true,
+                shrinkToFit: true,
+                datatype: "json",
+                colNames: [
+                    '',
+                    'Reference No.',
+                    'VIN',
+                    'Engine No.',
+                    'Year Model',
+                    'VLN',
+                    'Net Weight',
+                    'GVM',
+                    'Licence Expiry',
+                    'Roadworth Expiry',
+                    'Insurance Expiry',
+                    'Captured Date'
+                    
+                ],
+                colModel: [
+                    { name: 'ID', key: true, hidden: true },
+                    { name: 'BookingReference', key: false },
+                    { name: 'VIN', key: false },
+                    { name: 'EngineNumber', key: false },
+            
+                    { name: 'YearOfMake', key: false },
+                    { name: 'VLN', key: false },
+                    { name: 'NetWeight', key: false },
+                    { name: 'GVM', key: false },
+                    
+                    { name: 'FormattedLicenceExpiryDate', key: false },
+                    { name: 'FormattedRoadworthyExpiryDate', key: false },
+                    { name: 'FormattedInsuranceExpiryDate', key: false },
+                    { name: 'FormattedCapturedDate', key: false }//,
+                    
+                ],
+                viewrecords: true,
+                rowNum: 20,
+                pager: "#jqGridPager",
+                page: page
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#jqGrid').setGridWidth(width);
+
+            });
+
+            function createEditLink(cellvalue, options, rowObject) {
+
+                var id = rowObject.ID;
+                var html = '';
+                html = "<a id='editLink" + id + "'  class='memberAction' href='" + editUrl + "?id=" + id + "' style='color:blue;cursor:pointer;' type='button' title='" + 'Edit' + "'>" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+
+                return html;
+            }
+
+            function getSelectedRow() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.jqGrid('getGridParam', "selrow");
+
+                if (rowKey)
+                    alert("Selected row primary key is: " + rowKey);
+                else
+                    alert("No rows are selected");
+            }
+
+        });
+
+        function doSearch() {
+            page = 1;
+            reloadGrid();
+        }
+
+        var reloadGrid = function() {
+            grid.setGridParam({
+                datatype: 'json',
+                page: page            //Replace the '1' here
+            }).trigger('reloadGrid');
+        };
+
+    </script>
+}
+
+
+
+

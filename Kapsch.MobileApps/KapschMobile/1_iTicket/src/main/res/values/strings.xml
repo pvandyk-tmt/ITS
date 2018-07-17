@@ -1,0 +1,674 @@
+<resources>
+    <string name="downloading_configuration_info">downloading configuration info</string>
+    <string name="downloading_configuration_info_failed">downloading configuration info failed</string>
+    <string name="configuration_info_downloaded">configuration info downloaded</string>
+
+    <string name="downloading_charge_info">downloading charge info</string>
+    <string name="downloading_charge_info_failed">downloading charge info failed</string>
+    <string name="charge_info_downloaded">charge info downloaded</string>
+
+    <string name="downloading_court_detail">downloading court detail</string>
+    <string name="downloading_court_detail_failed">downloading court detail failed</string>
+    <string name="court_detail_downloaded">court detail downloaded</string>
+
+    <string name="downloading_public_holidays">downloading public holidays</string>
+    <string name="downloading_public_holidays_failed">downloading public holidays failed</string>
+    <string name="public_holidays_downloaded">public holidays downloaded</string>
+
+    <string name="downloading_infringement_locations">downloading infringement locations</string>
+    <string name="downloading_infringement_locations_failed">downloading infringement locations failed</string>
+    <string name="infringement_locations_downloaded">infringement locations downloaded</string>
+
+    <string name="downloading_vosi_action">downloading vosi actions</string>
+    <string name="downloading_vosi_action_failed">downloading vosi actions failed</string>
+    <string name="vosi_action_downloaded">vosi actions downloaded</string>
+
+    <string name="downloading_identification_type">downloading identification types</string>
+    <string name="downloading_identification_type_failed">downloading identification types failed</string>
+    <string name="identification_type_downloaded">identification types downloaded</string>
+
+    <string name="downloading_countries">downloading countries</string>
+    <string name="downloading_countries_failed">downloading countries failed</string>
+    <string name="countries_downloaded">countries downloaded</string>
+
+    <string name="downloading_ticket_numbers">downloading ticket numbers</string>
+    <string name="downloading_ticket_numbers_failed">downloading ticket numbers failed</string>
+    <string name="ticket_numbers_downloaded">ticket numbers downloaded</string>
+
+    <string name="synchronisation_required">Synchronization required\r\nPlease press \'UPDATE\' to synchronise.</string>
+    <string name="query_updates">QUERY UPDATES</string>
+    <string name="update">UPDATE</string>
+    <string name="data_is_up_to_date">Data is up to date.</string>
+
+    <string name="uploading_ticket">uploading ticket</string>
+    <string name="uploading_ticket_failed">uploading ticket failed</string>
+    <string name="uploading_ticket_successful">uploading ticket successful</string>
+
+    <string name="uploading_vosi_action_capture">uploading vosi action</string>
+    <string name="uploading_vosi_action_capture_failed">uploading vosi action failed</string>
+    <string name="uploading_vosi_action_capture_successful">uploading vosi action successful</string>
+
+    <string name="uploading_user_activity_log">uploading user activity log</string>
+    <string name="uploading_user_activity_log_failed">uploading user activity log failed</string>
+    <string name="uploading_user_activity_log_successful">uploading user activity log successful</string>
+
+    <string name="vosi_action">Vosi Action:</string>
+
+    <string name="delete_evidence_failed">delete evidence failed</string>
+    <string name="uploading_evidence_successfull">uploading evidence successfull</string>
+    <string name="uploading_evidence_failed">uploading evidence failed</string>
+    <string name="uploading_evidence">uploading evidence</string>
+
+    <string name="no_more_tickets_available">No more %s tickets are available, please run updates to top up tickets.</string>
+    <string name="available_tickets">Available tickets:</string>
+    <string name="unsynchronised_tickets">Unsynchronised tickets:</string>
+    <string name="not_printed">Not printed:</string>
+
+    <string name="unknown">Unknown</string>
+    <string name="zambian_id">Zambian ID</string>
+    <string name="zambian_passport">Zambian Passport</string>
+    <string name="foreign_id_document">Foreign ID Document</string>
+    <string name="foreign_Passport">Foreign Passport</string>
+    <string name="zambian_drivers_card">Zambian Drivers Card</string>
+    <string name="zone_speed">Zone: %1$s Speed: %2$s</string>
+
+    <string name="camera_prosecution">Camera Prosecution</string>
+    <string name="comments">Comments:</string>
+
+    <string name="app_name">iTicket</string>
+    <string name="next_Button_Text">Next</string>
+    <string name="back_Button_Text">Back</string>
+    <string name="finish_Button_Text">Finish</string>
+    <string name="wizard_Button_Text">Wizard</string>
+    <string name="title_fragment_drivers_Licence">Drivers Licence Card</string>
+    <string name="title_fragment_drivers_Licence_Ex">Driver Information</string>
+
+    <string name="text_fragment_drivers_Licence_Name">Name:</string>
+    <string name="text_fragment_drivers_Licence_Gender">Gender:</string>
+    <string name="text_fragment_drivers_Licence_Id_Number">Id No:</string>
+    <string name="text_fragment_drivers_Licence_id_type">Id Type:</string>
+    <string name="text_fragment_drivers_Licence_country">Country:</string>
+    <string name="text_fragment_drivers_Licence_Initials">Initials:</string>
+    <string name="text_fragment_drivers_Licence_Lic_no">Licence No:</string>
+    <string name="text_fragment_drivers_Licence_Date_Of_Birth">DOB:</string>
+    <string name="text_fragment_drivers_Licence_Valid">Valid:</string>
+    <string name="text_fragment_drivers_Licence_Issued">Issued:</string>
+    <string name="text_fragment_drivers_Licence_Code">Code</string>
+    <string name="text_fragment_drivers_Licence_Restrictions">Restrictions:</string>
+    <string name="text_fragment_drivers_Licence_First_Issue">First Issue</string>
+    <string name="text_fragment_drivers_Licence_Name_Placeholder">NAME PLACEHOLDER</string>
+    <string name="text_fragment_drivers_Licence_Veh_Restrictions">Veh Restrictions</string>
+    <string name="text_fragment_drivers_Licence_First_Name">First name:</string>
+    <string name="text_fragment_drivers_Licence_Last_Name">Last name:</string>
+    <string name="text_fragment_drivers_Licence_Occupation">Occupation:</string>
+    <string name="text_fragment_drivers_Licence_Email">Email:</string>
+    <string name="text_fragment_drivers_Licence_Mobile_Number">Mobile No:</string>
+    <string name="fragment_drivers_title_a">Drivers License Card</string>
+    <string name="fragment_drivers_title_b">Driver information</string>
+    <string name="fragment_drivers_person_details_title">Personal details</string>
+    <string name="text_fragment_drivers_Licence_Gardian">Parent/Gaurdian:</string>
+    <string name="fragment_drivers_Licence_not_valid_rsa_id">Not a valid RSA ID number</string>
+
+    <string name="text_fragment_address_capture_ex_address_line_one">Line One:</string>
+    <string name="text_fragment_address_capture_ex_address_line_two">Line Two:</string>
+    <string name="text_fragment_address_capture_ex_address_description">Description:</string>
+    <string name="text_fragment_address_capture_ex_address_line_suburb">Suburb:</string>
+    <string name="text_fragment_address_capture_ex_address_line_city">City:</string>
+    <string name="text_fragment_address_capture_ex_address_line_code">Code:</string>
+    <string name="text_fragment_address_capture_ex_address_home_address">Home Address</string>
+    <string name="text_fragment_address_capture_ex_address_business_address">Business Address</string>
+    <string name="text_fragment_address_capture_ex_address_postal_address">Postal Address</string>
+    <string name="text_fragment_address_capture_ex_address_offence_address">Offence Location</string>
+
+    <string name="fragment_signature_title">Infringer Signature</string>
+
+    <string name="title_fragment_vehicle_Licence">Vehicle Licence Disc</string>
+    <string name="title_fragment_vehicle_Licence_Ex">Vehicle Information</string>
+    <string name="text_fragment_vehicle_Licence_Lic_no">Licence No:</string>
+    <string name="text_fragment_vehicle_Licence_Disk_no">Disk No:</string>
+    <string name="text_fragment_vehicle_Licence_Description">Description:</string>
+    <string name="text_fragment_vehicle_Licence_Make">Make:</string>
+    <string name="text_fragment_vehicle_Licence_Model">Model:</string>
+    <string name="text_fragment_vehicle_Licence_Colour">Colour:</string>
+    <string name="text_fragment_vehicle_Licence_Series">Series:</string>
+    <string name="text_fragment_vehicle_Licence_Vin">VIN:</string>
+    <string name="text_fragment_vehicle_Licence_Engine_No">Engine No:</string>
+    <string name="text_fragment_vehicle_Licence_Expiry_Date">Expiry Date:</string>
+    <string name="text_fragment_vehicle_register_no">Register No:</string>
+    <string name="text_fragment_vehicle_Licence_type">Type:</string>
+    <string name="fragment_vehicle_title_a">Vehicle License Disc</string>
+    <string name="fragment_vehicle_title_b">Vehicle information</string>
+    <string name="fragment_vehicle_date_message">Date</string>
+
+    <string name="text_place_holder">-</string>
+    <string name="fragment_charge_code_text">Code:</string>
+    <string name="fragment_charge_1_title">Charge 1</string>
+    <string name="fragment_charge_2_title">Charge 2</string>
+    <string name="fragment_charge_3_title">Charge 3</string>
+    <string name="fragment_charge_notes">Notes</string>
+    <string name="offence_date">Offence Date:</string>
+    <string name="offence_date_ex">Offence Date</string>
+    <string name="fragment_charge_description_text">Description:</string>
+    <string name="fragment_charge_offence_text">Offence:</string>
+    <string name="fragment_charge_regulation_text">Regulation:</string>
+    <string name="fragment_charge_fine_amount_text">Amount:</string>
+    <string name="fragment_charge_alternative_text">Alternative</string>
+    <string name="fragment_charge_title">Charges</string>
+    <string name="fragment_charge_please_capture_vehicle_info_message">Please capture vehicle information for non bylaw charges.</string>
+    <string name="fragment_charge_amount_invalid">Please enter a valid charge amount.</string>
+    <string name="fragment_print_add_additional_notice">Add additional notice</string>
+
+    <string name="title_activity_capture">CaptureActivity</string>
+    <string name="title_activity_camera_capture">CameraCaptureActivity</string>
+
+    <string name="fragment_scan_button_text">SCAN BARCODE</string>
+
+    <string name="activity_about_title">About</string>
+    <string name="activity_login_title">Login</string>
+    <string name="activity_login_username_text_view_text">Username</string>
+    <string name="activity_login_password_text_view_text">Password</string>
+    <string name="activity_login_login_button_text">Login</string>
+    <string name="activity_login_login_failed_message">Username or password is invalid.</string>
+    <string name="charge_info_list_is_empty">Charge info list is empty</string>
+
+    <string name="activity_signature_clear_button_text">Clear</string>
+    <string name="activity_signature_ok_button_text">OK</string>
+    <string name="activity_signature_title">Officer Signature</string>
+
+    <string name="activity_court_message">Please verify the court date</string>
+    <string name="activity_court_district_text">District:</string>
+    <string name="activity_court_court_text">Court:</string>
+    <string name="activity_court_room_text">Room:</string>
+    <string name="activity_court_date_text">Date:</string>
+    <string name="activity_court_court_date_text">Court Date:</string>
+    <string name="activity_court_title">Court Date</string>
+
+    <string name="activity_main_prosecute_button_text">Prosecute</string>
+    <string name="activity_main_title">Home</string>
+
+    <string name="activity_district_list_ok_button">OK</string>
+    <string name="activity_district_list_search_button">Search</string>
+
+    <string name="activity_main_user_null_message">User is null</string>
+    <string name="activity_main_court_null_message">Court is null</string>
+    <string name="activity_main_district_null_message">District is null</string>
+    <string name="activity_main_configure_printer">Please configure a printer before issuing a ticket</string>
+
+    <string name="activity_main_enabled_provider">Enabled provider </string>
+    <string name="activity_main_disabled_provider">Disabled provider </string>
+
+    <string name="activity_main_court_not_selected">This option requires court to be selected. </string>
+    <string name="activity_main_user_not_logged_in">This option requires a user to be logged in. </string>
+    <string name="activity_main_printer_not_configured">This option requires a printer to be configured. </string>
+    <string name="activity_main_district_not_configured">This option requires district to be configured. </string>
+    <string name="activity_main_no_tickets_available_message">No more section %d tickets are available, please run updates to top up tickets.</string>
+
+    <string name="activity_distance_over_time_title">Distance Over Time</string>
+    <string name="activity_distance_over_time_speed">Speed:</string>
+    <string name="activity_distance_over_time_license">License:</string>
+    <string name="activity_distance_over_time_zone">Zone:</string>
+    <string name="activity_distance_over_time_vehicle_class">Class:</string>
+    <string name="activity_distance_over_time_camera_ip">Camera IP:</string>
+    <string name="activity_distance_over_time_request_service">REQUEST SERVICE</string>
+
+    <string name="signature_capture_no_signature">Please capture a signature.</string>
+
+    <string name="message_asset_file_not_found">Asset file not found.</string>
+    <string name="message_none">none</string>
+    <string name="message_date_parse_error">Date format error.</string>
+    <string name="message_not_valid_vehicle_disc_barcode">Not a valid vehicle disc barcode</string>
+    <string name="message_not_valid_drivers_licence_card_barcode">Not a valid drivers licence card barcode</string>
+
+    <string name="court_list_is_empty">Court list is empty</string>
+    <string name="court_room_list_is_empty">Court room list is empty</string>
+    <string name="court_date_list_is_empty">Court dates list is empty</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_fragment_address_capture_infringer_address">Infringer:</string>
+    <string name="title_fragment_address_capture_business_address">Business:</string>
+    <string name="title_fragment_address_capture_offence_address">Offence:</string>
+
+    <string name="title_fragment_address_capture_search_message">Search</string>
+    <string name="title_fragment_address_capture_detail_message">Detail</string>
+    <string name="title_fragment_address_capture_select_message">Select</string>
+    <string name="title_fragment_address_capture_saved_address">Saved Address:</string>
+    <string name="fragment_address_search_discover_button_text">Search For Printers</string>
+    <string name="fragment_address_search_save_button_text">Save Printer</string>
+    <string name="fragment_address_search_ok_button_text">OK</string>
+    <string name="fragment_address_search_cancel_button_text">Cancel</string>
+
+    <string name="activity_address_capture_title">Addresses </string>
+    <string name="activity_address_list_title">Possible Addresses</string>
+    <string name="activity_printer_list_title">Available Printers</string>
+    <string name="message_network_not_available">Network connection not available.</string>
+    <string name="message_no_results_found_for_search_criteria">No results found, for search criteria.</string>
+    <string name="message_search">Search:</string>
+    <string name="message_zone">Zone:</string>
+    <string name="activity_evidence_list_photo_text">Photo</string>
+    <string name="activity_evidence_list_voice_text">Voice</string>
+    <string name="outstanding_violations">Outstanding Violations</string>
+    <string name="charges">Charges</string>
+
+    <string name="activity_evidence_title">Evidence</string>
+    <string name="activity_district_list_title">Districts</string>
+
+    <string name="activity_discover_printer_name_label">Friendly Name:</string>
+    <string name="activity_discover_printer_address_label">Mac Address:</string>
+
+    <string name="activity_discover_printer_save_failed_message">Save Failed!</string>
+    <string name="activity_discover_printer_save_succeeded">Printer Saved</string>
+
+    <string name="charge_description_regulation_message">You wrongfully %1$s, in that you contravened %2$s</string>
+
+
+    <string name="activity_synchronise_data_updates_available_message">Synchronization required\r\nPlease press \'UPDATE\' to synchronise.</string>
+    <string name="activity_synchronise_data_updates_reference_list_failed_message">Device item list and/or Backend device is null.</string>
+    <string name="activity_synchronise_data_checking_for_updates_message">Checking for updates...</string>
+    <string name="activity_synchronise_data_software_up_to_date">Software is up to date</string>
+
+    <string name="data_service_updating_courts_message">Downloading courts...</string>
+    <string name="data_service_updating_vehicles_message">Downloading vehicle information...</string>
+    <string name="data_service_updating_offence_codes_message">Downloading offence codes...</string>
+    <string name="data_service_updating_users_message">Downloading users...</string>
+    <string name="data_service_updating_public_holiday_message">Downloading public holiday...</string>
+    <string name="data_service_uploading_section56_tickets_message">Uploading section56 tickets...</string>
+    <string name="data_service_uploading_section341_tickets_message">Uploading section341 tickets...</string>
+    <string name="data_service_updating_evidence_message">Updating evidence file...</string>
+    <string name="data_service_update_completed_message">Update completed.</string>
+    <string name="data_service_courts_update_failed_message">Courts download failed.</string>
+    <string name="data_service_vehicles_update_failed_message">Vehicles information download failed.</string>
+    <string name="data_service_courts_version_update_failed_message">Courts version update failed.</string>
+    <string name="data_service_vehicles_version_update_failed_message">Vehicles version update failed.</string>
+    <string name="data_service_courts_updated_message">Courts updated</string>
+    <string name="data_service_vehicles_updated_message">Vehicles updated</string>
+    <string name="data_service_title">Data Updates</string>
+    <string name="data_service_updating_gps_log_message">Uploading GPS logs...</string>
+    <string name="data_service_downloading_update_apk">Downloading device software...</string>
+    <string name="data_service_available_56tickets_caption">Available Section 56:</string>
+    <string name="data_service_unsynchronised_56tickets_caption">Unsynced Section 56:</string>
+    <string name="data_service_available_341tickets_caption">Available Section 341:</string>
+    <string name="data_service_unsynchronised_341tickets_caption">Unsynced Section 341:</string>
+    <string name="data_service_completing56_tickets">Marking 56 tickets as complete...</string>
+    <string name="data_service_completing341_tickets">Marking 341 tickets as complete...</string>
+    <string name="data_service_updating_device_config_message">Downloading device config...</string>
+
+    <string name="data_service_users_update_failed">Users update failed.</string>
+    <string name="data_service_users_version_update_failed">Users version update failed</string>
+    <string name="data_service_users_updated">Users updated</string>
+    <string name="data_service_offence_codes_update_failed">Offence codes update failed.</string>
+    <string name="data_service_offence_codes_updated">Offence codes updated</string>
+    <string name="data_service_offence_codes_version_updated_failed">"Offence codes version update failed"</string>
+    <string name="data_service_public_Holidays_update_failed">Public Holidays update failed.</string>
+    <string name="data_service_public_Holidays_version_update_failed">Public Holidays version update failed</string>
+    <string name="data_service_public_Holidays_updated">Public Holidays updated</string>
+    <string name="notice_numbers_download_failed">notice update failed</string>
+    <string name="data_service_section56_ticket_update_failed">Section56 ticket update failed</string>
+    <string name="data_service_ticket_update_failed">Ticket update failed</string>
+    <string name="data_service_section56_ticket_request_local_database_insert_failed">Section56 ticket request: local database insert failed.</string>
+    <string name="requesting_section56_notice_numbers">Requesting section 56 notice numbers</string>
+    <string name="requesting_section341_notice_numbers">Requesting section 341 notice numbers</string>
+    <string name="data_service_device_config_update_failed">Device configuration update failed.</string>
+    <string name="data_service_device_config_updated">Device config updated</string>
+
+    <string name="data_service_section341_ticket_update_failed">Section341 ticket update failed</string>
+    <string name="data_service_section341_ticket_request_local_database_insert_failed">Section341 ticket request: local database insert failed.</string>
+
+    <string name="court_info_title">Select Court</string>
+    <string name="court_info_court">Court:</string>
+    <string name="court_info_court_room">Court Room:</string>
+    <string name="court_info_court_date">Court Date:</string>
+
+    <string name="vehicle_info_title">Select Vehicle</string>
+    <string name="vehicle_info_vehicle_type_group">Vehicle Type Group:</string>
+    <string name="vehicle_info_vehicle_type">Vehicle Type:</string>
+    <string name="vehicle_info_vehilce_make">Vehicle Make:</string>
+
+    <string name="data_service_section56_ticket_updated">Section56 ticket updated</string>
+    <string name="data_service_ticket_updated">Notice numbers updated</string>
+    <string name="data_service_section56_update_failed">Section56 update failed</string>
+    <string name="data_service_section341_ticket_updated">Section341 ticket updated</string>
+    <string name="data_service_section341_update_failed">Section341 update failed</string>
+    <string name="data_service_local_delete_of_ticket_failed">_Local delete of ticket failed</string>
+    <string name="data_service_ticket_uploaded">Ticket uploaded</string>
+    <string name="data_service_evidence_upload_failed">Evidence upload failed</string>
+    <string name="data_service_local_delete_of_evidence_failed">Local delete of evidence failed</string>
+    <string name="data_service_evidence_uploaded">Evidence uploaded</string>
+    <string name="data_service_evidence_update_failed">Evidence update failed"</string>
+    <string name="data_service_download_of_device_update_software_failed">Download of device update software failed</string>
+    <string name="data_service_device_update_software_downloaded">Device update software downloaded</string>
+    <string name="data_service_gps_logs_upload_failed">Gps logs upload failed</string>
+    <string name="data_service_gps_logs_uploaded">Gps logs uploaded</string>
+    <string name="data_service_failed_to_obtain_districts">Failed to obtain districts</string>
+    <string name="data_service_districts_list_downloaded_succeeded">Disrict list download succeeded</string>
+    <string name="data_service_request_districts">Requesting district list</string>
+    <string name="data_service_register_device">Validating device registration</string>
+    <string name="data_service_registration_completed">Device registration successfull</string>
+    <string name="data_service_registration_failed">Device registration failed</string>
+    <string name="data_service_requesting_dlc_serializer_rsa_licence">Requesting DLC serializer RSA licence</string>
+    <string name="data_service_dlc_serializer_rsa_licence_request_failed">DLC serializer RSA licence request failed"</string>
+    <string name="data_service_dlc_serializer_rsa_licence_request_successful">DLC serializer RSA licence request successful"</string>
+    <string name="data_service_section56_set_complete_failed">Local set section56 to complete failed</string>
+    <string name="data_service_section341_set_complete_failed">Local set section341 to complete failed</string>
+    <string name="data_service_section56_set_complete_success">Section56 set complete success</string>
+    <string name="data_service_section341_set_complete_success">Section341 set complete success</string>
+    <string name="data_service_update_device_software">Software Update</string>
+
+    <string name="fragment_print_section">Print</string>
+
+    <string name="activity_cancellation_reason_other_text">Other</string>
+    <string name="activity_cancellation_reason_label_text">Cancellation Reason</string>
+    <string name="activity_cancellation_reason_other_reason_text">Please provide a reason</string>
+    <string name="activity_cancellation_reason_provide_valid_reason_message">Please provide a valid reason</string>
+
+    <string name="failed_to_save_ticket_message">Failed to save ticket"</string>
+    <string name="ok_text">OK"</string>
+    <string name="cancel_text">Cancel"</string>
+    <string name="activity_media_manager_maximum_duration_reached"> "Maximum duration reached."</string>
+
+    <string name="activity_charge_place_holder_title">Charge Information</string>
+
+    <string name="activity_icam_ip_address_caption">IP:</string>
+    <string name="activity_icam_ip_address_sperator">:</string>
+    <string name="activity_icam_connect_button_text">CONNECT</string>
+    <string name="activity_icam_issue_infringement_button_text">ISSUE INFRINGEMENT</string>
+    <string name="activity_icam_disconnect_button_text">DISCONNECT</string>
+    <string name="activity_icam_text_view_passage">Passage:</string>
+
+    <string name="infringement_notice">INFRINGEMENT NOTICE</string>
+    <string name="personal_details">A (PERSONAL DETAILS)</string>
+    <string name="Address_w">Address (W):</string>
+    <string name="vehicle_details">VEHICLE DETAILS</string>
+    <string name="reg_no">Reg No:</string>
+    <string name="make">Make:</string>
+    <string name="charge_details">C (CHARGE DETAILS)</string>
+    <string name="amount">Amount</string>
+    <string name="offence_location">Offence Location</string>
+    <string name="district">C2 (DISTRICT)</string>
+    <string name="court_details">D (COURT DETAILS)</string>
+    <string name="court_date">Court Date:</string>
+    <string name="court_name">Court Name:</string>
+    <string name="pay_by_date">E (PAY BY DATE)</string>
+    <string name="officer_details">F (OFFICER DETAILS)</string>
+    <string name="issue_date">Issue Date</string>
+    <string name="peace_officer_signature">peace officer signature</string>
+    <string name="accused_signature">accused signature</string>
+
+    <string name="header_a">City of Cape Town | Isixeko Sasekapa | Stad Kaapstad</string>
+    <string name="header_b">Notification in terms of Section 341 of Act 51 of 1977</string>
+    <string name="offender_details">OFFENDER DETAILS</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="id_number">Id Number</string>
+    <string name="id_type">Id Type</string>
+    <string name="age">Age</string>
+    <string name="gender">Gender</string>
+    <string name="mobile">Mobile</string>
+    <string name="address_h">Address (H)</string>
+    <string name="address_p">Address (P)</string>
+    <string name="section341_slip_vehicle_details">B (VEHICLE DETAILS)</string>
+    <string name="section341_slip_reg_no">Reg No</string>
+    <string name="section341_slip_make">Make</string>
+    <string name="offence_details">OFFENCE DETAILS</string>
+    <string name="charge_1">Charge 1</string>
+    <string name="offence">Offence</string>
+    <string name="description">Description</string>
+    <string name="officer_description">Officer Description</string>
+    <string name="offence_description">Offence Description</string>
+    <string name="regulation">Regulation</string>
+    <string name="alt_charge">Alt Charge</string>
+    <string name="charge_2">"Charge 2</string>
+    <string name="charge_3">"Charge 3</string>
+
+    <string name="registration_number">Registration Number</string>
+    <string name="nrc_number">NRC</string>
+
+    <string name="officer_official_details">OFFICER/OFFICIAL DETAILS</string>
+    <string name="officer_signature">officer signature</string>
+    <string name="original_to_accused">The original was handed to the accused &amp; importance thereof explained to him/her</string>
+    <string name="place_of_issue">Place of Issue</string>
+
+    <string name="officer_official_name">Officer/Official Name</string>
+    <string name="officer_official_code">Officer/Official Code</string>
+    <string name="district_name">District Name</string>
+    <string name="offence_number">Offence Number:</string>
+
+    <string name="section341_slip_parent_guardian">Parent/Guardian</string>
+
+    <string name="section341_slip_accused_signature">accused signature</string>
+    <string name="section341_slip_notification_341_text">Notification in terms of Section 341 of Act 51 of 1977</string>
+    <string name="section341_slip_notice_response_text">You must respond to this notice within 30 days of issue.</string>
+    <string name="section341_slip_notice_payment_text">PAYMENT INFORMATION ON REVERSE SIDE.</string>
+    <string name="section_slip_seperator">.............................................</string>
+    <string name="section_slip_line">_____________________________________________</string>
+    <string name="section_slip_blank_line">\u0020</string>
+    <string name="warning_of_intended_prosection">Warning of Intended Prosecution</string>
+    <string name="notice_of_intended_prosection">Notice of Intended Prosecution</string>
+    <string name="in_pursuant_to_section_162_of_the_road_traffic_act">In Pursuant to section 162 of the Road Traffic Act No. 11 of 2002</string>
+    <string name="you_are_hereby_warned_that_it_is_intended">You are hereby warned that it is intended to prosecute you for one or more of the following offences contrary to the Road Traffic Act No. 11 of 2002 of the laws of Zambia. For Contravening the listed charge(s):</string>
+    <string name="exceeding_the_speed_limit">•	Exceeding the Speed Limit</string>
+    <string name="reckless_driving">•	Reckless Driving</string>
+    <string name="dangerous_driving">•	Dangerous Driving</string>
+    <string name="careless_driving">•	Careless Driving</string>
+    <string name="failing_to_obey_traffic_signs_signal">•	Failing to obey traffic signs/signal</string>
+    <string name="obstructing_a_road">•	Obstructing a Road</string>
+    <string name="outstanding_offences_for">OUTSTANDING OFFENCES FOR</string>
+    <string name="payment_options">PAYMENT OPTIONS</string>
+
+    <string name="reprint_header_column_one">Ticket Number</string>
+    <string name="reprint_header_column_two">Issue Date</string>
+    <string name="reprint_activity_not_printed">NOTICES IN RED ARE MARKED AS NOT PRINTED</string>
+    <string name="reprint_activity_date">Select Date</string>
+    <string name="print">PRINT</string>
+
+    <string name="configuration_header_column_one">Description</string>
+    <string name="configuration_header_column_two">value</string>
+
+    <string name="charge_search_header_column_two">Code</string>
+    <string name="charge_search_header_column_three">Zone</string>
+
+    <string name="activity_charge_search_item_not_selected">No charge is selected.</string>
+
+    <string name="activity_configuration_description">Desc:</string>
+    <string name="activity_configuration_value">Value:</string>
+    <string name="save_text">Save</string>
+
+    <string name="activity_court_delimitation_court_date_invalid_message">Court date must be in the future.</string>
+
+    <string name="print_list_header_column_one">Available Printers</string>
+
+    <string name="not_available_message">N/A</string>
+
+    <string name="notice_to_appear_in_court">NOTICE TO APPEAR IN COURT</string>
+    <string name="terms_of_act">(SECTION 56 IN TERMS OF ACT 51 OF 1977)</string>
+    <string name="city_of_cape_town">City of Cape Town | Stad Kaapstad | Isixeko Sasekapa</string>
+    <string name="notice_details_heading">NOTICE DETAILS</string>
+    <string name="notice_details_caption_notice_number">Notice number:</string>
+    <string name="notice_details_caption_date_and_time_of_offence">Date and time of offence:</string>
+    <string name="notice_details_caption_location">Location:</string>
+    <string name="notice_details_caption_gps_coordinates">GPS coords:</string>
+
+    <string name="offender_details_heading">OFFENDER DETAILS</string>
+    <string name="offender_details_caption_first_name">First name:</string>
+    <string name="offender_details_caption_initials">Initials:</string>
+    <string name="offender_details_caption_surname">Surname:</string>
+    <string name="offender_details_caption_id_type">ID type:</string>
+    <string name="offender_details_caption_id_number">ID number:</string>
+    <string name="offender_details_caption_pdp_number">PDP number:</string>
+    <string name="offender_details_caption_telephone_number">Telephone number:</string>
+    <string name="offender_details_caption_cell_number">Cell number:</string>
+    <string name="offender_details_caption_gender">Gender:</string>
+    <string name="offender_details_caption_Age">Age:</string>
+    <string name="offender_details_caption_licence_number">Licence number</string>
+    <string name="offender_details_caption_home_address">Home physical address:</string>
+    <string name="offender_details_caption_work_address">Work physical address:</string>
+    <string name="offender_details_caption_postal_address">Postal address:</string>
+
+    <string name="vehicle_details_heading">VEHICLE DETAILS</string>
+    <string name="vehicle_details_caption_registration_number">Registration Number:</string>
+    <string name="vehicle_details_caption_vehicle_make">Vehicle make:</string>
+    <string name="vehicle_details_caption_licence_expiry_date">Licence expiry date:</string>
+    <string name="vehicle_details_caption_vehicle_model">Vehicle model:</string>
+    <string name="vehicle_details_caption_vehicle_type">Vehicle type:</string>
+    <string name="vehicle_details_caption_vehicle_colour">Vehicle colour:</string>
+    <string name="vehicle_details_caption_vehicle_register_number">Register number</string>
+    <string name="vehicle_details_caption_engine_number">Engine number:</string>
+    <string name="vehicle_details_caption_vin_chassis_number">VIN / Chassis number:</string>
+
+    <string name="details_heading">CHARGE DETAILS</string>
+    <string name="act_regulation">Act/Regulation</string>
+    <string name="charge_code">Charge code:</string>
+    <string name="charge_description">Charge description:</string>
+    <string name="fine_amount">Fine amount:</string>
+    <string name="alternative_charge">Alternative charge:</string>
+    <string name="nag">NAG:</string>
+
+    <string name="details_caption">PAYMENT DETAILS:</string>
+    <string name="payment_details_caption_DESC">Date and place where admission of guilt fine(s) may be paid to avoid appearance in court</string>
+    <string name="court">Court:</string>
+    <string name="court_room">Court Room:</string>
+    <string name="due_date">Payment due date:</string>
+    <string name="electronic_payment">Electronic payment:</string>
+    <string name="electronic_payment_value">www.paycity.co.za</string>
+    <string name="postal_payment_caption">Post payment: </string>
+    <string name="postal_payment_address">City of Cape Town, Traffic Services, Private Bag X19, Roggebaai, 8012</string>
+
+    <string name="court_details_caption">COURT DETAILS:</string>
+    <string name="court_details_message">Date and place you are personally to appear in court</string>
+    <string name="court_details_court">Court:</string>
+    <string name="court_details_court_room">Court Room:</string>
+    <string name="court_details_court_date">Court Date:</string>
+
+    <string name="officer_details_heading">OFFICER DETAILS</string>
+    <string name="officer_details_caption_officer_number">Officer number:</string>
+    <string name="officer_details_caption_officer_name">Officer name:</string>
+    <string name="officer_details_caption_officer_group">Officer group:</string>
+
+    <string name="accused_rights_heading">RIGHTS OF THE ACCUSED</string>
+    <string name="syntell_section_officer_signature">OFFICER SIGNATURE</string>
+
+    <string name="syntell_section56_accused_signature">ACCUSED SIGNATURE</string>
+
+    <string name="vosi_enatis_query_heading">eNATIS / SAPS query</string>
+    <string name="vosi_enatis_query">\?</string>
+    <string name="enatis_query_text">eNATIS</string>
+    <string name="saps_query_text">SAPS</string>
+    <string name="saps_enatis_try_again_text">PLEASE TRY AGAIN</string>
+
+    <string name="Vln">Vln:</string>
+    <string name="LicenceDiscNumber">LicenceDiscNumber:</string>
+    <string name="Gvm">Gvm:</string>
+    <string name="Make">Make:</string>
+    <string name="MakeCode">MakeCode:</string>
+    <string name="Model">Model:</string>
+    <string name="ModelCode">ModelCode:</string>
+    <string name="ColorCode">ColorCode:</string>
+    <string name="Color">Color:</string>
+    <string name="Category">Category:</string>
+    <string name="Description">Description:</string>
+    <string name="VehicleState">VehicleState:</string>
+    <string name="RwState">RwState:</string>
+    <string name="Vin">Vin:</string>
+    <string name="EngineNumber">EngineNumber:</string>
+    <string name="RegistrationNumber">RegistrationNumber:</string>
+    <string name="CategoryCode">CategoryCode:</string>
+    <string name="DescriptionCode">DescriptionCode:</string>
+    <string name="RwStateCode">RwStateCode:</string>
+    <string name="Owner">Owner:</string>
+    <string name="IdDocumentTypeCode">IdDocumentTypeCode:</string>
+    <string name="IdNumber">IdNumber:</string>
+    <string name="HomePhoneNumber">HomePhoneNumber:</string>
+    <string name="WorkPhoneNumber">WorkPhoneNumber:</string>
+    <string name="FaxNumber">FaxNumber:</string>
+    <string name="CellularNumber">CellularNumber:</string>
+    <string name="EmailAddresss">EmailAddresss:</string>
+    <string name="LastName">LastName:</string>
+    <string name="FirstName">FirstName:</string>
+    <string name="Initials">Initials:</string>
+
+    <string name="syntell_section341_slip_notice_in_terms_of_section_341">Notification in terms of Section 341 of Act 51 of 1977</string>
+    <string name="syntell_section341_slip_charge_details_heading_description">It is illegal that you have committed the following offence.</string>
+
+    <string name="end_of_day_report">END OF DAY REPORT</string>
+    <string name="notice_number">Notice Number:</string>
+    <string name="notice_number_uppercase">NOTICE NUMBER</string>
+    <string name="end_of_day_report_adapter_offender_id_number">Id Number:</string>
+    <string name="end_of_day_report_adapter_name">Name:</string>
+    <string name="end_of_day_report_description">Description:</string>
+    <string name="end_of_day_report_offence_code">Offence Code:</string>
+    <string name="end_of_day_report_offence_date">Date/Time:</string>
+    <string name="end_of_day_report_charge">Charge:</string>
+    <string name="end_of_day_report_alt_charge">Alternative Charge</string>
+    <string name="end_of_day_report_short_alt_charge">Alt Charge</string>
+    <string name="end_of_day_report_charge1">Charge 1</string>
+    <string name="end_of_day_report_charge2">Charge 2</string>
+    <string name="end_of_day_report_charge3">Charge 3</string>
+    <string name="end_of_day_report_vehicle">Vehicle:</string>
+    <string name="end_of_day_report_location">Location:</string>
+    <string name="end_of_day_report_cancelled">Cancelled</string>
+    <string name="end_of_day_report_idNumber">Id Number:</string>
+
+    <string name="end_of_day_report_start_date">Start Date:</string>
+    <string name="end_of_day_report_end_date">End Date:</string>
+    <string name="end_of_day_report_notes">Notes:</string>
+
+    <string name="end_of_day_report_nothing_to_print">Nothing to print.</string>
+    <string name="end_of_day_report_print_not_found">Printer details not found, Please register a printer.</string>
+
+    <string name="database_backed_up_message">Database backed up successfully</string>
+
+    <string name="enum_offender_id_type_no_id">NoID</string>
+    <string name="enum_offender_id_type_rsa">RSA</string>
+    <string name="enum_offender_id_type_passport">Passport</string>
+
+    <string name="enum_vosi_action_cancelled">Cancelled</string>
+    <string name="enum_vosi_action_arrest">Arrest</string>
+    <string name="enum_vosi_action_impound">Impound</string>
+    <string name="enum_vosi_action_payment">Payment</string>
+
+    <string name="overwrite_database_button">Overwrite database with test database</string>
+    <string name="gateway_ip_address_info">Gateway IP address information</string>
+
+    <string name="coreGatewayIP">Core Gateway IP</string>
+    <string name="itsGatewayIP">ITS Gateway IP</string>
+    <string name="ip_address_title">Enter Gateway IP Addresses"</string>
+
+    <string name="this_application_can_only_be_started_via_the_console">This application can only be started via the console.</string>
+    <string name="no_more_tickets_available_please_run_update">No tickets are available, please run update</string>
+    <string name="printer_is_not_configured">Printer is not configured. Configure printer via Console app config settings.</string>
+
+    <string name="id_number_cannot_be_longer_than_20_characters">ID number cannot be longer than 20 characters.</string>
+    <string name="invalid_barcode">Invalid Barcode</string>
+    <string name="tickets">Tickets</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="zambia_currency">ZMW</string>
+    <string name="transaction_token_is_absent">Transaction token is absent. This fine cannot be issued via the device.</string>
+
+    <!--Release Notes-->
+    <string name="new_features">New features:</string>
+    <string name="release_notes_new_features">
+        Version 1.0.5
+        \n\t•Voice and image evidence.
+
+        \n\nVersion 1.0.6
+        \n\t•3rd charge.
+        \n\t•Officer notes.
+        \n\t•eNatis and Saps query from main screen.
+        \n\t•Enhancements on \'End of day report\'.
+    </string>
+
+    <string name="bug_fixes">Bug fixes:</string>
+    <string name="release_notes_bug_fixes">
+        Version 1.0.5
+        \n\t•Id type issue has been resolved.
+
+        \n\nVersion 1.0.6
+        \n\t•NAG amount has been resolved.
+        \n\t•Slip printing issue where address does not \n\t contain 5 fields has been resolved.
+
+        \n\nVersion 1.0.7
+        \n\t•Issue with deleting CourtDate records when records are more than 999.
+    </string>
+
+</resources>

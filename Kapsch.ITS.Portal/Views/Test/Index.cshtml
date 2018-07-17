@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script>
+        $(function () {
+            $.connection.hub.url = 'http://192.168.0.33:60001/signalr';
+            $.connection.hub.logging = true;
+            $.connection.hub.qs = { "transactionToken": "B073802C-A4E4-49B0-8FF4-799BD3DD8CFC" }
+            var paymentTransactionHubProxy = $.connection.hub.createHubProxy('paymentTransactionHub');
+            paymentTransactionHubProxy.on('onStatusChanged', function (transactionToken, status, amount) {
+                console.log(transactionToken + ' ' + status + ' ' + amount);
+            });
+
+            $.connection.hub.start({ jsonp: true, xdomain: true })
+                .done(function () { console.log('Now connected, connection ID=' + $.connection.hub.id); })
+                .fail(function () { console.log('Could not connect'); });
+        });
+    </script>
+}
+

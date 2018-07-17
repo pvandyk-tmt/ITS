@@ -1,0 +1,38 @@
+DROP TABLE IF EXISTS TransactionRegister; 
+
+CREATE TABLE TransactionRegister(
+	ID							INTEGER PRIMARY KEY,
+	Receipt						TEXT UNIQUE,
+	ReceiptTimeStamp			DATE,
+	TransactionToken			TEXT,
+	UserID						TEXT,
+	UserName					TEXT,
+	Amount						DOUBLE,
+	TerminalType				INTEGER,
+	TerminalUUID				TEXT,
+	PaymentSource				INTEGER,
+	PaymentConfirmation			INTEGER,
+	Status						INTEGER,
+	ConfirmedTransactionToken	TEXT,
+	ConfirmedAmount				DOUBLE);
+	
+DROP TABLE IF EXISTS TransactionItem; 
+
+CREATE TABLE TransactionItem(
+	ID					INTEGER PRIMARY KEY,
+	TransactionID		INTEGER,
+	ReferenceNumber		TEXT,
+	TransactionToken	TEXT,
+	Description			TEXT,
+	Quantity			INTEGER,
+	Amount				DOUBLE,
+	Status				INTEGER,
+	FOREIGN KEY(TransactionID) REFERENCES TransactionRegister(ID));
+	
+DROP TABLE IF EXISTS ConfigItem;
+
+CREATE TABLE ConfigItem(
+	ID			INTEGER PRIMARY KEY,
+	Name		TEXT UNIQUE,
+	Value		TEXT);
+

@@ -1,0 +1,69 @@
+DROP TABLE IF EXISTS User; 
+
+CREATE TABLE User(
+	ID					INTEGER PRIMARY KEY,
+	CredentialID		INTEGER,
+	UserName			TEXT,
+	Password			TEXT,
+	FirstName      		TEXT,
+	LastName			TEXT,
+    Email 				TEXT,
+	MobileNumber 		TEXT,
+	ExternalID			TEXT,
+	Status 				INTEGER,
+	Signature			BLOB,
+	SystemFunctionIDs	TEXT,
+	IsOfficer			BOOLEAN DEFAULT('FALSE'));
+
+CREATE INDEX IX_User_UserName ON User (UserName DESC);
+
+DROP TABLE IF EXISTS SystemFunction; 
+
+CREATE TABLE SystemFunction(
+	ID				INTEGER PRIMARY KEY,
+	Name			TEXT,
+	Description		TEXT);
+
+DROP TABLE IF EXISTS District;
+
+CREATE TABLE District(
+	ID				INTEGER PRIMARY KEY,
+	Name			TEXT,
+	PaymentOptions  TEXT);
+
+DROP TABLE IF EXISTS GpsLog; 
+
+CREATE TABLE GpsLog(
+	ID					INTEGER PRIMARY KEY,
+    GpsLatitude     	DOUBLE,
+	GpsLongitude		DOUBLE,
+	MobileDeviceID		INTEGER,
+	LocationTimestamp	DATE,
+	IsSynced			BOOLEAN DEFAULT('FALSE'),
+	UploadDateTime  	DATE);
+
+DROP TABLE IF EXISTS ConfigItem;
+
+CREATE TABLE ConfigItem(
+	ID			INTEGER PRIMARY KEY,
+	Name		TEXT UNIQUE,
+	Value		TEXT);
+
+DROP TABLE IF EXISTS MobileDeviceApplication;
+
+CREATE TABLE MobileDeviceApplication(
+	ID					INTEGER PRIMARY KEY,
+	Name				TEXT UNIQUE,
+	Value				TEXT,
+	SoftwareVersion 	TEXT,
+	ApplicationType		INTEGER,
+	Status 				INTEGER,
+	ModifiedTimestamp	DATE);
+
+DROP TABLE IF EXISTS MobileDevice;
+
+CREATE TABLE MobileDevice(
+	ID					INTEGER PRIMARY KEY,
+	DeviceID			TEXT UNIQUE,
+	DistrictID			INTEGER,
+	SerialNumber 		TEXT);

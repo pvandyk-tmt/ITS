@@ -1,0 +1,9 @@
+﻿@{
+    var users = ViewBag.Users as IList<Kapsch.Core.Gateway.Models.User.UserModel>;
+}
+
+<div class="form-group">
+    <h5>Officer</h5>
+    @Html.DropDownList("officerID", new SelectList(users, "ID", "FormattedName", ""), new { @class = "form-control input-sm" })
+    <div class="hr-line-dashed"></div>
+</div>

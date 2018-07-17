@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<?define ProductUpgradeCode = "12345678-1234-1234-1234-111111111111"?>
+<?define ConfigName = "$(var.Configuration)"?>
+<?define AppPath = "..\Kapsch.ITS.App\bin\$(var.ConfigName)\"?>
+<?define AppExe = "$(var.AppPath)Kapsch.ITS.App.exe"?>
+<?define ProductVersion=!(bind.FileVersion.Kapsch.ITS.App.exe)?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" UpgradeCode="$(var.ProductUpgradeCode)" Name="IMS Apps" Version="$(var.ProductVersion)" Manufacturer="Kapsch TrafficCom" Language="1033">
+    
+    <Package InstallerVersion="200" Compressed="yes" Comments="Windows Installer Package" InstallPrivileges="elevated" AdminImage="yes" />
+    <Media Id="1" Cabinet="setup.cab" EmbedCab="yes" />
+    <Icon Id="ProductIcon" SourceFile="..\Kapsch.ITS.App\IMS-logo.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="ProductIcon" />
+    <Property Id="ARPHELPLINK" Value="http://www.kapsch.com" />
+    <Property Id="ARPURLINFOABOUT" Value="http://www.kapsch.com" />
+    <!--<Property Id="ARPNOREPAIR" Value="1" />
+    <Property Id="ARPNOMODIFY" Value="1" />
+    <Property Id="ROOTDRIVE" Value="C:\"/>-->
+    <UIRef Id="WixUI_InstallDir"/>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <Property Id="INSTALLFOLDER"><![CDATA[C:\Kapsch\DeskTop\Kapsch.ITS.App]]></Property>
+    <Property Id="APPLICATIONICONDESTINATION" Value="..\Kapsch.ITS.App\IMS-logo.ico" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.txt" />
+
+    <!--<Upgrade Id="$(var.ProductUpgradeCode)">
+      <UpgradeVersion Minimum="$(var.ProductVersion)" OnlyDetect="yes" Property="NEWERVERSIONDETECTED" />
+      <UpgradeVersion Minimum="0.0.0" Maximum="$(var.ProductVersion)" IncludeMinimum="yes" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+    </Upgrade>
+    <Condition Message="A newer version of this software is already installed.">
+      NOT NEWERVERSIONDETECTED
+    </Condition>-->
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="INSTALLDIR" Name="Kapsch">
+        <Directory Id="DesktopDir" Name="Desktop">
+          <Directory Id="INSTALLFOLDER" Name="Offence">
+            <Component Id="ApplicationFiles" Guid="12345678-1234-1234-1234-222222222222">
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\ControlzEx.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\ControlzEx.pdb" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\FoolproofValidation.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.Core.Gateway.Clients.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.Core.Gateway.Clients.pdb" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.Core.Gateway.Models.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.Core.Gateway.Models.pdb" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.Core.Reports.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.Core.Reports.pdb" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.Gateway.Models.Shared.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.Gateway.Models.Shared.pdb" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.ITS.App.Common.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.ITS.App.Common.pdb" />
+              <File Id="Kapsch.ITS.App.exe" Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.ITS.App.exe" KeyPath="yes"/>
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.ITS.App.exe.config" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.ITS.App.Resources.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.ITS.App.Resources.pdb" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.ITS.Gateway.Models.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Kapsch.ITS.Gateway.Models.pdb" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\MahApps.Metro.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\MahApps.Metro.pdb" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\MahApps.Metro.xml" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Microsoft.Web.Infrastructure.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Newtonsoft.Json.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\Newtonsoft.Json.xml" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\RestSharp.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\RestSharp.xml" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.Mvc.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.Mvc.xml" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.Razor.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.Razor.xml" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.WebPages.Deployment.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.WebPages.Deployment.xml" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.WebPages.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.WebPages.Razor.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.WebPages.Razor.xml" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Web.WebPages.xml" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\System.Windows.Interactivity.dll" />
+              <File Source="..\Kapsch.ITS.App\bin\$(var.Configuration)\WebApi Foolproof Validation.dll" />
+
+              <!-- iPortal -->
+              <File Source="..\iPortal\bin\$(var.Configuration)\iPortal.dll" />
+              <File Source="..\iPortal\bin\$(var.Configuration)\iPortal.pdb" />
+
+              <!-- iCapture -->
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\AForge.dll" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\iCapture.exe" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\iCapture.exe.config" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\iCapture.pdb" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\iImageViewer.dll" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\iImageViewer.pdb" />
+              <!--<File Source="..\iCapture\Src\bin\$(var.Configuration)\Oracle.DataAccess.dll" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\TMT.Core.Camera.Interfaces.dll" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\TMT.Core.Camera.Interfaces.pdb" />-->
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\TMT.Core.Components.dll" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\TMT.Core.Components.pdb" />
+              <File Source="..\iCapture\Src\bin\$(var.Configuration)\TMT.Drawing.dll" />
+              <File Source="..\iAdjudicate\Src\bin\$(var.Configuration)\Kapsch.ITS.Gateway.Clients.dll" />
+              <File Source="..\iAdjudicate\Src\bin\$(var.Configuration)\Kapsch.ITS.Gateway.Clients.pdb" />
+              
+              <!-- iAdjudicate -->
+              <File Source="..\iAdjudicate\Src\bin\$(var.Configuration)\iAdjudicate.exe" />
+              <File Source="..\iAdjudicate\Src\bin\$(var.Configuration)\iAdjudicate.exe.config" />
+              <File Source="..\iAdjudicate\Src\bin\$(var.Configuration)\iAdjudicate.pdb" />
+              
+              
+               <!--iLog--> 
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Microsoft.ReportViewer.Common.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Microsoft.ReportViewer.WinForms.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Microsoft.ReportViewer.WinForms.xml" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.Base.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.RedRoom.Base.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.RedRoom.Base.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.RedRoom.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.RedRoom.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Oracle.DataAccess.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.Interfaces.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.Interfaces.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.Utils.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.Camera.Utils.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Core.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.ErrorWriting.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.ErrorWriting.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.iLog.Controls.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.iLog.Controls.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.iLog.exe" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.iLog.exe.config" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.iLog.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.iLog.Persistence.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\TMT.Enforcement.iLog.Persistence.pdb" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\readenc6000Old.dll" />
+              <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\readencNew.dll" />
+
+
+              <File Source="..\packages\TMT\TMT.Core.VideoSource.PreProcessor.Common.TVG.dll" />
+              <File Source="..\packages\TMT\TMT.Core.Camera.Artemis.dll" />
+              <File Source="..\packages\TMT\TMT.Core.Camera.Aurecon.DOT.dll" />
+              <File Source="..\packages\TMT\TMT.Core.Camera.DigiCam.dll" />
+              <File Source="..\packages\TMT\TMT.Core.Camera.SafetyCam.dll" />
+              <File Source="..\packages\TMT\TMT.Core.Camera.SafetyCam.DOT.dll" />
+              <File Source="..\packages\TMT\TMT.Core.Camera.SafetyCam.DOTL.dll" />
+              <File Source="..\packages\TMT\TMT.Core.Camera.TruCam.dll" />
+              <File Source="..\packages\TMT\TMT.Core.Camera.VideoSource.TVG.dll" />
+
+              <File Source="..\packages\TMT\ltijmf.dll" />
+              <File Source="..\packages\TMT\readenc.dll" />
+              <File Source="..\packages\TMT\readenc5600.dll" />
+              <File Source="..\packages\TMT\readenc6000.dll" />
+              <File Source="..\packages\TMT\stcdecode.dll" />
+              <File Source="..\packages\TMT\stcdecode2.dll" />
+              <File Source="..\packages\TMT\stcdecode6216-4240-01-01.dll" />
+              
+            </Component>
+
+            <Directory Id="ConfigFolder" Name="Config">
+              <Component Id="ConfigFiles" Guid="1F3B01D1-B92E-4747-8C43-D4A46CAA9B80">
+                <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Config\CameraConfig.xml"/>
+              </Component>
+            </Directory>
+
+            <Directory Id="ReportsFolder" Name="Reports">
+              <Component Id="ReportsFiles" Guid="DD0EA956-7AC0-434B-A774-1711C5B76825">
+                <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Reports\StatsReport.rdlc"/>
+                <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Reports\ReportViewer.exe"/>
+              </Component>
+            </Directory>
+
+            <Directory Id="ResourcesFolder" Name="Resources">
+              <Component Id="ResourcesFiles" Guid="1F906833-58D7-40F2-A776-C9B268544DA1">
+                <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Resources\app.ico"/>
+                <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Resources\folder.ico"/>
+                <File Source="..\TMT.Enforcement.iLog\iLog\bin\$(var.Configuration)\Resources\Legend.jpg"/>
+              </Component>
+            </Directory>
+             
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuSubfolder" Name="Kapsch">
+          <Component Id="ApplicationShortcuts" Guid="12345678-1234-1234-1234-333333333333">
+            <Shortcut Id="ApplicationShortcut1" Name="IMS Apps" Description="IMS Apps" Target="[INSTALLFOLDER]Kapsch.ITS.App.exe" WorkingDirectory="INSTALLFOLDER"/>
+            <RegistryValue Root="HKCU" Key="Software\Kapsch\Kapsch.ITS.App" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+          </Component>
+        </Directory>
+      </Directory>
+
+      <Directory Id="DesktopFolder" Name="Desktop">
+        <Component Id="ApplicationShortcutDesktop" Guid="{3814B2EE-55A4-4BE7-AFE3-FC71157C42E7}">
+          <Shortcut Id="ApplicationDesktopShortcut"
+             Name="IMS Apps"
+             Description="IMS Apps"
+             Target="[INSTALLFOLDER]Kapsch.ITS.App.exe"
+             WorkingDirectory="INSTALLFOLDER"/>
+          <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+          <RegistryValue Root="HKCU" Key="Software\Kapsch\Kapsch.ITS.App" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        </Component>
+      </Directory>
+    </Directory>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallValidate" />
+    </InstallExecuteSequence>
+
+    <Feature Id="DefaultFeature" Level="1">
+      <ComponentRef Id="ApplicationFiles" />
+      <ComponentRef Id="ConfigFiles" />
+      <ComponentRef Id="ReportsFiles" />
+      <ComponentRef Id="ResourcesFiles" />
+      <ComponentRef Id="ApplicationShortcuts"/>
+      <ComponentRef Id="ApplicationShortcutDesktop"/>
+    </Feature>
+
+  </Product>
+</Wix>

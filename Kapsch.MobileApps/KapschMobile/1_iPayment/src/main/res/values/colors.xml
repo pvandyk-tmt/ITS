@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F59F26</color>
+    <color name="colorPrimaryDark">#F59F26</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="buttonColor">#c4c7c7</color>
+    <color name="selectColor">#31bede</color>
+    <color name="listAlternatingColor">#249b9696</color>
+    <color name="colorBannerBackGround">#249b9696</color>
+    <color name="colorWhite">#ffffff</color>
+</resources>

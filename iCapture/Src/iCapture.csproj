@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D5A8338C-BAC0-4C4C-BFFF-BE63FD1E4F6C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TMT.iCapture</RootNamespace>
+    <AssemblyName>iCapture</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AForge">
+      <HintPath>..\..\packages\TMT\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="iImageViewer">
+      <HintPath>..\..\packages\TMT\iImageViewer.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MahApps.Metro.1.6.1\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=4.112.1.2, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TMT.Core.Camera.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TMT.Core.Camera.Interfaces.1.0.14\lib\TMT.Core.Camera.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TMT.Core.Components, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TMT.Core.Components.1.0.64\lib\TMT.Core.Components.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TMT.Drawing">
+      <HintPath>..\..\packages\TMT\TMT.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reasons.xaml.cs">
+      <DependentUpon>Reasons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sessions.xaml.cs">
+      <DependentUpon>Sessions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+    <Compile Include="TextBox.cs" />
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataAccess.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Reasons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sessions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\app.ico" />
+    <Resource Include="Images\Background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Arrow-right-red-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Arrow-right-green-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Arrow-back-green-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Check_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cross_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Kapsch.Core.Gateway.Models\Kapsch.Core.Gateway.Models.csproj">
+      <Project>{E26F5BDF-639D-456C-8E56-4120851293E3}</Project>
+      <Name>Kapsch.Core.Gateway.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kapsch.Gateway.Models.Shared\Kapsch.Gateway.Models.Shared.csproj">
+      <Project>{b44f6b37-9497-4a6a-ae70-76a2f9daa1ac}</Project>
+      <Name>Kapsch.Gateway.Models.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kapsch.ITS.App.Common\Kapsch.ITS.App.Common.csproj">
+      <Project>{9126b61e-0d49-4d2a-8151-30ac76b4ba04}</Project>
+      <Name>Kapsch.ITS.App.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kapsch.ITS.App.Resources\Kapsch.ITS.App.Resources.csproj">
+      <Project>{456b3149-900d-4459-9303-d352ce358049}</Project>
+      <Name>Kapsch.ITS.App.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kapsch.ITS.Gateway.Clients\Kapsch.ITS.Gateway.Clients.csproj">
+      <Project>{de40ce6f-29dc-4a22-b1a0-e5e8d02ee614}</Project>
+      <Name>Kapsch.ITS.Gateway.Clients</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kapsch.ITS.Gateway.Models\Kapsch.ITS.Gateway.Models.csproj">
+      <Project>{7daca9f7-7a69-4cd1-aad4-b6a8e6b7eed5}</Project>
+      <Name>Kapsch.ITS.Gateway.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\app.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"C:\Program Files\TortoiseSVN\bin\SubWCRev.exe" "$(ProjectDir)." "$(ProjectDir)Properties\AssemblyInfo_Template.cs" "$(ProjectDir)Properties\AssemblyInfo.cs"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy /y "$(TargetDir)iCapture.exe" "$(SolutionDir)\Kapsch.ITS.App\bin\Debug\iCapture.exe"
+copy /y "$(TargetDir)iImageViewer.dll" "$(SolutionDir)\Kapsch.ITS.App\bin\Debug\iImageViewer.dll"
+copy /y "$(TargetDir)Kapsch.ITS.Gateway.Clients.dll" "$(SolutionDir)\Kapsch.ITS.App\bin\Debug\Kapsch.ITS.Gateway.Clients.dll"
+copy /y "$(TargetDir)Kapsch.ITS.Gateway.Models.dll" "$(SolutionDir)\Kapsch.ITS.App\bin\Debug\Kapsch.ITS.Gateway.Models.dll"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

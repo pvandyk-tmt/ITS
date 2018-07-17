@@ -1,0 +1,228 @@
+﻿@model Kapsch.Core.Gateway.Models.User.UserModel
+@using Kapsch.ITS.Portal.Helpers
+
+@{
+    ViewBag.Title = "CreateUser";
+
+    var districts = ViewBag.Districts as List<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+    var systemFunctions = ViewBag.SystemFunctions as List<Kapsch.Core.Gateway.Models.User.SystemFunctionModel>;
+}
+
+<script>
+    $("#breadcrumbText").html("Administration / Users / <b>Edit User</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Edit User</h5>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("EditUser", "Management", FormMethod.Post, new { id = "wizard" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID)
+                        @Html.HiddenFor(model => model.UserName)
+
+
+                        <h1>Details</h1>
+                        <fieldset>
+                            <div class="step-content">
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+                                        <div class="col-sm-4">
+                                            @Html.EditorFor(model => model.FirstName)
+                                            @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+                                        <div class="col-sm-4">
+                                            @Html.EditorFor(model => model.LastName)
+                                            @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(model => model.Email, new { @type = "email", @class = "text-box single-line" })
+                                            @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.MobileNumber, new { @class = "control-label col-md-2" })
+                                        <div class="col-sm-4">
+                                            @Html.EditorFor(model => model.MobileNumber)
+                                            @Html.ValidationMessageFor(model => model.MobileNumber, null, new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.IsOfficer, new { @class = "control-label col-md-2" })
+                                        <div class="col-sm-4">
+                                            @Html.CheckBoxFor(model => model.IsOfficer)
+                                            @Html.ValidationMessageFor(model => model.IsOfficer, null, new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.ExternalID, new { @class = "control-label col-md-2" })
+                                        <div class="col-sm-4">
+                                            @Html.EditorFor(model => model.ExternalID)
+                                            @Html.ValidationMessageFor(model => model.ExternalID, null, new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+                                        <div class="col-sm-4">
+                                            @Html.EnumDropDownListFor(model => model.Status, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <h1>Districts</h1>
+                        <fieldset>
+                            <div class="container">
+                                <select name="districts_" class="form-control dual_select" multiple="multiple">
+                                    @foreach (var district in districts)
+                                    {
+
+                                        var selected = "";
+                                        if (Model.Districts != null && Model.Districts.Any(f => f.ID == district.ID))
+                                        {
+                                            selected = "selected";
+                                        }
+
+                                        <option value="@district.ID" id="@string.Format("{0}", district.ID)" @selected>@district.BranchName</option>
+
+
+                                    }
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        <h1>System Functions</h1>
+                        <fieldset>
+                            <div style="background-color: white;padding: 20px; min-height:300px">
+                                <ul class="todo-list m-t" style="list-style: none outside none !important;">
+                                    @foreach (var systemFunction in systemFunctions)
+                                    {
+                                        var checked_ = "";
+                                        if (Model.SystemFunctions != null && Model.SystemFunctions.Any(f => f.ID == systemFunction.ID))
+                                        {
+                                            checked_ = "checked";
+                                        }
+
+                                        <li>
+                                            <input type="checkbox" name="@string.Format("systemFunction_{0}", systemFunction.ID)" id="@string.Format("systemFunction_{0}", systemFunction.ID)" class="i-checks" @checked_ />
+                                            <span class="m-l-xs">@systemFunction.Description</span>
+                                        </li>
+                                    }
+
+
+                                </ul>
+
+                            </div>
+                        </fieldset>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles
+{
+
+    <link href="~/Content/plugins/steps/jquery.steps.css" rel="stylesheet">
+
+    @Styles.Render("~/plugins/duallistStyles")
+
+    <style>
+        /*.wizard > .content > .body position: relative;*/
+    </style>
+
+}
+
+@section scripts
+{
+    <!-- Steps -->
+    <script src="~/Scripts/plugins/staps/jquery.steps.min.js"></script>
+
+    @Scripts.Render("~/plugins/duallist")
+
+     
+    <script>
+        var cancelUrl = '@Url.Action("Users", "Management")';
+
+        $(document).ready(function () {
+            $("#wizard").steps({
+                bodyTag: "fieldset",
+                onCanceled: function (event) {
+                    window.location.href = cancelUrl;
+                },
+                onStepChanging: function (event, currentIndex, newIndex) {
+                    // Always allow going backward even if the current step contains invalid fields!
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+
+                    var form = $(this);
+                    form.data('validator', null);
+                    $.validator.unobtrusive.parse(form);
+
+                    return form.valid();
+                },
+                onFinishing: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Submit form input
+                    form.submit();
+                }
+            }).validate({
+                errorPlacement: function (error, element) {
+                    element.before(error);
+                },
+                rules: {
+                    confirm: {
+                        equalTo: "#password"
+                    }
+                }
+            });
+
+            $('.dual_select').bootstrapDualListbox({
+                selectorMinimalHeight: 300
+            });
+
+        });
+
+    </script>
+}
+
+
+
+

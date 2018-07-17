@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/rootView"
+    tools:context="za.co.kapsch.iticket.MainActivity">
+
+    <!--android:id="@+id/main_toolbar-->
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:background="#FFA000"-->
+        <!--android:id="@+id/toolbar"/>-->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/backgroundLinearLayout">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/gps_on"
+                    android:id="@+id/locationButton"
+                    android:background="#FFFFFF"
+                    android:onClick="locationButtonClick"/>
+
+                <!--<ImageButton-->
+                    <!--android:layout_width="75dp"-->
+                    <!--android:layout_height="75dp"-->
+                    <!--android:layout_marginRight="4dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/print"-->
+                    <!--android:id="@+id/discoverPrinterButton"-->
+                    <!--android:background="#FFFFFF"-->
+                    <!--android:onClick="findPrinters"/>-->
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginRight="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/court"
+                    android:id="@+id/courtButton"
+                    android:background="#FFFFFF"
+                    android:onClick="setCourt"/>
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/sync"
+                    android:background="#FFFFFF"
+                    android:onClick="syncToBackend"/>
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/bluetooth_on"
+                    android:id="@+id/blueToothButton"
+                    android:background="#FFFFFF"
+                    android:onClick="blueToothButtonClick"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/reprint"
+                    android:id="@+id/reprint56TicketButton"
+                    android:background="#FFFFFF"
+                    android:onClick="reprintSection56Ticket"/>
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/copy_database_blue"
+                    android:id="@+id/copyDatabaseButton"
+                    android:background="#FFFFFF"
+                    android:onClick="copyDatabase"/>
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="4dp"
+                    android:src="@drawable/report"
+                    android:id="@+id/endOfDayReportTable"
+                    android:background="#FFFFFF"
+                    android:onClick="endOfDayReport"/>
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitXY"
+
+                    android:src="@drawable/about"
+                    android:id="@+id/aboutButton"
+                    android:background="#FFFFFF"
+                    android:onClick="showAboutActivity"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/config"
+                    android:id="@+id/adminButton"
+                    android:background="#FFFFFF"
+                    android:onClick="loginToAdminActivity"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/prosecute_icam"
+                    android:id="@+id/dotServiceButton"
+                    android:background="#FFFFFF"
+                    android:onClick="startICamActivity"/>
+                <!--android:onClick="dotServiceActivity"/>-->
+
+
+                <ImageButton
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/prosecute_s56"
+                    android:id="@+id/section56Button"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#FFFFFF"
+                    android:onClick="startHandWrittenWizard"/>
+
+                <!--<ImageButton-->
+                    <!--android:layout_width="110dp"-->
+                    <!--android:layout_height="110dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/prosecute_s341"-->
+                    <!--android:id="@+id/section341Button"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:background="#FFFFFF"-->
+                    <!--android:onClick="start341Wizard"/>-->
+
+                <!--<ImageButton-->
+                    <!--android:layout_width="110dp"-->
+                    <!--android:layout_height="110dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/prosecute_with_icam"-->
+                    <!--android:id="@+id/section56WithIcamButton"-->
+                    <!--android:layout_marginTop="20dp"-->
+                    <!--android:layout_gravity="center_horizontal"-->
+                    <!--android:background="#FFFFFF"-->
+                    <!--android:onClick="startICamActivity"/>-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,78 @@
+DROP TABLE IF EXISTS VehicleMake; 
+
+CREATE TABLE VehicleMake(
+	ID					INTEGER PRIMARY KEY,
+    Description 		TEXT,
+	ExternalCode 		TEXT,
+	ModifiedDate		DATE);
+	
+DROP TABLE IF EXISTS VehicleMakeModel;
+
+CREATE TABLE VehicleMakeModel(
+	ID				INTEGER PRIMARY KEY,
+	VehicleMakeID	INTEGER,
+	Description		TEXT,
+	ExternalCode	TEXT,
+	ModifiedDate	TEXT);
+
+DROP TABLE IF EXISTS VehicleModelNumber;
+
+CREATE TABLE VehicleModelNumber(
+	ID					INTEGER PRIMARY KEY,
+	VehicleModelID		Date,
+	Description 		TEXT,
+	ExternalCode		TEXT,
+	ExternalModelCode 	TEXT,
+	ModifiedDate 		DATE);
+
+DROP TABLE IF EXISTS ConfigItem;
+
+CREATE TABLE ConfigItem(
+	ID			INTEGER PRIMARY KEY,
+	Name		TEXT UNIQUE,
+	Value		TEXT);
+
+DROP TABLE IF EXISTS CancellationReason;
+
+CREATE TABLE CancellationReason(
+	ID			INTEGER PRIMARY KEY,
+	Reason		TEXT);
+	
+DROP TABLE IF EXISTS VehicleInspectionResult;
+
+CREATE TABLE VehicleInspectionResult(
+	ID							INTEGER PRIMARY KEY,
+	VehicleInspectionResultsID 	INTEGER,
+	Uploaded					BOOLEAN,
+	BookingID					INTEGER,
+	TestTypeID					INTEGER,
+	TestQuestionID				INTEGER,
+	Answer						TEXT,
+	TestQuestionAnswerID		INTEGER,
+	RelationshipID  			INTEGER,
+	Comments					TEXT,
+	IsPassed					INTEGER);
+	
+DROP TABLE IF EXISTS VehicleInspectionResults;
+
+CREATE TABLE VehicleInspectionResults(
+	ID						INTEGER PRIMARY KEY,
+	CredentialID			INTEGER,
+	Uploaded				BOOLEAN,
+	BookingID				INTEGER,
+	IsPassed				BOOLEAN,
+	TestStartTime			Date,
+	TestEndTime				Date);
+	
+CREATE TABLE Evidence(
+	ID				INTEGER PRIMARY KEY,
+	BookingID		INTEGER,
+	SiteID			INTEGER,
+	EvidenceType	TEXT,
+	Evidence		BLOB,
+	Uploaded		BOOLEAN DEFAULT('FALSE'),
+	UploadDateTime  DATE,
+	EvidenceDate    DATE,
+	Submit			BOOLEAN DEFAULT('FALSE'));
+
+

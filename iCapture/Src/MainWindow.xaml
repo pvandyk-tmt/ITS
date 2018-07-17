@@ -1,0 +1,181 @@
+﻿<Controls:MetroWindow
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" x:Class="TMT.iCapture.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        WindowStartupLocation="CenterScreen"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ImageViewer="clr-namespace:TMT.ImageViewer;assembly=iImageViewer"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        ShowMinButton="False"
+        xmlns:my="clr-namespace:TMT.iCapture"
+        Title="iCapture" Width="850" Height="600" MinWidth="805" MinHeight="570" SizeToContent="WidthAndHeight"
+        Icon="/iCapture;component/Images/app.png" Loaded="Window_Loaded" Closing="Window_Closing">
+
+    <!--<Controls:MetroWindow.Background>
+        <SolidColorBrush Color="{DynamicResource WhiteColorBrush}" />
+    </Controls:MetroWindow.Background>-->
+
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <Storyboard x:Key="HeightUp">
+                <DoubleAnimation From="1" To="12" Duration="0:0:0.25" RepeatBehavior="2x" Storyboard.TargetProperty="Height"/>
+                <DoubleAnimation From="10" To="12" Duration="0:0:0.5" RepeatBehavior="1x" Storyboard.TargetProperty="Width"/>
+            </Storyboard>
+
+            <!--<ResourceDictionary.MergedDictionaries>
+                --><!-- this window should be blue --><!--
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Orange.xaml" />
+                --><!-- and should use the light theme --><!--
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>-->
+            
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
+
+    <Grid x:Name="LayoutRoot" Width="805" Height="570">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="234" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border ClipToBounds="True" Focusable="False" Margin="1" Grid.Column="0" Grid.Row="1" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5,0,0,0" Padding="0" >
+            <ImageViewer:cImage x:Name="img1" Focusable="False" Stretch="Uniform" pPanEnabled="False" pZoomEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+        <Border x:Name="brdImg2" ClipToBounds="True" Focusable="False" Margin="1" Grid.Column="1" Grid.Row="1" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="0,5,0,0" Padding="0" >
+            <Grid Cursor="Cross" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Focusable="False">
+                <Grid Focusable="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="img2Grid" KeyDown="img2Grid_KeyDown" PreviewKeyDown="img2Grid_PreviewKeyDown" >
+                    <ImageViewer:cImage Focusable="False" HorizontalAlignment="Center" pZoomAnimateEnabled="False" pPanAnimateEnabled="False" pZoomEnabled="False" pPanEnabled="False" Margin="0" Opacity="0.3" x:Name="imgBG" Stretch="Uniform" VerticalAlignment="Center" />
+                    <ImageViewer:cImage Focusable="True" HorizontalAlignment="Center" pZoomAnimateEnabled="False" pPanAnimateEnabled="False" pZoomEnabled="True" pPanEnabled="True" Margin="0" pDefaultPanFactor="2" pDefaultZoomFactor="1.1" pMinimumZoom="0.5" pMaximumZoom="10" Opacity="1" x:Name="img2" Stretch="Uniform" VerticalAlignment="Center" GotFocus="img2_GotFocus" LostFocus="img2_LostFocus"/>
+                </Grid>
+                <Rectangle Name="recMask" Focusable="False" Margin="170,154,0,0" Width="100" Height="40" Stroke="{DynamicResource HighlightBrush}" StrokeThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </Grid>
+        </Border>
+
+        <Border BorderBrush="{DynamicResource AccentColorBrush2}" Background="{DynamicResource HighlightBrush}" BorderThickness="1,1,1,0" VerticalAlignment="Top" Height="18" Width="68" Margin="110,5,0,0" CornerRadius="5,5,0,0" Focusable="False" HorizontalAlignment="Left" Grid.Column="0" Grid.RowSpan="2">
+            <Label Content="Print Image" Height="16" HorizontalAlignment="Left" Margin="5,2,0,0"  VerticalAlignment="Top" Padding="2,0,2,0" Foreground="{DynamicResource WhiteColorBrush}" FontSize="10" FontWeight="Bold" />
+        </Border>
+        <Border BorderBrush="{DynamicResource AccentColorBrush2}" Background="{DynamicResource HighlightBrush}" BorderThickness="1,1,1,0" VerticalAlignment="Top" Height="18" Width="87" Margin="0,5,90,0" CornerRadius="5,5,0,0" Focusable="False" HorizontalAlignment="Right" Grid.Column="1" Name="bdrImg2Label" Grid.RowSpan="2">
+            <Label Content="Additional Image" Height="16" HorizontalAlignment="Left" Margin="3,2,0,0"  VerticalAlignment="Top" Padding="2,0,2,0" Foreground="{DynamicResource WhiteColorBrush}" FontSize="10" />
+        </Border>
+
+        <Border BorderBrush="{DynamicResource HighlightBrush}" Background="{DynamicResource WhiteColorBrush}" BorderThickness="2" VerticalAlignment="Bottom" Height="40" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="120" Focusable="False" Padding="1" CornerRadius="2" Name="bdrNP" Margin="336,0" >
+            <ImageViewer:cImage Focusable="False" Name="imgNP" Stretch="Uniform" pPanEnabled="False" pZoomEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <Label Grid.ColumnSpan="2" Name="lblTicketNumber" IsTabStop="False" Content="ticket number" FontSize="15" Padding="0" HorizontalContentAlignment="Center" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" Width="250" Margin="271,0" />
+        <Label Content="Image" Height="19" HorizontalAlignment="Left" Margin="5,3,0,0" Padding="2,0,2,0" VerticalAlignment="Top" Width="37" />
+        <Label Content="0" Height="19" HorizontalAlignment="Left" Margin="43,4,0,0" Padding="2,0,2,0" VerticalAlignment="Top" Width="61" Name="lblTickets" FontWeight="Bold" Grid.RowSpan="2" />
+        <Label Content="File Location:" Grid.Row="2" Height="19" HorizontalAlignment="Left" Margin="5,7,0,0"  VerticalAlignment="Top" Padding="2,0,2,0" Foreground="{DynamicResource LabelTextBrush}" Width="73" />
+        <Label x:Name="lblFileLocation" Content="Not loaded..." Grid.Row="2" Height="19" Margin="85,7,12,0"  VerticalAlignment="Top" Padding="2,0,2,0" Foreground="{DynamicResource LabelTextBrush}" Grid.ColumnSpan="2" />
+        <Label Content="Version x.x.x.xxx" FontFamily="Arial" FontSize="9.5" FontStyle="Italic" Height="20" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Margin="0,2,4,0" Name="lblVersion" Padding="0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Width="83" />
+        <Label Content="Previously rejected:" Foreground="{DynamicResource LabelTextBrush}" Height="31" HorizontalAlignment="Left" Margin="339,0,0,5" Padding="2,0,2,0" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.Row="3" Width="167" Name="lblPrevReject" />
+
+        <GroupBox Name="grpMain" Grid.Row="3"  VerticalAlignment="Top" Height="191" BorderThickness="1" Header="Vehicle Details" FontWeight="Bold" Margin="6,2,6,0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+            <Grid>
+
+                <Label Content="Registration Num:" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="1,9,0,0" Padding="2,0,2,0" VerticalAlignment="Top" FontWeight="Normal" />
+                <Label Content="Confirm Reg Num:" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="1,36,0,0" Padding="2,0,2,0" FontWeight="Normal" VerticalAlignment="Top" />
+                <Label Content="Place of Offence:" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="1,92,0,0" Padding="2,0,2,0" VerticalAlignment="Top" FontWeight="Normal" />
+                <Label Content="Offence Date:" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="1,119,0,0" Padding="2,0,2,0" VerticalAlignment="Top" FontWeight="Normal" />
+                <Label Content="Officer:" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="249,9,0,0" Padding="2,0,2,0" VerticalAlignment="Top" FontWeight="Normal" />
+                <Label Content="Vehicle Type:" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="1,65,0,0" Padding="2,0,2,0" VerticalAlignment="Top" FontWeight="Normal" />
+                <Label Content="Descrip:" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="245,65,0,0" Padding="2,0,2,0" VerticalAlignment="Top" Name="lblTypeDescript" />
+                <Label Content="Zone:" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="328,119,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Speed:" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="251,119,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Fine:" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="398,119,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Mr. Koos van Staden" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="362,9,0,0" Padding="2,0,2,0" VerticalAlignment="Top" Name="lblOfficer" Width="226" FontWeight="Normal" FontStyle="Italic" />
+                <Label Content="Code:" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="489,119,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Sheet No:" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" Margin="235,36,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <PasswordBox HorizontalAlignment="Left" Margin="104,8,1,1" Name="passwordBoxRegNum" VerticalAlignment="Top" Width="125"
+                 Padding="1"             
+                 Password="aaaaaaa" TabIndex="2" PasswordChanged="passwordBoxRegNum_PasswordChanged" GotFocus="textBox_GotFocus" LostFocus="passwordBoxRegNum_LostFocus" ToolTip="No VLN" />
+                <my:cTextBox HorizontalAlignment="Left" Margin="104,35,0,0" Width="125"
+                 VerticalAlignment="Top"
+                 x:Name="textBoxRegNum" Text="XYZ 1234 GP" FontWeight="Bold" Padding="1" IsEnabled="False" TabIndex="3" TextChanged="textBoxRegNo_TextChanged" GotFocus="textBox_GotFocus"
+                                    pValidChars="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" pCaseType="Uppercase" Height="28" />
+
+                <TextBox HorizontalAlignment="Left" Margin="104,91,0,0" VerticalAlignment="Top" Width="125" x:Name="textBoxPlace" Text="Place of offence" 
+                            IsTabStop="False" FontWeight="Normal" IsReadOnly="True" Padding="1"  TabIndex="5" />
+                <TextBox HorizontalAlignment="Left" Margin="104,118,0,0" VerticalAlignment="Top" Width="125" x:Name="textBoxDate" Text="2012/03/11  14:15" 
+                            IsTabStop="False" FontWeight="Normal" IsReadOnly="True" Padding="1" TabIndex="6" />
+                <TextBox HorizontalAlignment="Left" Margin="297,8,0,0" VerticalAlignment="Top" Width="55" x:Name="textBoxOfficer" Text="Officer" FontWeight="Normal" Padding="1" TabIndex="1" GotFocus="textBox_GotFocus" TextChanged="textBoxOfficer_TextChanged" />
+                <TextBox FontWeight="Normal" Height="53" FontSize="10" IsReadOnly="True" IsTabStop="False" Margin="297,64,180,0" Name="textBoxDescription" Padding="1" Text="This is a long description ................................" VerticalAlignment="Top"
+                 VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"  TabIndex="7" />
+                <TextBox FontWeight="Bold" IsReadOnly="True" IsTabStop="False" Margin="297,118,0,0" Name="textBoxSpeed" Padding="1" Text="88" VerticalAlignment="Top" Width="30" HorizontalAlignment="Left" HorizontalContentAlignment="Center" TabIndex="8" />
+                <TextBox FontWeight="Bold" HorizontalAlignment="Left" HorizontalContentAlignment="Center" IsReadOnly="True" IsTabStop="False" Margin="363,118,0,0" Name="textBoxZone" Padding="1" Text="60" VerticalAlignment="Top" Width="30" TabIndex="9" />
+                <TextBox FontWeight="Bold" HorizontalAlignment="Left" IsReadOnly="True" IsTabStop="False" Margin="430,118,0,0" Name="textBoxFine" Padding="1" Text="12500" VerticalAlignment="Top" Width="55" HorizontalContentAlignment="Center" TabIndex="10" />
+                <ComboBox HorizontalAlignment="Left" Margin="104,64,0,0" Name="comboBoxType" VerticalAlignment="Top" Width="125" FontWeight="Normal" Padding="1" SelectionChanged="comboBoxType_SelectionChanged" TabIndex="4" GotFocus="comboBoxType_GotFocus" Height="20" />
+                <TextBox FontWeight="Bold"  HorizontalContentAlignment="Stretch" IsReadOnly="True" IsTabStop="False" Margin="526,118,180,0" Name="textBoxCode" Padding="1" Text="12345" VerticalAlignment="Top" TabIndex="11" />
+                <TextBox FontWeight="Normal" HorizontalAlignment="Stretch" Margin="297,35,180,0" Name="textBoxSheetNo" Padding="1" TabIndex="1" Text="Field Sheet No" VerticalAlignment="Top" TextChanged="textBoxSheetNo_TextChanged" Height="28" />
+                <GroupBox Header="Accept conditions:" Height="143" Margin="608,0,10,0" VerticalAlignment="Top" 
+                 BorderBrush="{DynamicResource AccentColorBrush}" 
+                          HorizontalAlignment="Right" Width="160" FontWeight="Normal" Name="grpConditions">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24">
+                            <Image Name="imgOfficer" Width="12" Height="12" Source="/iCapture;component/Images/Check_16x16.png" Margin="5,0,0,0"/>
+                            <Label Content="Officer recognised" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="1" Margin="8,3,0,0"  />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Name="spanelNPimage">
+                            <Image Name="imgNPimage" Width="12" Height="12" Source="/iCapture;component/Images/Cross_16x16.png" Margin="5,0,0,0" />
+                            <Label Content="Numberplate image" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="1" Margin="8,3,0,0"  />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24">
+                            <Image Name="imgNPmatch" Width="12" Height="12" Source="/iCapture;component/Images/Cross_16x16.png" Margin="5,0,0,0" />
+                            <Label Content="Numberplates match" FontWeight="Normal" Foreground="{DynamicResource LabelTextBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0" Margin="8,3,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+
+        <Button  Grid.Row="3" Height="32" HorizontalAlignment="Left" Margin="258,0,0,3" Padding="0" Name="buttonNext" VerticalAlignment="Bottom" Width="78" TabIndex="51" Click="buttonNext_Click" ToolTip="Accept this image and load the next image...">
+            <Button.Content>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Name="lblAcceptReject" Content="Reject" Padding="1" FontSize="9" Margin="0" Background="Red" HorizontalContentAlignment="Center" Foreground="White" />
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="_Next" Padding="0" FontSize="12" Margin="0" HorizontalContentAlignment="Center"/>
+                        <Image Name="imgRightRed" Width="20" Height="20" Source="/iCapture;component/Images/Arrow-right-red-32.png" />
+                        <Image Name="imgRightGreen" Width="20" Height="20" Source="/iCapture;component/Images/Arrow-right-green-32.png" />
+                    </StackPanel>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button Grid.Row="3" Height="32" HorizontalAlignment="Left" Margin="141,0,0,3" Name="buttonPrevious" VerticalAlignment="Bottom" Width="78" TabIndex="52" Click="buttonPrevious_Click" ToolTip="Reload the previous image...">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="15" Height="20" Source="/iCapture;component/Images/Arrow-back-green-32.png" />
+                    <Label Content="_Previous" Padding="0" FontSize="12" Margin="0" HorizontalContentAlignment="Center" Width="54"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button Name="btnShowVideo" Content="_Show Video" HorizontalAlignment="Left" Margin="43,0,0,3" Grid.Row="3" VerticalAlignment="Bottom" Width="78" Height="32" Click="btnShowVideo_Click"/>
+
+        <Button Content="_Submit" Height="32" HorizontalAlignment="Left" Margin="124,0,0,3" Name="buttonSubmit" TabIndex="53" VerticalAlignment="Bottom" Width="75" Grid.Column="1" Grid.Row="3" FontWeight="Bold" Click="buttonSubmit_Click" ToolTip="Save all captured image data into database and choose another session..." />
+
+        <Border Focusable="False" BorderBrush="{DynamicResource AccentColorBrush2}" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Center" Height="192" Width="56" Padding="2" Name="brdIcons" CornerRadius="4" Background="{DynamicResource AccentColorBrush2}" MouseWheel="Icon_MouseWheel" Grid.Column="0" Grid.Row="1" 
+                            ToolTip="Zoom in and out with your mouse wheel" Grid.ColumnSpan="2" Margin="368,0">
+            <Grid Focusable="False" >
+                <Button Content="Drop" FontSize="8" Height="15" Width="40" Name="btnCollapse" Click="btnCollapse_Click" Focusable="False" IsTabStop="False" VerticalAlignment="Top" Margin="4,0,4,0" Padding="0" />
+                <Grid Name="grdIcons" Margin="0,15,0,0">
+                    <Image Name="Icon1" Stretch="Uniform" Focusable="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,4,0,0" Width="50" Height="40" Cursor="ScrollWE" MouseUp="Icon_MouseUp"  MouseMove="Icon_MouseMove"/>
+                    <Image Name="Icon2" Stretch="Uniform" Focusable="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,46,0,0" Width="50" Height="40" Cursor="ScrollWE" MouseUp="Icon_MouseUp"  MouseMove="Icon_MouseMove"/>
+                    <Image Name="Icon3" Stretch="Uniform" Focusable="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,88,0,0" Width="50" Height="40" Cursor="ScrollWE" MouseUp="Icon_MouseUp"  MouseMove="Icon_MouseMove"/>
+                    <Image Name="Icon4" Stretch="Uniform" Focusable="False" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,130,0,0" Width="50" Height="40" Cursor="ScrollWE" MouseUp="Icon_MouseUp"  MouseMove="Icon_MouseMove"/>
+                    <Polygon Points="5,4 5,0 0,6 5,12 5,8 8,8 8,4 5,4" Focusable="False" Stroke="{DynamicResource AccentColorBrush}" Margin="-8,28,0,0" StrokeThickness="1" Fill="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="Polygon_MouseDown" Cursor="ScrollW" Name="L1" />
+                    <Polygon Points="5,4 5,0 0,6 5,12 5,8 8,8 8,4 5,4" Focusable="False" Stroke="{DynamicResource AccentColorBrush}" Margin="-8,70,0,0" StrokeThickness="1" Fill="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="Polygon_MouseDown" Cursor="ScrollW" Name="L2" />
+                    <Polygon Points="5,4 5,0 0,6 5,12 5,8 8,8 8,4 5,4" Focusable="False" Stroke="{DynamicResource AccentColorBrush}" Margin="-8,112,0,0" StrokeThickness="1" Fill="{DynamicResource AccentColorBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="Polygon_MouseDown" Cursor="ScrollW" Name="L3" />
+                    <Polygon Points="5,4 5,0 0,6 5,12 5,8 8,8 8,4 5,4" Focusable="False" Stroke="{DynamicResource AccentColorBrush2}" Margin="-8,154,0,0" StrokeThickness="1" Fill="{DynamicResource AccentColorBrush2}" HorizontalAlignment="Left" VerticalAlignment="Top" MouseDown="Polygon_MouseDown" Cursor="ScrollW" Name="L4" />
+                    <Polygon Points="0,0 5,6 0,12 0,8 -3,8 -3,4 0,4 0,0" Focusable="False" Stroke="{DynamicResource AccentColorBrush}" Margin="0,28,-8,0" StrokeThickness="1" Fill="{DynamicResource AccentColorBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="Polygon_MouseDown" Cursor="ScrollE" Name="R1" />
+                    <Polygon Points="0,0 5,6 0,12 0,8 -3,8 -3,4 0,4 0,0" Focusable="False" Stroke="{DynamicResource AccentColorBrush}" Margin="0,70,-8,0" StrokeThickness="1" Fill="{DynamicResource AccentColorBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="Polygon_MouseDown" Cursor="ScrollE" Name="R2" />
+                    <Polygon Points="0,0 5,6 0,12 0,8 -3,8 -3,4 0,4 0,0" Focusable="False" Stroke="{DynamicResource AccentColorBrush}" Margin="0,112,-8,0" StrokeThickness="1" Fill="{DynamicResource AccentColorBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="Polygon_MouseDown" Cursor="ScrollE" Name="R3" />
+                    <Polygon Points="0,0 5,6 0,12 0,8 -3,8 -3,4 0,4 0,0" Focusable="False" Stroke="{DynamicResource AccentColorBrush}" Margin="0,154,-8,0" StrokeThickness="1" Fill="{DynamicResource AccentColorBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" MouseDown="Polygon_MouseDown" Cursor="ScrollE" Name="R4" />
+                </Grid>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Controls:MetroWindow>

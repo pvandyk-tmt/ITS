@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootView"
+    tools:context="za.co.kapsch.ivehicletest.VehicleInspectionInitiateActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:text="@string/vehicle_inspection"-->
+            <!--android:id="@+id/textView"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--tools:layout_editor_absoluteY="0dp"-->
+            <!--tools:layout_editor_absoluteX="0dp"/>-->
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center_horizontal"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/booking_reference_number"
+                android:textStyle="bold"
+                android:id="@+id/textView1"
+                android:layout_gravity="center_horizontal"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:maxLength="18"
+                android:inputType="textCapCharacters"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/bookingReferenceEditText"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/query"
+                android:onClick="queryButtonClick"/>
+
+        </LinearLayout>
+
+    <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<Button-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:layout_weight="0"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--android:layout_marginLeft="5dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:textAppearance="?android:textAppearanceLarge"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:text="@string/scan_barcode"-->
+                <!--android:id="@+id/scanBarcodeButton"/>-->
+
+        <!--</LinearLayout>-->
+    </LinearLayout>
+</RelativeLayout>

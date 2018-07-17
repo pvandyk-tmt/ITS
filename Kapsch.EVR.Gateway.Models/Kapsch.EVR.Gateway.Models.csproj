@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4307BC2E-9A17-4271-925A-FAC683C25D24}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kapsch.EVR.Gateway.Models</RootNamespace>
+    <AssemblyName>Kapsch.EVR.Gateway.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Inspection\InspectionModel.cs" />
+    <Compile Include="Inspection\QuestionSetModel.cs" />
+    <Compile Include="Vehicle\BookingQuestionAnswerModel.cs" />
+    <Compile Include="Vehicle\BookingSearchTypeModel.cs" />
+    <Compile Include="Vehicle\QuestionAnswerResult.cs" />
+    <Compile Include="Vehicle\TestBookingRecordModel.cs" />
+    <Compile Include="Vehicle\TestCategoryModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vehicle\AnswerModel.cs" />
+    <Compile Include="Vehicle\QuestionAnswerResultModel.cs" />
+    <Compile Include="Vehicle\QuestionModel.cs" />
+    <Compile Include="Vehicle\TestResultRecordModel.cs" />
+    <Compile Include="Vehicle\TestResultsSearchModel.cs" />
+    <Compile Include="Vehicle\VehicleBookingModel.cs" />
+    <Compile Include="Vehicle\VehicleBookingRecordModel.cs" />
+    <Compile Include="Vehicle\VehicleCategoryModel.cs" />
+    <Compile Include="Vehicle\VehicleColorModel.cs" />
+    <Compile Include="Vehicle\VehicleFuelTypeModel.cs" />
+    <Compile Include="Vehicle\VehicleMakeModel.cs" />
+    <Compile Include="Vehicle\VehicleModel.cs" />
+    <Compile Include="Vehicle\VehicleModelNumberModel.cs" />
+    <Compile Include="Vehicle\VehiclePropellModel.cs" />
+    <Compile Include="Vehicle\VehicleSearchModel.cs" />
+    <Compile Include="Vehicle\VehicleTestBooking.cs" />
+    <Compile Include="Vehicle\VehicleTestBookingModel.cs" />
+    <Compile Include="Vehicle\VehicleTestModel.cs" />
+    <Compile Include="Vehicle\VehicleTestResultModel.cs" />
+    <Compile Include="Vehicle\VehicleTypeModel.cs" />
+    <Compile Include="Vehicle\VehileLookUpsModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Vehicle\VehicleModelModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kapsch.Core.Gateway.Models\Kapsch.Core.Gateway.Models.csproj">
+      <Project>{E26F5BDF-639D-456C-8E56-4120851293E3}</Project>
+      <Name>Kapsch.Core.Gateway.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.Core\Kapsch.Core.csproj">
+      <Project>{CA35DE4A-3054-4900-AD34-FB550D0CF927}</Project>
+      <Name>Kapsch.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

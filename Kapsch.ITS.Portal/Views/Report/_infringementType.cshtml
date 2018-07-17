@@ -1,0 +1,16 @@
+﻿@{
+    var enums = Enum.GetValues(typeof(Kapsch.ITS.Gateway.Models.Enums.InfringementType));
+}
+
+<div class="form-group">
+    <h5>Infringement Type</h5>
+    <select id="infringementType" class="form-control input-sm">
+        <option value="">Any Type</option>
+        @foreach (var en in enums)
+        {
+            <option value="@((int)en)">@en.ToString()</option>
+        }
+       
+    </select>
+    <div class="hr-line-dashed"></div>
+</div>

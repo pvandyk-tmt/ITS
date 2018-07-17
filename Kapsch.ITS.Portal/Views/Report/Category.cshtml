@@ -1,0 +1,55 @@
+﻿@model Kapsch.Core.Reports.Models.ReportCategoryModel
+
+<script>
+    $("#breadcrumbText").html("Reports / @Model.CategoryName / <b>Available Reports</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Available Reports</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Category
+                                </th>
+                                <th>
+                                    Subcategory
+                                </th>
+                                <th>
+                                    Report
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var subcategory in Model.ReportSubCategories)
+                            {
+                                foreach (var reportDefinition in subcategory.ReportDefinitions)
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => reportDefinition.CategoryName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => reportDefinition.SubCategoryName)
+                                    </td>
+                                    <td>
+
+                                        @Html.ActionLink(reportDefinition.ReportName, "Index", "Report", new { reportName = reportDefinition.ReportName, categoryName = reportDefinition.CategoryName, subCategoryName = reportDefinition.SubCategoryName }, null)
+                                    </td>
+
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

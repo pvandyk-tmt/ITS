@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TMT.Enforcement.iAutoLog.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SmtpHost" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">192.168.0.254</Value>
+    </Setting>
+    <Setting Name="SmtpPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">26</Value>
+    </Setting>
+    <Setting Name="SmtpUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SmtpPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MailEnableSsl" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SmtpUseDefaultCredentials" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SmtpMailFrom" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">iautolog@tmtservices.co.za</Value>
+    </Setting>
+    <Setting Name="LogFileFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\TMT\Infringement Logs</Value>
+    </Setting>
+    <Setting Name="MailDistributionList" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">rtrollip@tmtservices.co.za</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

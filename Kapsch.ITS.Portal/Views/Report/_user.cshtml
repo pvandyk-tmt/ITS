@@ -1,0 +1,16 @@
+﻿@{
+    var users = ViewBag.Users as IList<Kapsch.Core.Gateway.Models.User.UserModel>;
+    users.Insert(0, new Kapsch.Core.Gateway.Models.User.UserModel { ID = 0, FirstName = "ALL", LastName = "Users"});
+}
+
+<div class="form-group">
+    <h5>User</h5>
+    <select id="userID" class="form-control input-sm">
+        <option value="">ALL Users</option>
+        @foreach (var user in users)
+        {
+            <option value="@user.ID">@user.FormattedName</option>
+        }       
+    </select>
+    <div class="hr-line-dashed"></div>
+</div>

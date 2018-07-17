@@ -1,0 +1,93 @@
+﻿<Controls:MetroWindow x:Class="TMT.iAdjudicate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen" 
+        ShowMinButton="False"
+        Title="iAdjudicate" 
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
+               Height="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}" 
+               Width="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}" 
+               MaxHeight="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenHeightKey}}"
+               MaxWidth="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}"
+               MinHeight="600" 
+               MinWidth="1250" 
+               Icon="/iAdjudicate;component/Images/app.png" 
+               Loaded="Window_Loaded" 
+               Closing="Window_Closing" 
+               xmlns:my="clr-namespace:TMT.iAdjudicate"
+               >
+    <!--<window.background>
+        <solidcolorbrush color = "cornflowerblue"  />
+    </window.background>-->
+
+    <!--<Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="56" />
+            <RowDefinition Height="190" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <my:cPictureDisplay Grid.Row="1" Grid.Column="0" Margin="2" Background="{DynamicResource WhiteColorBrush}" x:Name="cPictureDisplayLeft" />
+        <my:cPictureDisplay Grid.Row="1" Grid.Column="1" Margin="2" Background="{DynamicResource WhiteColorBrush}" x:Name="cPictureDisplayRight" />
+        <Border BorderBrush="{DynamicResource HighlightBrush}" BorderThickness="1" Grid.Row="1" HorizontalAlignment="Center" Background="{DynamicResource WhiteColorBrush}" Margin="229,0,229,2" VerticalAlignment="Bottom" Height="55" Width="120" Grid.ColumnSpan="2">
+            <my:cPictureDisplay HorizontalAlignment="Stretch" Background="{DynamicResource WhiteColorBrush}" Margin="2" x:Name="cPictureDisplayNP" VerticalAlignment="Stretch" />
+        </Border>
+        <Label Grid.ColumnSpan="2" Name="lblTicketNumber" IsTabStop="False" Content="Ticket number" FontSize="14" Padding="2" HorizontalContentAlignment="Center" Height="22" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold" />
+        <Label Content="Tickets:" Height="19" HorizontalAlignment="Left" Margin="5,6,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+        <Label Content="0" Height="19" HorizontalAlignment="Left" Margin="52,6,0,0" Padding="2,0,2,0" VerticalAlignment="Top" Width="52" Name="lblTickets" FontWeight="Bold" />
+        <Label Content="File Location:" Grid.Row="2" Height="19" HorizontalAlignment="Left" Margin="5,3,0,0"  VerticalAlignment="Top" Padding="2,0,2,0" />
+        <Label Content="Notification:"  Grid.Row="2" Height="19" HorizontalAlignment="Left" Margin="5,30,0,0" VerticalAlignment="Top" Padding="2,0,2,0" />
+        <Label x:Name="lblFileLocation" Content="Not loaded..." Grid.Row="2" Height="19" Margin="85,3,166,0"  VerticalAlignment="Top" Padding="2,0,2,0" Grid.ColumnSpan="2" />
+        <Label x:Name="lblNotification" Content="Not loaded..." Grid.Row="2" Height="19" Margin="85,30,3,0" VerticalAlignment="Top" Padding="2,0,2,0" FontWeight="Bold" />
+        <Label Content="Version x.x.x.xxx" FontFamily="Arial" FontSize="9.5" FontStyle="Italic" Height="20" HorizontalAlignment="Right" HorizontalContentAlignment="Left" Margin="0,3,4,0" Name="lblVersion" Padding="0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Top" Width="83" />
+        <Label Content="Additionals 0    " Height="19" HorizontalAlignment="Left" Margin="38,3,0,0" Padding="2,0,2,0" VerticalAlignment="Top" Grid.Column="1" Grid.Row="2" Width="85" Name="labelAdditionals" />
+        <Border Grid.Row="3" Grid.Column="0" Margin="2" VerticalAlignment="Top" Height="155" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush3}" HorizontalAlignment="Stretch">
+            <Grid>
+                <Label Content="Registration Number:" Height="19" HorizontalAlignment="Left" Margin="2,9,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Vehicle Make:" Height="19" HorizontalAlignment="Left" Margin="2,38,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Vehicle Model:" Height="19" HorizontalAlignment="Left" Margin="2,67,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Vehicle Colour:" Height="19" HorizontalAlignment="Left" Margin="2,96,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Vehicle Type:" Height="19" HorizontalAlignment="Left" Margin="2,125,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,6,6,0" VerticalAlignment="Top" Name="textBoxRegNum" Text="XYZ 1234 GP" FontWeight="Bold" />
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,35,6,0" VerticalAlignment="Top" Name="textBoxVMake" Text="Volkswagen"/>
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,64,6,0" VerticalAlignment="Top" Name="textBoxVModel" Text="Golf"/>
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,93,6,0" VerticalAlignment="Top" Name="textBoxVColor" Text="Black"/>
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,122,6,0" VerticalAlignment="Top" Name="textBoxVType" Text="Sedan"/>
+            </Grid>
+        </Border>
+        <Border Grid.Row="3" Grid.Column="1" Margin="2" VerticalAlignment="Top" Height="183" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush3}" HorizontalAlignment="Stretch">
+            <Grid>
+                <Label Content="Offence Date:" Height="19" HorizontalAlignment="Left" Margin="2,9,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Speed:" Height="19" HorizontalAlignment="Left" Margin="2,38,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Zone:" Height="19" HorizontalAlignment="Left" Margin="2,67,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Direction/Lane:" Height="19" HorizontalAlignment="Left" Margin="2,96,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Offence Code:" Height="19" HorizontalAlignment="Left" Margin="2,125,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <Label Content="Vehicle License Expire:" Height="19" HorizontalAlignment="Left" Margin="2,154,0,0" Padding="2,0,2,0" VerticalAlignment="Top" />
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,6,5,0" VerticalAlignment="Top" Name="textBoxODate" Text="2011/01/02"/>
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,35,5,0" VerticalAlignment="Top" Name="textBoxOSpeed" Text="143.5"/>
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,64,5,0" VerticalAlignment="Top" Name="textBoxOZone" Text="120"/>
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,93,5,0" VerticalAlignment="Top" Name="textBoxODir" Text="East"/>
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="128,122,5,0" VerticalAlignment="Top" Name="textBoxOffence" Text="Speeding"/>
+                <TextBox Height="23" HorizontalAlignment="Stretch" IsReadOnly="True" IsTabStop="False" IsUndoEnabled="False" Margin="129,151,5,0" VerticalAlignment="Top" Name="textBoxLExpire" Text="2012/03/01"/>
+            </Grid>
+        </Border>
+        <Button Content="_Accept" Grid.Row="3" Height="23" Margin="0,0,0,6" Name="buttonAccept" VerticalAlignment="Bottom" TabIndex="1" Click="buttonAccept_Click" HorizontalAlignment="Right" Width="72" />
+        <Button Content="_Reject" Grid.Row="3" Height="23" Margin="0,0,73,6" Name="buttonReject" VerticalAlignment="Bottom" TabIndex="2" Click="buttonReject_Click" HorizontalAlignment="Right" Width="72" />
+        <Button Content="_View or Edit Notes..." Grid.Column="1" Grid.Row="2" Height="19" Margin="129,3,11,0" Name="buttonViewEditNotes" VerticalAlignment="Top" FontSize="9" Click="buttonViewEditNotes_Click" ToolTip="None" />
+        <Button Content="_Add Additional Offences..." Grid.Column="1" Grid.Row="2" Height="19" Margin="129,30,11,0" Name="buttonAddAdditional" VerticalAlignment="Top" FontSize="9" Click="buttonAddAdditional_Click" />
+        <Button Content="_Images" Height="25" Margin="0,0,221,6" Name="buttonImages" TabIndex="2" VerticalAlignment="Bottom"  Grid.Row="3" IsEnabled="False" Click="buttonImages_Click" HorizontalAlignment="Right" Width="72" />
+        <Button Content="_Show Video" Height="23" Margin="0,0,147,6" Grid.Row="3"  Name="buttonShowVideo" VerticalAlignment="Bottom" Click="buttonShowVideo_Click" IsEnabled="False" FontSize="9" HorizontalAlignment="Right" Width="72" />
+    </Grid>
+</Controls:MetroWindow>

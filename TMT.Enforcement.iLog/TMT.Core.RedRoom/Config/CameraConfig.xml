@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CameraConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CameraConfig>
+    <ID>1</ID>
+    <AssemblyName>TMT.Core.Camera.SafetyCam</AssemblyName>
+    <NameSpace>TMT.Core.Camera.SafetyCam</NameSpace>
+    <CameraName>SafetyCam</CameraName>
+    <CameraVersion>6.0.0.0</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>9999</MaxHeight>
+    <MaxWidth>9999</MaxWidth>
+  </CameraConfig>
+  <CameraConfig>
+    <ID>2</ID>
+    <AssemblyName>TMT.Core.Camera.SafetyCam</AssemblyName>
+    <NameSpace>TMT.Core.Camera.SafetyCam</NameSpace>
+    <CameraName>SafetyCam</CameraName>
+    <CameraVersion>5.6.0.0</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>9999</MaxHeight>
+    <MaxWidth>9999</MaxWidth>
+  </CameraConfig>
+  <CameraConfig>
+    <ID>3</ID>
+    <AssemblyName>TMT.Core.Camera.SafetyCam</AssemblyName>
+    <NameSpace>TMT.Core.Camera.SafetyCam</NameSpace>
+    <CameraName>SafetyCam</CameraName>
+    <CameraVersion>4.0.0.0</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>768</MaxHeight>
+    <MaxWidth>1024</MaxWidth>
+  </CameraConfig>
+  <CameraConfig>
+		<ID>4</ID>
+		<AssemblyName>TMT.Core.Camera.SafetyCam</AssemblyName>
+		<NameSpace>TMT.Core.Camera.SafetyCam</NameSpace>
+		<CameraName>SafetyCam</CameraName>
+		<CameraVersion>3.0.0.2</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>768</MaxHeight>
+    <MaxWidth>1024</MaxWidth>
+	</CameraConfig>
+	<CameraConfig>
+		<ID>5</ID>
+		<AssemblyName>TMT.Core.Camera.SafetyCam</AssemblyName>
+		<NameSpace>TMT.Core.Camera.SafetyCam</NameSpace>
+		<CameraName>SafetyCam</CameraName>
+		<CameraVersion>3.0.0.0</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>768</MaxHeight>
+    <MaxWidth>1024</MaxWidth>
+	</CameraConfig>
+	<CameraConfig>
+		<ID>6</ID>
+		<AssemblyName>TMT.Core.Camera.SafetyCam</AssemblyName>
+		<NameSpace>TMT.Core.Camera.SafetyCam</NameSpace>
+		<CameraName>SafetyCam</CameraName>
+		<CameraVersion>2.1.1.2</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>768</MaxHeight>
+    <MaxWidth>1024</MaxWidth>
+	</CameraConfig>
+  <CameraConfig>
+    <ID>7</ID>
+    <AssemblyName>TMT.Core.Camera.TruCam</AssemblyName>
+    <NameSpace>TMT.Core.Camera.TruCam</NameSpace>
+    <CameraName>TruCam</CameraName>
+    <CameraVersion>1.0.0.0</CameraVersion>
+    <DateFormat>dd*MM*yyyy HH:mm:ss</DateFormat>
+    <MaxHeight>768</MaxHeight>
+    <MaxWidth>1024</MaxWidth>
+  </CameraConfig>
+  <CameraConfig>
+    <ID>8</ID>
+    <AssemblyName>TMT.Core.Camera.DigiCam</AssemblyName>
+    <NameSpace>TMT.Core.Camera.DigiCam</NameSpace>
+    <CameraName>DigiCam</CameraName>
+    <CameraVersion>1.0.0.0</CameraVersion>
+    <DateFormat>dd*MM*yyyy HH:mm:ss</DateFormat>
+    <MaxHeight>768</MaxHeight>
+    <MaxWidth>1024</MaxWidth>
+  </CameraConfig>
+  <CameraConfig>
+    <ID>9</ID>
+    <AssemblyName>TMT.Core.Camera.Artemis</AssemblyName>
+    <NameSpace>TMT.Core.Camera.Artemis</NameSpace>
+    <CameraName>Artemis</CameraName>
+    <CameraVersion>1.0.0.0</CameraVersion>
+    <DateFormat>dd*MM*yyyy HH:mm:ss</DateFormat>
+    <MaxHeight>768</MaxHeight>
+    <MaxWidth>1024</MaxWidth>
+  </CameraConfig>
+ <CameraConfig>
+    <ID>10</ID>
+    <AssemblyName>TMT.Core.Camera.SafetyCam.DOT</AssemblyName>
+    <NameSpace>TMT.Core.Camera.SafetyCam.DOT</NameSpace>
+    <CameraName>SafetyCam_DOT</CameraName>
+    <CameraVersion>5.5.0.0</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>9999</MaxHeight>
+    <MaxWidth>9999</MaxWidth>
+  </CameraConfig>
+  <CameraConfig>
+    <ID>11</ID>
+    <AssemblyName>TMT.Core.Camera.SafetyCam.DOTL</AssemblyName>
+    <NameSpace>TMT.Core.Camera.SafetyCam.DOTL</NameSpace>
+    <CameraName>SafetyCam_DOTL</CameraName>
+    <CameraVersion>5.5.0.0</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>9999</MaxHeight>
+    <MaxWidth>9999</MaxWidth>
+  </CameraConfig>
+  <CameraConfig>
+    <ID>12</ID>
+    <AssemblyName>TMT.Core.Camera.VideoSource.TVG</AssemblyName>
+    <NameSpace>TMT.Core.Camera.VideoSource.TVG</NameSpace>
+    <CameraName>Video_TVG</CameraName>
+    <CameraVersion>1.0.0.0</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>9999</MaxHeight>
+    <MaxWidth>9999</MaxWidth>
+  </CameraConfig>
+  <CameraConfig>
+    <ID>13</ID>
+    <AssemblyName>TMT.Core.Camera.Aurecon.DOT</AssemblyName>
+    <NameSpace>TMT.Core.Camera.Aurecon.DOT</NameSpace>
+    <CameraName>Aurecon</CameraName>
+    <CameraVersion>1.0.0.0</CameraVersion>
+    <DateFormat>yyyy*MM*dd HH:mm:ss.ff</DateFormat>
+    <MaxHeight>9999</MaxHeight>
+    <MaxWidth>9999</MaxWidth>
+  </CameraConfig>
+</CameraConfigs>

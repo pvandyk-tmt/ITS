@@ -1,0 +1,928 @@
+﻿@model IList<Kapsch.ITS.Gateway.Models.Monitor.CameraStatisticsModel>
+@{
+    var cameras = Json.Encode(Model);
+    var regions = ViewBag.Regions as IList<Kapsch.Core.Gateway.Models.Configuration.RegionModel>;
+    var districts = Json.Encode(ViewBag.Districts as IList<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>);
+}
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+    $("#breadcrumbText").html("Monitoring / <b>Cameras</b>");
+</script>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Cameras</h5>
+                    <div class="ibox-tools">
+
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="ibox-tools">
+                                <i class="fa fa-bars" id="collapse"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 open" id="sidebar">
+                            <form id="filterForm" class="form-group-sm">
+                                <div class="ibox float-e-margins">
+                                    <h5>Filter</h5>
+                                    <h4>Regions</h4>
+                                    @Html.DropDownList("regionsDropDownList", new SelectList(regions, "ID", "Name", ""), new { @class = "form-control input-sm" })
+                                    <div class="hr-line-dashed"></div>
+                                    <h4>Districts</h4>
+                                    <select id="districtsDropDownList" class="form-control input-sm">
+                                        <option value="0">ALL DISTRICTS</option>
+                                    </select>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="panel-heading ">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapse1">
+                                                <i class="indicator glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i> Device Status
+                                            </a>
+                                        </h4>
+                                    </div>
+
+                                    <div id="collapse1" class="panel-collapse collapse in">
+                                        <div class="form-group" id="deviceStatusDiv">
+                                            @foreach (var deviceStatus in Enum.GetValues(typeof(Kapsch.Core.Gateway.Models.Enums.CameraStatusType)))
+                                            {
+                                                <div class="i-checks">
+                                                    <label> <input type="checkbox" name="@string.Format("statusChkBox_{0}", (int) deviceStatus)" value="@((int) deviceStatus)" checked> <i></i> @(deviceStatus.ToString())</label>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                    <input type="button" value="Filter" class="btn btn-primary" onclick="onchangeFilter()" style="width:100%" />
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="content" class="col-md-10">
+                            <div class="tabs-container" id="tabs">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#mapview"> <i class="fa fa-laptop " title="Map View"></i></a></li>
+                                    <li class=""><a data-toggle="tab" href="#dataview"><i class="fa fa-database" title="Data View"></i></a></li>
+                                    <li class=""><a data-toggle="tab" href="#quickview"><i class="fa fa-eye" title="Quick View"></i></a></li>
+                                    <li class=""><a data-toggle="tab" href="#statsview"><i class="fa fa-bar-chart" title="Stats View"></i></a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="mapview" class="tab-pane active">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="wrapper wrapper-content animated fadeInLeft">
+                                                        <div class="google-map" id="map2"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="dataview" class="tab-pane">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="wrapper wrapper-content animated fadeInLeft">
+                                                        <div id="searchResults" class="jqGrid_wrapper">
+                                                            <table id="jqGrid" class="table table-hover table-striped" style="width: 100%"></table>
+                                                            <div id="jqGridPager"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="quickview" class="tab-pane">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="wrapper wrapper-content animated fadeInLeft">
+                                                        <div id="qucikViewResults" class="jqGrid_wrapper">
+                                                            <table id="jqGridQuickView" class="table table-hover table-striped" style="width: 100%"></table>
+                                                            <div id="jqGridPagerQuickView"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="statsview" class="tab-pane">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="wrapper wrapper-content animated fadeInLeft">
+                                                        <div id="statsViewResults" class="jqGrid_wrapper">
+                                                            <table id="jqGridStatsView" class="table table-hover table-striped" style="width: 100%"></table>
+                                                            <div id="jqGridPagerStats"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .scrollable-menu {
+        height: auto;
+        max-height: 300px;
+        overflow-x: hidden;
+    }
+</style>
+
+@section styles {
+    <style>
+        #map2 {
+            height: 500px;
+            width: 100%;
+        }
+
+        /*	start styles for the ContextMenu	*/
+        .context_menu {
+            background-color: white;
+            border: 1px solid gray;
+        }
+
+        .context_menu_item {
+            padding: 3px 6px;
+        }
+
+            .context_menu_item:hover {
+                background-color: #CCCCCC;
+            }
+
+        .context_menu_separator {
+            background-color: gray;
+            height: 1px;
+            margin: 0;
+            padding: 0;
+        }
+        /*	end styles for the ContextMenu	*/
+
+
+        .modal-dialog {
+            position: relative;
+            display: table;
+            overflow-x: auto;
+            width: auto;
+            min-width: 300px;
+        }
+
+        .ui-tabs .ui-tabs-hide {
+            position: absolute;
+            left: -10000px;
+        }
+    </style>
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGlM4-Bkk-Zk1ZKLoPpgqtY1iyVq-wOcE" type="text/javascript"></script>
+    <script src="~/Scripts/marker-contextmenu.js"></script>
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <section class="scripts">
+        <script type="text/javascript">
+
+            var latitude = -15.371516;
+            var longitude = 28.341395;
+            
+            var map;
+            var events = [];
+            var cameras = @Html.Raw(cameras);
+            var districts = @Html.Raw(districts);
+            var deviceMarkers = [];
+            var contextMenu;
+            var contextMenu1;
+            var contextMenu2;
+            var filterUrl = '@Url.Action("FilterCameraStatistics", "Dashboard")';
+            var latestThumbNailUrl = '@Url.Action("GetDeviceLastThumbnail", "Dashboard")';
+
+            var style = [
+             {
+                 featureType: "poi",
+                 stylers: [
+                     { visibility: "off" }
+                 ]
+             }, {
+                 featureType: "transit",
+                 stylers: [
+                     { visibility: "off" }
+                 ]
+             }, {
+                 featureType: "road",
+                 stylers: [
+                     { lightness: "50" },
+                     { visibility: "on" }
+                 ]
+             }, {
+                 featureType: "landscape",
+                 stylers: [
+                     { lightness: "50" }
+                 ]
+
+             }
+            ];
+
+            var deviceStatusEnum = {
+                Offline: 0,
+                Operational: 1,
+                Intermittent: 2,
+                Online: 3,
+                properties: {
+                    0: { name: "Offline", value: 0 },
+                    1: { name: "Operational", value: 1 },
+                    2: { name: "Intermittent", value: 2 },
+                    3: { name: "Online", value: 3 }
+                }
+            };
+
+            $(document).ready(function() {
+                $("a[href='#mapview']").on('shown.bs.tab', function (e) {
+                    initMap();
+                    initDevices();
+                    $(window).trigger("resize");
+
+                    google.maps.event.trigger(map, "resize");
+                });
+
+                $("a[href='#dataview']").on('shown.bs.tab', function (e) {
+
+                    $(window).trigger("resize");
+                });
+
+                $("a[href='#statsview']").on('shown.bs.tab', function (e) {
+
+                    $(window).trigger("resize");
+                });
+
+                $('#regionsDropDownList').on('change', function() {
+                    populateDistrictsDropdown($(this).val());
+
+                });
+
+                initMap();
+                initDevices();
+                initDataViewOnLoad();
+                initStatsViewOnLoad();
+                initQuickViewOnLoad();
+            });
+
+            function populateDistrictsDropdown(regionID) {
+                var regionDistricts = [];
+                if (regionID == 0) {
+                    regionDistricts = districts;
+                } else {
+                    $.each(districts, function(key, value) {
+                        if (value.RegionID == regionID) {
+                            regionDistricts.push(value);
+                        }
+                    });
+                }
+
+                var dropdown = $("#districtsDropDownList");
+                dropdown.html('');
+                dropdown.append('<option value="0">ALL DISTRICTS</option>');
+
+                regionDistricts.forEach(function (t) {
+                    dropdown.append('<option value="' + t.ID + '">' + t.BranchName + '</option>');
+                });
+            }
+
+            function FormatQuickViewDeviceStatus(cellvalue, options, rowObject) {
+                var deviceStatus = rowObject.CameraStatusType;
+
+                var html = '';
+                if (deviceStatus === 0)
+                    html = "<img src='images/battery/battery-offline.png' title='Offline' />";
+                else if (deviceStatus === 1)
+                    html = "<img src='images/battery/battery-operational.png' title='Operational'/>";
+                else if (deviceStatus === 2)
+                    html = "<img src='images/battery/battery-intermitent.png' title='Intermittent'/>";
+                else if (deviceStatus === 3)
+                    html = "<img src='images/battery/battery-warning.png' title='Online'/>";
+
+                return html;
+            }
+
+            function FormatQuickViewGps(cellvalue, options, rowObject) {
+                if (rowObject.GpsLatitude == null)
+                    return "<img src='images/markers/map-red.png' title='Gps not found'/>";
+
+                return "<img src='images/markers/map-green.png' title='Gps location found (" + rowObject.GpsLatitude + "," + rowObject.GpsLongitude + ")'/>";
+            }
+
+            function FormatQuickViewCommStatus(cellvalue, options, rowObject) {
+                var lastComms = rowObject.ModifiedTimeStamp;
+
+                var html = '';
+                if (lastComms == null)
+                    html = "<img src='images/comms/comm-red.png' title='No Comms'/>";
+                else
+                    html = "<img src='images/comms/comm-green.png' title='Comms received'/>";
+
+                return html;
+            }
+
+            function FormatDeviceStatus(cellvalue, options, rowObject) {
+
+                var deviceStatus = rowObject.CameraStatusType;
+
+                var html = '';
+                if (deviceStatus === 0)
+                    html = "<span class=\"label label-default col-sm-12\" style=\"color: White;background-color: #821B2E;width: 137px\">" + deviceStatusEnum.properties[deviceStatus].name + "</span>";
+                else if (deviceStatus === 1)
+                    html = "<span  class=\"label label-default col-sm-12\" style=\"color: White;background-color: #238C03;width: 137px\">" + deviceStatusEnum.properties[deviceStatus].name + "</span>";
+                else if (deviceStatus === 2)
+                    html = "<span  class=\"label label-default col-sm-12\" style=\"color: White;background-color: #1F5494;width: 137px\">" + deviceStatusEnum.properties[deviceStatus].name + "</span>";
+                else if (deviceStatus === 3)
+                    html = "<span  class=\"label label-default col-sm-12\" style=\"color: White;background-color: #AD8910;width: 137px\">" + deviceStatusEnum.properties[deviceStatus].name + "</span>";
+                return html;
+            }
+
+            function onchangeFilter() {
+                var selected = ',';
+                $('#deviceStatusDiv input:checked').each(function() {
+                    selected = selected + $(this).attr('name') + ',';
+                });
+
+                var formData = {
+                    'regionID': $("#regionsDropDownList").val(),
+                    'districtID': $("#districtsDropDownList").val(),
+                    'cameraStatusTypes': selected
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: filterUrl,
+                    data: formData,
+                    success: function(data) {
+                        cameras = data;
+
+                        initDevices();
+
+                        var allParameters = $("#jqGrid").jqGrid("getGridParam");
+                        allParameters.data = cameras;
+                        $("#jqGrid").trigger('reloadGrid');
+
+                        var allParameters = $("#jqGridStatsView").jqGrid("getGridParam");
+                        allParameters.data = cameras;
+                        $("#jqGridStatsView").trigger('reloadGrid');
+
+                        var allParameters = $("#jqGridQuickView").jqGrid("getGridParam");
+                        allParameters.data = cameras;
+                        $("#jqGridQuickView").trigger('reloadGrid');
+                    },
+                    error: function() {
+                        alert('Error');
+                    }
+                });
+            }
+
+            function initStatsViewOnLoad() {
+                $("#jqGridStatsView").jqGrid({
+                    datatype: 'jsonstring',
+                    datastr: cameras,
+                    height: 'auto',
+                    width: null,
+                    shrinkToFit: false,
+                    colNames: ['', 'Status', 'Device Name', 'Operator', 'Time', 'Speed', 'Distance', 'Session Vehicle Count', 'Session Infringement Count', 'Session Vosi Count', 'Day Vehicle Count', 'Day Infringement Count', 'Day Vosi Count'],
+                    colModel: [
+                        { name: 'DeviceID', key: true, hidden: true },
+                        { name: 'CameraStatusType', key: false, formatter: FormatQuickViewDeviceStatus, align: "center", width: 50 },
+                        { name: 'Name', key: false},
+                        { name: 'Operator', key: false},
+                        { name: 'LastInfingementTime', key: false},
+                        { name: 'LastInfingementSpeed', key: false},
+                        { name: 'LastInfingementDistance', key: false},
+                        { name: 'SessionStatisticsVehicleCount', key: false},
+                        { name: 'SessionStatisticsInfringementCount', key: false},
+                        { name: 'SessionStatisticsVoSICount', key: false},
+                        { name: 'DayStatisticsVehicleCount', key: false},
+                        { name: 'DayStatisticsInfringementCount', key: false},
+                        { name: 'DayStatisticsVoSICount', key: false}
+                    ],
+                    viewrecords: true,
+                    gridview: true,
+                    caption: 'Device Stats View',
+                    pager: true,
+                    rowNum: 10000,
+                    pgbuttons: false,
+                    pginput: false,
+                    pgtext: "",
+                    autoResizable: true,
+                    autoresizeOnLoad: true
+                });
+            }
+
+            function initDataViewOnLoad() {
+
+                $("#jqGrid").jqGrid({
+                    datatype: 'jsonstring',
+                    datastr: cameras,
+                    height: 'auto',
+                    width: null,
+                    shrinkToFit: false,
+                    colNames: ['', '', 'Status', 'GPS', 'Last Comms', 'Last Infringement',  'Device Name', 'Region', 'District', 'Location', 'Location Description', 'Operator'],
+                    colModel: [
+                        { name: 'DeviceID', key: true, hidden: true },
+                        { name: 'Ip', key: false, hidden: true },
+                        { name: 'DeviceStatus', key: false, formatter: FormatDeviceStatus, align: "center"},
+                        { name: 'FormattedGps', key: false, width: 50},
+                        { name: 'FormattedModifiedTimestamp', key: false },
+                        { name: 'FormattedLastInfingementTime', key: false },
+                        { name: 'Name', key: false },
+                        { name: 'RegionName', key: false },
+                        { name: 'DistrictName', key: false },
+                        { name: 'LocationCode', key: false },
+                        { name: 'LocationDescription', key: false, width: 300 },
+                        { name: 'Operator', key: false }
+                    ],
+                    viewrecords: true,
+                    caption: 'Device Data View',
+                    pager: true,
+                    rowNum: 10000,
+                    pgbuttons: false,
+                    pginput: false,
+                    pgtext: "",
+                    subGrid: true,
+                    subGridRowExpanded: function(subgrid_id, row_id) {
+                        var subgrid_table_id, pager_id;
+                        var subgrid_table_id = subgrid_id+"_t";
+                        pager_id = "p_"+subgrid_table_id;
+
+                        var rowData = $("#jqGrid").getRowData(row_id);
+                        var data;
+                        $.each(cameras, function(key, value) {
+                            if (value.DeviceID == rowData.DeviceID) {
+                                data = value;
+                            }
+                        });
+
+                        var thumbnailUrl = latestThumbNailUrl + '?deviceid=' + row_id;
+                        var statisticsContent = "<div class='ibox float-e-margins'>" +
+                        //start box title
+                        "<div class='ibox-title'>" +
+                        "<h5><b>Current Site: </b><b id='sitename'>" + data.LocationCode + "(" + data.LocationDescription + ")</b></h5>" +
+                        "<div class='ibox-tools'>" +
+                        "<button type='button' class='btn btn-primary' data-toggle='modal' onclick='ShowModal_" + data.DeviceID + "();'><i class='fa fa-wrench' title='Live Video Feed'></i></button>" +
+                        "</div>" +
+                        "</div>" +
+                        //end box title
+
+                        //start box content
+                        "<div class='ibox-content'>" +
+
+                        //start table
+                        "<table class='table' style='width: 100%; text-align: center;'>" +
+                        " <tbody>" +
+                        "<tr style='background-color: #286090; color: White'>" +
+                        "<td style='width: 25%; vertical-align: text-top; padding-bottom: 2px'>" +
+                        "<b>Operator Id: " + data.Operator + "</b>" +
+                        "</td>" +
+                        "</tr>" +
+                        "<tr style='background-color: #286090; color: White'>" +
+                        "<td style='width: 25%; vertical-align: text-top; padding-bottom: 2px'>" +
+                        "<b>Ip: " + data.Ip + "</b>" +
+                        "</td>" +
+                        "</tr>" +
+                        "</tbody>" +
+                        "</table>" +
+                        "<table class='table' style='width: 100%; text-align: center;'>" +
+                        "<tbody>" +
+                        "<tr style='background-color: #ffcc00; color: White'>" +
+                        "<td style='width: 100%; vertical-align: text-top; ' colspan='4'>" +
+                        "<b>Session Statistics</b>" +
+                        "</td>" +
+                        "</tr>" +
+                        "<tr >" +
+                        "<td style='width: 25%; vertical-align: text-top'>" +
+                        "<b>Vehicle Count</b><br>" +
+                        "<div style='width: 75%; height: 20px; display: block; margin: auto auto; font-size: 20px;'>" +
+                        "<div style='height: 0px;' id='vcnt'>" + data.SessionStatisticsVehicleCount + "</div>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td style='width: 25%; vertical-align: text-top'>" +
+                        "<b>Infringement Count</b><br>" +
+                        "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 20px;'>" +
+                        "<div style='height: 0px;' id='vcnt'>" + data.SessionStatisticsInfringementCount + "</div>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td style='width: 25%; vertical-align: text-top'>" +
+                        "<b>VoSI Count</b><br>" +
+                        "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 20px;'>" +
+                        "<div style='height: 0px;' id='vcnt'>" + data.SessionStatisticsVoSICount + "</div>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td style='width: 25%; vertical-align: text-top'>" +
+                        "<b>Last Measurement</b><br>" +
+                        "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 15px;'>" +
+                        "<div style='height: 0px;' id='lmtimestamp'>" + data.LastInfingementTime + "</div><br>" +
+                        data.LastInfingementSpeed + "<b>km/h</b>&nbsp;&nbsp;" + data.LastInfingementDistance + "<b>m</b>" +
+                        "</div>" +
+                        "</td>" +
+                        "</tr>" +
+                        "<tr style='background-color: #ffcc00; color: White'>" +
+                        "<td style='width: 100%; vertical-align: text-top;' colspan='4'>" +
+                        "<b>Day Statistics</b>" +
+                        "</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                        "<td style='width: 25%; vertical-align: text-top'>" +
+                        "<b>Vehicle Count</b><br>" +
+                        "<div style='width: 75%; height: 20px; display: block; margin: auto auto; font-size: 20px;'>" +
+                        "<div style='height: 0px;' id='vcnt'>" + data.DayStatisticsVehicleCount + "</div>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td style='width: 25%; vertical-align: text-top'>" +
+                        "<b>Infringement Count</b><br>" +
+                        "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 20px;'>" +
+                        "<div style='height: 0px;' id='vcnt'>" + data.DayStatisticsInfringementCount + "</div>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td style='width: 25%; vertical-align: text-top'>" +
+                        "<b>VoSI Count</b><br>" +
+                        "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 20px;'>" +
+                        "<div style='height: 0px;' id='vcnt'>" + data.DayStatisticsVoSICount + "</div>" +
+                        "</div>" +
+                        "</td>" +
+                        "<td style='width: 25%; vertical-align: text-top'>" +
+                        "<b>Last Measurement</b><br>" +
+                        "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 15px;'>" +
+                        "<div style='height: 0px;' id='lmtimestamp'>" + data.LastInfingementTime + "</div><br>" +
+                        data.LastInfingementSpeed + "<b>km/h</b>&nbsp;&nbsp;" + data.LastInfingementDistance + "<b>m</b>" +
+                        "</div>" +
+                        "</td>" +
+                        "</tr>" +
+                        "</tbody>" +
+                        "</tbody>" +
+                        "</table>" +
+                        //end table
+                        "</div>" +
+                        //end box content
+
+                        //start of modal box modal_"+key+
+                        "<div class='modal inmodal' id='modal_" + data.DeviceID + "' tabindex='-1' role='dialog' aria-hidden='true'>" +
+                        "<div class='modal-dialog'>" +
+                        "<div class='modal-content animated bounceInRight'>" +
+                        "<div class='modal-header'>" +
+                        "<button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>" +
+                        "<i class='fa fa-laptop modal-icon'></i>" +
+                        "<h4 class='modal-title'>" + data.LocationCode + "(" + data.LocationDescription + ")</h4>" +
+                        "</div>" +
+                        "<div class=\"modal-body\" style=\"text-align: center;\">" +
+                        "<img  id='img_" + data.DeviceID + "' style='border: 4px solid #6388b4; height: 140px;'/>" +
+                        /*     "<iframe  'img_" + key + "' width=\"100%\" height=\"250px\" frameborder=\"0\" style=\"border:0\"></iframe>" +*/
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        //end of modal box modal_"+key+
+                        "<script>" +
+                        "function ShowModal_" + data.DeviceID + "() {" +
+                        " $.ajax({" +
+                        "url: '" + thumbnailUrl + "'" +
+                        "}).done(function(results) {" +
+                        "var imgObj = document.getElementById('img_" + data.DeviceID + "');" +
+                        "imgObj.setAttribute('src', results);" +
+                        "});" +
+                        " $('#modal_" + data.DeviceID + "').modal('show');" +
+                        "}" +
+                        "</scri" +
+                        "pt>" +
+                        "</div>";
+
+                        $("#" + subgrid_id).html(statisticsContent);
+                    }
+                });
+            }
+
+            function initQuickViewOnLoad() {
+                $("#jqGridQuickView").jqGrid({
+                    datatype: 'jsonstring',
+                    datastr: cameras,
+                    height: 'auto',
+                    width: null,
+                    shrinkToFit: false,
+                    colNames: ['', '', 'Device', 'Comms', 'GPS', 'Device Name', 'Region', 'District', 'Location', 'Location description', 'Operator'],
+                    colModel: [
+                        { name: 'DeviceID', key: true, hidden: true },
+                        { name: 'Ip', key: false },
+                        { name: 'CameraStatusType', key: false, formatter: FormatQuickViewDeviceStatus, align: "center", width: 40 },
+                        { name: 'LastComms', key: false, formatter: FormatQuickViewCommStatus, align: "center", width: 40 },
+                        { name: 'GpsLat', key: false, formatter: FormatQuickViewGps, align: "center", width: 40 },
+                        { name: 'Name', key: false},
+                        { name: 'RegionName', key: false},
+                        { name: 'DistrictName', key: false},
+                        { name: 'LocationCode', key: false},
+                        { name: 'LocationDescription', key: false, width: 300},
+                        { name: 'Operator', key: false}
+                    ],
+                    viewrecords: true,
+                    gridview: true,
+                    caption: 'Device Quick View',
+                    pager: true,
+                    rowNum: 10000,
+                    pgbuttons: false,
+                    pginput: false,
+                    pgtext: ""
+                });
+            }
+
+            $('#collapse').click(function(){
+                if($('#sidebar').hasClass('open'))
+                {
+                    $('#sidebar').removeClass('col-md-2');
+                    $('#sidebar').removeClass('open');
+                    $('#sidebar').addClass('hidden');
+                    $('#content').addClass('col-md-12');
+                    $('#content').removeClass('col-md-10');
+                }
+                else
+                {
+                    $('#sidebar').addClass('col-md-2');
+                    $('#sidebar').addClass('open');
+                    $('#sidebar').removeClass('hidden');
+                    $('#content').removeClass('col-md-12');
+                    $('#content').addClass('col-md-10');
+                }
+
+                initMap();
+                initDevices();
+                $(window).trigger("resize");
+
+                google.maps.event.trigger(map, "resize");
+            });
+
+            function initMap() {
+                window.google.maps.visualRefresh = true;
+
+                var mapOptions = {
+                    zoom: 11,
+                    center: new google.maps.LatLng(latitude, longitude),
+                    styles: [{ "featureType": "water", "stylers": [{ "saturation": 43 }, { "lightness": -11 }, { "hue": "#0088ff" }] }, { "featureType": "road", "elementType": "geometry.fill", "stylers": [{ "hue": "#ff0000" }, { "saturation": -100 }, { "lightness": 99 }] }, { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "color": "#808080" }, { "lightness": 54 }] }, { "featureType": "landscape.man_made", "elementType": "geometry.fill", "stylers": [{ "color": "#ece2d9" }] }, { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{ "color": "#ccdca1" }] }, { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] }, { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "poi", "stylers": [{ "visibility": "off" }] }, { "featureType": "landscape.natural", "elementType": "geometry.fill", "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }] }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }]
+                };
+
+                map = new window.google.maps.Map(document.getElementById("map2"), mapOptions);
+
+                var contextMenuOptions1 = {};
+                contextMenuOptions1.classNames = { menu: 'dropdown-menu', menuSeparator: 'divider' };
+
+                var menuItems1 = [];
+                menuItems1.push({ className: 'context_menu_item', eventName: 'lastevent_click', label: 'Latest Statistics' });
+                menuItems1.push({});
+                menuItems1.push({ className: 'context_menu_item', eventName: 'center_map_click', label: 'Center map here' });
+                contextMenuOptions1.menuItems = menuItems1;
+
+                contextMenu1 = new ContextMenu(map, contextMenuOptions1);
+
+                google.maps.event.addListener(contextMenu1, 'menu_item_selected', function(latLng, eventName, marker, device) {
+                    switch (eventName) {
+
+                        case 'center_map_click':
+                            map.panTo(latLng);
+                            break;
+                        case 'lastevent_click':
+                            onDeviceLastStatistic(marker, device);
+                            break;
+                    }
+                });
+            }
+
+            function initDevices() {
+                // Clear all device markers
+                for (var i = 0; i < deviceMarkers.length; i++) {
+                    deviceMarkers[i].setMap(null);
+                }
+                deviceMarkers = [];
+
+                var gpsLocationFound = false;
+
+                $.each(cameras, function(key, value) {
+                    if (value.GpsLatitude != 0 && value.GpsLongitude != 0) {
+
+                        var icon = "Content/Images/MapIcons/Media/Red/photo.png";
+
+                        if (value.CameraStatusType != null && value.CameraStatusType == 1) {
+                            icon = "Content/Images/MapIcons/Media/Green/photo.png";
+                        } else if (value.CameraStatusType != null && value.CameraStatusType == 2) {
+                            icon = "Content/Images/MapIcons/Media/Blue/photo.png";
+                        } else if (value.CameraStatusType != null && value.CameraStatusType == 3) {
+                            icon = "Content/Images/MapIcons/Media/Orange/photo.png";
+                        }
+
+                        if (value.GpsLatitude != null) {
+                            var marker =
+                                new window.google.maps.Marker({
+                                    position: new window.google.maps.LatLng(value.GpsLatitude, value.GpsLongitude),
+                                    map: map,
+                                    title: value.Name
+                                });
+
+                            marker.setIcon(icon);
+
+                            if (value.AdapterType == 4) {
+                                marker.addListener('click', function() {
+                                    if (value.CameraStatusType != null && value.CameraStatusType == 0) {
+                                        contextMenu2.show(marker.position, marker, value);
+                                    } else {
+                                        //contextMenu.show(marker.position, marker, value);
+                                    }
+                                });
+                            } else {
+                                marker.addListener('click', function() {
+                                    if (value.CameraStatusType != null && value.CameraStatusType == 0) {
+                                        contextMenu2.show(marker.position, marker, value);
+                                    } else {
+                                        contextMenu1.show(marker.position, marker, value);
+                                    }
+                                });
+                            }
+
+                            deviceMarkers.push(marker);
+
+                            gpsLocationFound = true;
+                        }
+                    }
+
+                });
+
+                if (cameras.length > 0 && gpsLocationFound) {
+                    //fit markers to bound
+                    var bounds = new window.google.maps.LatLngBounds();
+                    for (var i = 0; i < deviceMarkers.length; i++) {
+                        bounds.extend(deviceMarkers[i].getPosition());
+                    }
+
+                    if (cameras.length == 1) {
+                        map.setZoom(11);
+                    } else {
+                        map.fitBounds(bounds);
+                    }
+                } else {
+                    var mybounds = new window.google.maps.LatLngBounds();
+                    var myLatLng1 = new window.google.maps.LatLng(-16.445652, 22.220035);
+                    mybounds.extend(myLatLng1);
+                    var myLatLng2 = new window.google.maps.LatLng(-8.243109, 30.734439);
+                    mybounds.extend(myLatLng2);
+
+                    map.fitBounds(mybounds);
+                }
+            }
+
+            function viewStatistics(marker, device) {
+                var config = JSON.parse(device.ConfigJson);
+                var ip = config.Ip;
+                if (ip == null || ip == undefined)
+                    return;
+
+                var infoWindow = new google.maps.InfoWindow();
+                infoWindow.setContent("<iframe width='600' height='450' frameborder='0' style='border:0' src='http://" + ip + "/statssum.html' allowfullscreen></iframe>");
+                infoWindow.open(map, marker);
+            }
+
+            function viewRealtimeVideo(marker, device) {
+                var config = JSON.parse(device.ConfigJson);
+                var ip = config.Ip;
+                if (ip == null || ip == undefined)
+                    return;
+
+                var infoWindow = new google.maps.InfoWindow();
+                infoWindow.setContent("<iframe width='600' height='450' frameborder='0' style='border:0' src='http://" + ip + "/livevideo.html' allowfullscreen></iframe>");
+                infoWindow.open(map, marker);
+            }
+
+            function onDeviceLastStatistic(marker, device) {
+                var data;
+                $.each(cameras, function(key, value) {
+                    if (value.DeviceID == device.DeviceID) {
+                        data = value;
+                    }
+                });
+
+                var content = /* "<div style=\"width: 600px; margin: auto; background-color: #1984c0; padding-bottom: 5px; padding-top: 1px;\" id=\"mainDiv\">" +*/
+                    "<div class='ibox float-e-margins'>" +
+
+                                    //start box title
+                                    "<div class='ibox-title'>" +
+                                    "<h5><b>Current Site: </b><b id='sitename'>" + data.LocationCode + "(" + data.LocationDescription + ")</b></h5>" +
+                                    "</div>" +
+                                    //end box title
+
+                                    //start box content
+                                    "<div class='ibox-content'>" +
+
+                                    //start table
+                                    "<table class='table' style='width: 100%; text-align: center;'>" +
+                                    " <tbody>" +
+                                    "<tr style='background-color: #286090; color: White'>" +
+                                    "<td style='width: 25%; vertical-align: text-top; padding-bottom: 2px'>" +
+                                    "<b>Operator Id: " + data.Operator + "</b>" +
+                                    "</td>" +
+                                    "</tr>" +
+                                        "<tr style='background-color: #286090; color: White'>" +
+                                    "<td style='width: 25%; vertical-align: text-top; padding-bottom: 2px'>" +
+                                    "<b>Ip: " + data.Ip + "</b>" +
+                                    "</td>" +
+                                    "</tr>" +
+                                    "</tbody>" +
+                                    "</table>" +
+                                    "<table class='table' style='width: 100%; text-align: center;'>" +
+                                    "<tbody>" +
+                                    "<tr style='background-color: #ffcc00; color: White'>" +
+                                    "<td style='width: 100%; vertical-align: text-top; ' colspan='4'>" +
+                                    "<b>Session Statistics</b>" +
+                                    "</td>" +
+                                    "</tr>" +
+                                    "<tr >" +
+                                    "<td style='width: 25%; vertical-align: text-top'>" +
+                                    "<b>Vehicle Count</b><br>" +
+                                    "<div style='width: 75%; height: 20px; display: block; margin: auto auto; font-size: 20px;'>" +
+                                    "<div style='height: 0px;' id='vcnt'>" + data.SessionStatisticsVehicleCount + "</div>" +
+                                    "</div>" +
+                                    "</td>" +
+                                    "<td style='width: 25%; vertical-align: text-top'>" +
+                                    "<b>Infringement Count</b><br>" +
+                                    "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 20px;'>" +
+                                    "<div style='height: 0px;' id='vcnt'>" + data.SessionStatisticsInfringementCount + "</div>" +
+                                    "</div>" +
+                                    "</td>" +
+                                    "<td style='width: 25%; vertical-align: text-top'>" +
+                                    "<b>VoSI Count</b><br>" +
+                                    "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 20px;'>" +
+                                    "<div style='height: 0px;' id='vcnt'>" + data.SessionStatisticsVoSICount + "</div>" +
+                                    "</div>" +
+                                    "</td>" +
+                                    "<td style='width: 25%; vertical-align: text-top'>" +
+                                    "<b>Last Measurement</b><br>" +
+                                    "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 15px;'>" +
+                                    "<div style='height: 0px;' id='lmtimestamp'>" + data.LastInfingementTime + "</div><br>" +
+                                    data.LastInfingementSpeed + "<b>km/h</b>&nbsp;&nbsp;" + data.LastInfingementDistance + "<b>m</b>" +
+                                    "</div>" +
+                                    "</td>" +
+                                    "</tr>" +
+                                    "<tr style='background-color: #ffcc00; color: White'>" +
+                                    "<td style='width: 100%; vertical-align: text-top;' colspan='4'>" +
+                                    "<b>Day Statistics</b>" +
+                                    "</td>" +
+                                    "</tr>" +
+                                    "<tr>" +
+                                    "<td style='width: 25%; vertical-align: text-top'>" +
+                                    "<b>Vehicle Count</b><br>" +
+                                    "<div style='width: 75%; height: 20px; display: block; margin: auto auto; font-size: 20px;'>" +
+                                    "<div style='height: 0px;' id='vcnt'>" + data.DayStatisticsVehicleCount + "</div>" +
+                                    "</div>" +
+                                    "</td>" +
+                                    "<td style='width: 25%; vertical-align: text-top'>" +
+                                    "<b>Infringement Count</b><br>" +
+                                    "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 20px;'>" +
+                                    "<div style='height: 0px;' id='vcnt'>" + data.DayStatisticsInfringementCount + "</div>" +
+                                    "</div>" +
+                                    "</td>" +
+                                    "<td style='width: 25%; vertical-align: text-top'>" +
+                                    "<b>VoSI Count</b><br>" +
+                                    "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 20px;'>" +
+                                    "<div style='height: 0px;' id='vcnt'>" + data.DayStatisticsVoSICount + "</div>" +
+                                    "</div>" +
+                                    "</td>" +
+                                    "<td style='width: 25%; vertical-align: text-top'>" +
+                                    "<b>Last Measurement</b><br>" +
+                                    "<div style='width: 75%; height: 50px; display: block; margin: auto auto; font-size: 15px;'>" +
+                                    "<div style='height: 0px;' id='lmtimestamp'>" + data.LastInfingementTime + "</div><br>" +
+                                    data.LastInfingementSpeed + "<b>km/h</b>&nbsp;&nbsp;" + data.LastInfingementDistance + "<b>m</b>" +
+                                    "</div>" +
+                                    "</td>" +
+                                    "</tr>" +
+                                    "</tbody>" +
+                                    "</tbody>" +
+                                    "</table>" +
+                                    //end table
+                                    "</div>" +
+
+                                    "</div>";
+
+                var infoWindow = new google.maps.InfoWindow();
+                infoWindow.setContent(content);
+                infoWindow.open(map, marker);
+
+            }
+
+        </script>
+    </section>
+}
+
+
+
+

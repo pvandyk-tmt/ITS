@@ -1,0 +1,76 @@
+<resources>
+    <string name="app_name">Console</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="asset_file_not_found">Asset file not found.</string>
+    <string name="network_not_available">Network connection not available.</string>
+    <string name="data_updates">Data Updates</string>
+    <string name="validating_device_registration">Validating device registration</string>
+    <string name="officer_signature">Officer Signature</string>
+    <string name="please_capture_a_signature">Please capture a signature.</string>
+    <string name="clear">Clear</string>
+    <string name="about">About</string>
+    <string name="please_restart_the_application">Please restart the application.</string>
+    <string name="failed_to_obtain_serial_number">Failed to obtain device serial number</string>
+    <string name="query_updates">QUERY UPDATES</string>
+    <string name="update">UPDATE</string>
+    <string name="synchronization_required">Synchronization required\r\nPlease press \'UPDATE\' to synchronise.</string>
+    <string name="data_is_up_to_date">Data is up to date.</string>
+    <string name="device_registration_successfull">Device registration successfull</string>
+    <string name="downloading_device_config">Downloading device config...</string>
+    <string name="uploading_gps_logs">Uploading GPS logs...</string>
+    <string name="downloading_device_software">Downloading %s...</string>
+    <string name="users_update_failed">Users update failed.</string>
+    <string name="users_updated">Users updated</string>
+    <string name="system_functions_updated">System functions updated</string>
+    <string name="device_config_update_failed">Device configuration update failed.</string>
+    <string name="device_config_updated">Device config updated</string>
+    <string name="system_functions_update_failed">System functions update failed.</string>
+    <string name="districts">Districts</string>
+    <string name="search">Search</string>
+    <string name="invalid_login_credentials">Invalid login credentials.</string>
+    <string name="downloading_users">Downloading users...</string>
+    <string name="user_list_is_empty">User list is empty</string>
+    <string name="downloading_system_functions">Downloading system functions...</string>
+    <string name="system_functions_list_is_empty">System function list is empty</string>
+    <string name="create_mobile_device_failed">Create mobile device failed.</string>
+    <string name="mobile_device_created">Mobile device created.</string>
+    <string name="select_a_district_from_the_list">Select a district from the list</string>
+
+    <string name="uploading_user_activity_log">uploading user activity log</string>
+    <string name="uploading_user_activity_log_failed">uploading user activity log failed</string>
+    <string name="uploading_user_activity_log_successful">uploading user activity log successful</string>
+
+    <string name="downloading_district">Downloading district...</string>
+    <string name="downloading_district_failed">Downloading district failed</string>
+    <string name="downloading_district_successful">Downloading district successful</string>
+
+    <string name="downloading_districts">Downloading districts...</string>
+    <string name="downloading_districts_failed">Downloading districts failed</string>
+    <string name="downloading_districts_successful">Downloading districts successful</string>
+
+    <string name="activity_configuration_description">Desc:</string>
+    <string name="activity_configuration_value">Value:</string>
+    <string name="save_text">Save</string>
+
+    <string name="configuration_header_column_one">Description</string>
+    <string name="configuration_header_column_two">value</string>
+
+    <string name="search_for_printers">Search For Printers</string>
+    <string name="friendly_name">Friendly Name:</string>
+    <string name="mac_address">Mac Address:</string>
+    <string name="save_failed">Save Failed</string>
+    <string name="printer_saved">Printer Saved</string>
+    <string name="save_printer">Save Printer</string>
+    <string name="available_printers">Available Printers</string>
+    <string name="this_option_requires_a_printer_to_be_configured">This option requires a printer to be configured. </string>
+    <string name="printer_details_not_found_please_register_a_printer">Printer details not found, Please register a printer.</string>
+
+    <string name="address">Addresses </string>
+    <string name="possible_addresses">Possible Addresses</string>
+    <string name="district_list_is_empty">District list is empty</string>
+
+</resources>

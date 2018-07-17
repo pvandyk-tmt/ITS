@@ -1,0 +1,188 @@
+﻿@using Kapsch.ITS.Portal.Helpers;
+
+@{
+    var user = User as Kapsch.ITS.Portal.Models.AuthenticatedUser;
+}
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element" style="align-content:center;">
+                    <img alt="image" src="~/Images/IMS-logo-180x66-1color.png" height="88" />
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">@string.Format("{0} {1}", user.UserData.FirstName, user.UserData.LastName)</strong>
+                            </span>
+                            @*<span class="text-muted text-xs block">@string.Format("{0}", user.User.AccessRole) <b class="caret"></b></span>*@
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li>
+                            <a href="#changePasswordModal" data-toggle="modal">
+                                Change Password
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+                        <li><a href="@Url.Action("Logout", "Account")">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    IMS
+                </div>
+            </li>
+
+
+
+
+            <!-- View -->
+            @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Fines_View_Fines))
+    {
+        <li class="@Html.IsSelected(controller: "Fine")">
+            <a href="@Url.Action("Index", "Fine")"><i class="fa fa-calculator"></i> <span class="nav-label" data-i18n="nav.layouts">View</span></a>
+        </li>
+}
+
+
+            <!-- Payment -->
+            @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Paymen_Capture_Payment))
+    {
+        <li class="@Html.IsSelected(controller: "Payment")">
+            <a href="@Url.Action("Index", "Payment")"><i class="fa fa-money"></i> <span class="nav-label" data-i18n="nav.dashboard">Payment</span> <span class="fa arrow"></span></a>
+        </li>
+}
+
+            <!-- Representation -->
+            @*<li class="@Html.IsSelected(controller: "Management")">
+            <a href="@Url.Action("Index", "Management")"><i class="fa fa-university"></i> <span class="nav-label" data-i18n="nav.dashboard">Representation</span> <span class="fa arrow"></span></a>
+
+        </li>*@
+
+            <!-- Reports -->
+            @if (user.ReportData.ReportCategories.Count > 0)
+    {
+        <li class="@Html.IsSelected(controller: "Report")">
+            <a href="@Url.Action("Categories", "Report")"><i class="fa fa-bar-chart"></i> <span class="nav-label" data-i18n="nav.dashboard">Reports</span><span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Report", cssClass: "in")">
+                @foreach (var category in user.ReportData.ReportCategories)
+        {
+            <li class="@Html.IsSelected(action: "Category")"><a href="@Url.Action("Category", "Report", new { categoryName = category.CategoryName })">@category.CategoryName</a></li>
+}
+
+            </ul>
+
+        </li>
+}
+
+            <!-- Monitoring -->
+            @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Monitoring_Cameras))
+    {
+        <li class="@Html.IsSelected(controller: "Dashboard")">
+            <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-tachometer"></i> <span class="nav-label" data-i18n="nav.layouts">Monitoring</span> @*<span class="label label-primary pull-right">NEW</span>*@</a>
+        </li>
+}
+
+            <!-- Administration -->
+            @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Administration_Payment_Terminal_Management) ||
+user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Administration_User_Management) ||
+user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Administration_Computer_Management) ||
+user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_VehicleTesting_Manage_Lookups))
+    {
+        <li class="@Html.IsSelected(controller: "Management")">
+            <a href="@Url.Action("Index", "Management")"><i class="fa fa-cogs"></i> <span class="nav-label" data-i18n="nav.dashboard">Administration</span> <span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Management", cssClass: "in")">
+                @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Administration_Computer_Management))
+        {
+            <li class="@Html.IsSelected(action: "Computers")"><a href="@Url.Action("Computers", "Management")">Computers</a></li>
+}
+                @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_VehicleTesting_Manage_Lookups))
+        {
+            <li class="@Html.IsSelected(action: "Lookups")"><a href="@Url.Action("Lookups", "Management")">Lookups</a></li>
+}
+
+                @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Administration_Payment_Terminal_Management))
+        {
+            <li class="@Html.IsSelected(action: "PaymentTerminals")"><a href="@Url.Action("PaymentTerminals", "Management")">Payment Terminals</a></li>
+}
+
+                @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Administration_User_Management))
+        {
+            <li class="@Html.IsSelected(action: "Users")"><a href="@Url.Action("Users", "Management")">Users</a></li>
+}
+
+        @*@if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_Administration_User_Check_Event_Management))*@
+        @*<li class="@Html.IsSelected(action: "UserCheckEvents")"><a href="@Url.Action("UserCheckEvents", "Management")">User Check Events</a></li>*@
+
+            </ul>
+        </li>
+}
+
+
+            <!-- Vehicle Testing -->
+            @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_VehicleTesting_Add_Booking) ||
+user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_VehicleTesting_View_Test_Results))
+    {
+        <li class="@Html.IsSelected(controller: "Vehicle")">
+            <a href="@Url.Action("Index", "Vehicle")"><i class="fa fa-car"></i> <span class="nav-label" data-i18n="nav.dashboard">Vehicle Testing</span> <span class="fa arrow"></span></a>
+
+            <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Vehicle", cssClass: "in")">
+                @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_VehicleTesting_Add_Booking))
+        {
+            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("Index", "Vehicle")">Inspection Bookings</a></li>
+}
+                @if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_VehicleTesting_View_Test_Results))
+        {
+            <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("TestResults", "Vehicle")">Inspections Completed</a></li>
+}
+            </ul>
+
+        </li>
+
+}
+            <!-- Owner Details (SystemsFunctions to be added for TISCapture)-->
+            <li class="@Html.IsSelected(controller: "TISCapture")">
+                <a href="@Url.Action("Index", "TISCapture")"><i class="fa fa-folder"></i> <span class="nav-label" data-i18n="nav.dashboard">TIS Capture</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "TISCapture", cssClass: "in")">
+
+                    @*@if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_TISCapture_SearchDeatails))*@
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("TISCaptureList", "TISCapture")">Capture TIS Details</a></li>
+
+                    @*@if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_TISCapture_ImportDetails))*@
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("ExportSelection", "TISCapture")">Export TIS CSV</a></li>
+
+                    @*@if (user.UserData.SystemFunctions.Any(f => f.Name == SystemFunctions.IMS_Portal_TISCapture_ImportDetails))*@
+                    <li class="@Html.IsSelected(action: "Index")"><a href="@Url.Action("ImportTISDetails", "TISCapture")">Import TIS CSV</a></li>
+
+                </ul>
+
+            </li>
+            <!-- Data -->
+            <!--
+            <li class="@@Html.IsSelected(controller: "Data")">
+                <a href="@@Url.Action("Index", "Data")"><i class="fa fa-database"></i> <span class="nav-label" data-i18n="nav.layouts">Data</span> </a>
+            </li>
+    -->
+
+        </ul>
+</div>
+</nav>
+
+<div id="changePasswordModal" class="modal inmodal fade">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-user modal-icon"></i>
+                <h4 class="modal-title">Change Password</h4>
+                <small class="font-bold">@string.Format("Change password for {0} {1}.  User since {2:dd MMM yyyy}", user.UserData.FirstName, user.UserData.LastName, user.UserData.CreatedTimestamp)</small>
+            </div>
+            <div class="modal-body">
+                <div id="changePasswordDiv">
+                    @Html.Partial("_ChangePassword", new Kapsch.Core.Gateway.Models.User.ChangePasswordModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

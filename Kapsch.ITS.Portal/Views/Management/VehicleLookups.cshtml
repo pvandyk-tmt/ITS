@@ -1,0 +1,505 @@
+﻿@{
+    var vehicleMakes = ViewBag.VehicleMakes as List<Kapsch.EVR.Gateway.Models.Vehicle.VehicleMakeModel>;
+}
+
+<script>
+    $("#breadcrumbText").html("Administration / Lookups / <b>Vehicle</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#tab-1">Vehicle Lookups</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Vehicle Make</label>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownList("vehicleMakeDropDownList", new SelectList(vehicleMakes, "ID", "Description", ""), new { @class = "form-control input-sm" })
+                                    </div>
+                                    <button class="btn btn-primary" type="button" onclick="addVehicleMake()"><i class="fa fa-plus"></i></button>
+                                    &nbsp;
+                                    <button class="btn btn-primary" type="button" onclick="updateVehicleMake()"><i class="fa fa-pencil"></i></button>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Vehicle Model</label>
+                                    <div class="col-sm-4">
+                                        <select id="vehicleModelDropDownList" class="form-control input-sm"></select>
+                                    </div>
+                                    <button class="btn btn-primary" type="button" onclick="addVehicleModel()"><i class="fa fa-plus"></i></button>                                  
+                                    &nbsp;
+                                    <button class="btn btn-primary" type="button" onclick="updateVehicleModel()"><i class="fa fa-pencil"></i></button>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Vehicle Model Number</label>
+                                    <div class="col-sm-4">
+                                        <select id="vehicleModelNumberDropDownList" class="form-control input-sm"></select>
+                                    </div>
+                                    <button class="btn btn-primary" type="button" onclick="addVehicleModelNumber()"><i class="fa fa-plus"></i></button>
+                                    &nbsp;
+                                    <button class="btn btn-primary" type="button" onclick="updateVehicleModelNumber()"><i class="fa fa-pencil"></i></button>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Vehicle Make modal -->
+<div id="addVehicleMakeModal" class="modal inmodal fade">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-car modal-icon"></i>
+                <h4 class="modal-title">Add Vehicle Make</h4>
+                <small class="font-bold"></small>
+            </div>
+            <div class="modal-body">
+                <div id="addVehicleMakeDiv">
+                    @Html.Partial("_AddVehicleMake", new Kapsch.EVR.Gateway.Models.Vehicle.VehicleMakeModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#addVehicleMakeForm").submit(
+        function (e) {
+            e.preventDefault();
+
+            var form = $("#addVehicleMakeForm");
+            form.data('validator', null);
+            $.validator.unobtrusive.parse(form);
+
+            if ($(this).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddVehicleMake", "Management")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data.IsValid) {
+                            $("#vehicleMakeDropDownList").empty();
+                            $("#vehicleMakeDropDownList").addItems(data.Data);
+                            $("#addVehicleMakeModal").modal('toggle');
+                        }
+                        else {
+                            alert("Add vehicle make failed: " + data.ErrorMessage);
+                        }
+                    }
+                });
+            }
+        }
+      );
+</script>
+
+<!-- update Vehicle Make modal -->
+<div id="updateVehicleMakeModal" class="modal inmodal fade">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-car modal-icon"></i>
+                <h4 class="modal-title">Update Vehicle Make</h4>
+                <small class="font-bold"></small>
+            </div>
+            <div class="modal-body">
+                <div id="updateVehicleMakeDiv">
+                    @Html.Partial("_UpdateVehicleMake", new Kapsch.EVR.Gateway.Models.Vehicle.VehicleMakeModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#updateVehicleMakeForm").submit(
+        function (e) {
+            e.preventDefault();
+
+            var form = $("#updateVehicleMakeForm");
+            form.data('validator', null);
+            $.validator.unobtrusive.parse(form);
+
+            if ($(this).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("UpdateVehicleMake", "Management")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data.IsValid) {
+                            $("#vehicleMakeDropDownList").empty();
+                            $("#vehicleMakeDropDownList").addItems(data.Data);
+                            $("#updateVehicleMakeModal").modal('toggle');
+                        }
+                        else {
+                            alert("Update vehicle make failed: " + data.ErrorMessage);
+                        }
+                    }
+                });
+            }
+        }
+      );
+</script>
+
+<!-- Add Vehicle Model modal -->
+<div id="addVehicleModelModal" class="modal inmodal fade">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-car modal-icon"></i>
+                <h4 class="modal-title">Add Vehicle Model</h4>
+                <small class="font-bold"></small>
+            </div>
+            <div class="modal-body">
+                <div id="addVehicleModelDiv">
+                    @Html.Partial("_AddVehicleModel", new Kapsch.EVR.Gateway.Models.Vehicle.VehicleModelModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#addVehicleModelForm").submit(
+        function (e) {
+            e.preventDefault();
+
+            var form = $("#addVehicleModelForm");
+            form.data('validator', null);
+            $.validator.unobtrusive.parse(form);
+
+            if ($(this).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddVehicleModel", "Management")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data.IsValid) {
+                            $("#vehicleModelDropDownList").empty();
+                            $("#vehicleModelDropDownList").addItems(data.Data);
+                            $("#addVehicleModelModal").modal('toggle');
+                        }
+                        else {
+                            alert("Add vehicle model failed: " + data.ErrorMessage);
+                        }
+                    }
+                });
+            }
+        }
+      );
+</script>
+
+<!-- update Vehicle Make modal -->
+<div id="updateVehicleModelModal" class="modal inmodal fade">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-car modal-icon"></i>
+                <h4 class="modal-title">Update Vehicle Model</h4>
+                <small class="font-bold"></small>
+            </div>
+            <div class="modal-body">
+                <div id="updateVehicleModelDiv">
+                    @Html.Partial("_UpdateVehicleModel", new Kapsch.EVR.Gateway.Models.Vehicle.VehicleModelModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#updateVehicleModelForm").submit(
+        function (e) {
+            e.preventDefault();
+
+            var form = $("#updateVehicleModelForm");
+            form.data('validator', null);
+            $.validator.unobtrusive.parse(form);
+
+            if ($(this).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("UpdateVehicleModel", "Management")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data.IsValid) {
+                            $("#vehicleModelDropDownList").empty();
+                            $("#vehicleModelDropDownList").addItems(data.Data);
+                            $("#updateVehicleModelModal").modal('toggle');
+                        }
+                        else {
+                            alert("Update vehicle model failed: " + data.ErrorMessage);
+                        }
+                    }
+                });
+            }
+        }
+      );
+</script>
+
+<!-- Add Vehicle Model Number modal -->
+<div id="addVehicleModelNumberModal" class="modal inmodal fade">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-car modal-icon"></i>
+                <h4 class="modal-title">Add Vehicle Model Number</h4>
+                <small class="font-bold"></small>
+            </div>
+            <div class="modal-body">
+                <div id="addVehicleModelDiv">
+                    @Html.Partial("_AddVehicleModelNumber", new Kapsch.EVR.Gateway.Models.Vehicle.VehicleModelNumberModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#addVehicleModelNumberForm").submit(
+        function (e) {
+            e.preventDefault();
+
+            var form = $("#addVehicleModelNumberForm");
+            form.data('validator', null);
+            $.validator.unobtrusive.parse(form);
+
+            if ($(this).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddVehicleModelNumber", "Management")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data.IsValid) {
+                            $("#vehicleModelNumberDropDownList").empty();
+                            $("#vehicleModelNumberDropDownList").addItems(data.Data);
+                            $("#addVehicleModelNumberModal").modal('toggle');
+                        }
+                        else {
+                            alert("Add vehicle model number failed: " + data.ErrorMessage);
+                        }
+                    }
+                });
+            }
+        }
+      );
+</script>
+
+<!-- update Vehicle Model Number modal -->
+<div id="updateVehicleModelNumberModal" class="modal inmodal fade">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-car modal-icon"></i>
+                <h4 class="modal-title">Update Vehicle Model Number</h4>
+                <small class="font-bold"></small>
+            </div>
+            <div class="modal-body">
+                <div id="updateVehicleModelDiv">
+                    @Html.Partial("_UpdateVehicleModelNumber", new Kapsch.EVR.Gateway.Models.Vehicle.VehicleModelNumberModel())
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#updateVehicleModelNumberForm").submit(
+        function (e) {
+            e.preventDefault();
+
+            var form = $("#updateVehicleModelNumberForm");
+            form.data('validator', null);
+            $.validator.unobtrusive.parse(form);
+
+            if ($(this).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("UpdateVehicleModelNumber", "Management")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data.IsValid) {
+                            $("#vehicleModelNumberDropDownList").empty();
+                            $("#vehicleModelNumberDropDownList").addItems(data.Data);
+                            $("#updateVehicleModelNumberModal").modal('toggle');
+                        }
+                        else {
+                            alert("Update vehicle model number failed: " + data.ErrorMessage);
+                        }
+                    }
+                });
+            }
+        }
+      );
+</script>
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+            $('#vehicleMakeDropDownList').change(function () {
+                $.getJSON("@Url.Action("GetModelsByMake", "Management")" + "/" + $(this).val(), null, function (data) {
+                    $("#vehicleModelDropDownList").empty();
+                    $("#vehicleModelDropDownList").addItems(data);
+                });
+            });
+
+            $('#vehicleModelDropDownList').change(function () {
+                $.getJSON("@Url.Action("GetModelNumberByModel", "Management")" + "/" + $(this).val(), null, function (data) {
+                    $("#vehicleModelNumberDropDownList").empty();
+                    $("#vehicleModelNumberDropDownList").addItems(data);
+                });
+            });
+        });
+
+        $.fn.addItems = function (data) {
+            return this.each(function () {
+                var list = this;
+                $.each(data, function (index, itemData) {
+                    var option = new Option(itemData.Text, itemData.Value);
+                    list.add(option);
+                });
+            });
+        };
+
+
+        function addVehicleMake() {
+            $('#addVehicleMakeModal').modal('show');
+        }
+
+        function updateVehicleMake() {
+            var selectedOption = $('#vehicleMakeDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Make.")
+                return;
+            }
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetVehicleMake", "Management")",
+                data: { id: selectedOption.val() },
+                success: function (model) {
+                    $("#updateVehicleMake_ID").val(model.ID)
+                    $("#updateVehicleMake_Description").val(model.Description);
+                    $("#updateVehicleMake_ExternalCode").val(model.ExternalCode);
+                    $('#updateVehicleMakeModal').modal('show');
+                }
+            });
+        }
+
+        function addVehicleModel() {
+            var selectedOption = $('#vehicleMakeDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Make.")
+                return;
+            }
+            $("#addVehicleModel_VehicleMake_ID").val(selectedOption.val());
+            $("#addVehicleModel_VehicleMake_Description").val(selectedOption.text());
+
+            $('#addVehicleModelModal').modal('show');
+        }
+
+        function updateVehicleModel() {
+            var selectedOption = $('#vehicleMakeDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Make.")
+                return;
+            }
+
+            selectedOption = $('#vehicleModelDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Model.")
+                return;
+            }
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetVehicleModel", "Management")",
+                data: { id: selectedOption.val() },
+                success: function (model) {
+                    $("#updateVehicleModel_VehicleMake_ID").val(model.VehicleMakeID);
+                    $("#updateVehicleModel_VehicleMake_Description").val(model.VehicleMakeDescription);
+                    $("#updateVehicleModel_ID").val(model.ID)
+                    $("#updateVehicleModel_Description").val(model.Description);
+                    $("#updateVehicleModel_ExternalCode").val(model.ExternalCode);
+                    $('#updateVehicleModelModal').modal('show');
+                }
+            });
+        }
+
+        function addVehicleModelNumber() {
+            var selectedOption = $('#vehicleMakeDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Make.")
+                return;
+            }
+
+            selectedOption = $('#vehicleModelDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Model.")
+                return;
+            }
+
+            $("#addVehicleModelNumber_VehicleModel_ID").val(selectedOption.val());
+            $("#addVehicleModelNumber_VehicleModel_Description").val(selectedOption.text());
+
+            $('#addVehicleModelNumberModal').modal('show');
+        }
+
+        function updateVehicleModelNumber() {
+            var selectedOption = $('#vehicleMakeDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Make.")
+                return;
+            }
+
+            selectedOption = $('#vehicleModelDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Model.")
+                return;
+            }
+
+            selectedOption = $('#vehicleModelNumberDropDownList option:selected');
+            if (selectedOption.val() == 0) {
+                alert("Please select a Vehicle Model Number.")
+                return;
+            }
+
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("GetVehicleModelNumber", "Management")",
+                data: { id: selectedOption.val() },
+                success: function (model) {
+                    $("#updateVehicleModelNumber_VehicleModel_ID").val(model.VehicleModelID);
+                    $("#updateVehicleModelNumber_VehicleModel_Description").val(model.VehicleModelDescription);
+                    $("#updateVehicleModelNumber_ID").val(model.ID)
+                    $("#updateVehicleModelNumber_Description").val(model.Description);
+                    $("#updateVehicleModelNumber_ExternalCode").val(model.ExternalCode);
+                    $('#updateVehicleModelNumberModal').modal('show');
+                }
+            });
+        }
+    </script>
+}

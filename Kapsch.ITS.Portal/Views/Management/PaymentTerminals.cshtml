@@ -1,0 +1,128 @@
+﻿@model Kapsch.Gateway.Models.Shared.PaginationListModel<Kapsch.Core.Gateway.Models.Payment.PaymentTerminalModel>
+
+<script>
+    $("#breadcrumbText").html("Administration / Payment Terminals / <b>Search Payment Terminals</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search Payment Terminals</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+
+                        <a class="close-link" href="@Url.Action("CreatePaymentTerminal", "Management")">
+                            <span class="label label-primary pull-right">NEW</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">UUID</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="uuid" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Terminal Type</label>
+                            <div class="col-sm-4">
+                                <select id="terminalType" class="form-control input-sm">
+                                    <option value="0">Any</option>
+                                    <option value="1">Internal Server</option>
+                                    <option value="2">Internal PC</option>
+                                    <option value="3">Internal Mobile Device</option>
+                                    <option value="4">External Server</option>
+                                    <option value="5">External PC</option>
+                                    <option value="6">External Mobile Device</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <input type="button" value="Search" class="btn btn-primary" onclick="reloadGrid()" style="width:100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="searchResults" class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script>
+
+        var searchUrl = '@Url.Action("SearchPaymentTerminals", "Management")';
+        var editUrl = '@Url.Action("EditPaymentTerminal", "Management")';
+        var grid = null;
+
+        $(function () {
+           
+            grid = $("#jqGrid").jqGrid({
+                url: searchUrl,
+                mtype: "GET",
+                postData: {
+                    uuid: function () { return $("#uuid").val() },
+                    terminalType: function () { return $("#terminalType").val() }
+                },
+                height: 450,
+                autowidth: true,
+                shrinkToFit: true,
+                datatype: "json",
+                colNames: ['', 'UUID', 'Terminal Type', 'Status', ''],
+                colModel: [
+                    { name: 'ID', key: true, hidden: true },
+                    { name: 'UUID', key: false },
+                    { name: 'FormattedTerminalType', key: false },
+                    { name: 'FormattedStatus', key: false },
+                    { name: '', index: '', sortable: false, formatter: createEditLink, align: "center", width: "30px" }
+                ],
+                viewrecords: true,
+                rowNum: 20,
+                pager: "#jqGridPager"
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#jqGrid').setGridWidth(width);
+
+            });
+
+            function createEditLink(cellvalue, options, rowObject) {
+
+                var id = rowObject.ID;
+                var html = '';
+                html = "<a id='editLink" + id + "'  class='memberAction' href='" + editUrl + "?id=" + id + "' style='color:blue;cursor:pointer;' type='button' title='" + 'Edit' + "'>" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+
+                return html;
+            }
+        });
+
+        var reloadGrid = function() {
+            grid.trigger('reloadGrid');
+        };
+
+    </script>
+}
+
+
+
+

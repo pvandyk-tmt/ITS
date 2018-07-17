@@ -1,0 +1,38 @@
+﻿@model Kapsch.EVR.Gateway.Models.Vehicle.VehicleModelModel
+
+@using (Html.BeginForm("AddVehicleMake", "Vehicle", FormMethod.Post, new { id = "addVehicleModelForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.VehicleMakeID, new { id = "addVehicleModel_VehicleMake_ID" })
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.VehicleMakeDescription, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.VehicleMakeDescription, new { @class = "form-control", id = "addVehicleModel_VehicleMake_Description", @readonly="readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", id = "addVehicleModel_Description" })
+                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExternalCode, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.ExternalCode, new { @class = "form-control", id = "addVehicleModel_ExternalCode" })
+                @Html.ValidationMessageFor(model => model.ExternalCode, null, new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+        <input type="submit" value="Save Changes" class="btn btn-primary" />
+    </div>
+}
+

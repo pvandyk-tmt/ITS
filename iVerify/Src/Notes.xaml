@@ -1,0 +1,18 @@
+﻿<Controls:MetroWindow x:Class="TMT.iVerify.cNotes"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        Title="Notes" Height="350" Width="300" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize" Loaded="Window_Loaded" WindowStyle="SingleBorderWindow" MinHeight="250" MinWidth="250">
+     
+    <Grid>
+        <Label Content="Notes for " Height="25" Margin="4,0,5,0" Name="labelNotes" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold" />
+        <Button Content="_Submit" Height="23" HorizontalAlignment="Right" Name="buttonSubmit" VerticalAlignment="Bottom" Width="75" Click="buttonSubmit_Click" Margin="0,0,5,5" />
+        <TextBox Margin="4,185,5,34" Name="textBoxNotes" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+        <GroupBox Header="Previous Notes" Height="148" Margin="4,30,4,0" VerticalAlignment="Top" FontWeight="Bold">
+            <Grid>
+                <TextBox Margin="3" Name="textBoxPrevious" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" FontWeight="Normal"  Background="{DynamicResource GrayBrush5}" Text="This is some notes added previously. This is some notes added previously. This is some notes added previously. This is some notes added previously."/>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Controls:MetroWindow>

@@ -1,0 +1,149 @@
+﻿@model Kapsch.Gateway.Models.Shared.PaginationListModel<Kapsch.Core.Gateway.Models.User.UserModel>
+
+<script>
+    $("#breadcrumbText").html("Administration / Users / <b>Search Users</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search Users</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+
+                        <a class="close-link" href="@Url.Action("CreateUser", "Management")">
+                            <span class="label label-primary pull-right">NEW</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">Last Name</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="lastName" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">External ID</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="externalID" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="searchResults" class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script>
+
+        var searchUrl = '@Url.Action("SearchUsers", "Management")';
+        var editUrl = '@Url.Action("EditUser", "Management")';
+        var viewUrl = '@Url.Action("ViewUser", "Management")';
+        var grid = null;
+
+        $(function () {
+            $("#externalID").on('change keyup paste input', function () {
+                var idNumber = $("#externalID").val();
+                if (idNumber.length >= 3 || idNumber.length == 0)
+                    reloadGrid();
+            });
+
+            $("#lastName").on('change keyup paste input', function () {
+                var idNumber = $("#lastName").val();
+                if (idNumber.length >= 3 || idNumber.length == 0)
+                    reloadGrid();
+            });
+
+            grid = $("#jqGrid").jqGrid({
+                url: searchUrl,
+                mtype: "GET",
+                postData: {
+                    lastName: function () { return $("#lastName").val() },
+                    externalID: function () { return $("#externalID").val() }
+                },
+                height: 450,
+                autowidth: true,
+                shrinkToFit: true,
+                datatype: "json",
+                colNames: ['', 'User Name', 'Last Name', 'First Name', 'Email', 'Mobile', 'Is Officer', 'External ID', 'Status', ''],
+                colModel: [
+                    { name: 'ID', key: true, hidden: true },
+                    { name: 'UserName', key: false },
+                    { name: 'LastName', key: false },
+                    { name: 'FirstName', key: false },
+                    { name: 'Email', key: false },
+                    { name: 'MobileNumber', key: false },
+                    { name: 'IsOfficer', key: false },
+                    { name: 'ExternalID', key: false },
+                    { name: 'FormattedStatus', key: false },
+                    { name: '', index: '', sortable: false, formatter: createEditLink, align: "center", width: "30px" }
+                ],
+                viewrecords: true,
+                rowNum: 20,
+                pager: "#jqGridPager",
+                ondblClickRow: function (row_id) {
+                    var rowData = $("#jqGrid").getRowData(row_id);
+
+                    window.location.href = viewUrl + "?id=" + row_id;
+                }
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#jqGrid').setGridWidth(width);
+
+            });
+
+            function createEditLink(cellvalue, options, rowObject) {
+
+                var id = rowObject.ID;
+                var html = '';
+                html = "<a id='editLink" + id + "'  class='memberAction' href='" + editUrl + "?id=" + id + "' style='color:blue;cursor:pointer;' type='button' title='" + 'Edit' + "'>" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+
+                return html;
+            }
+
+            function getSelectedRow() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.jqGrid('getGridParam', "selrow");
+
+                if (rowKey)
+                    alert("Selected row primary key is: " + rowKey);
+                else
+                    alert("No rows are selected");
+            }
+
+        });
+
+        var reloadGrid = function() {
+            grid.trigger('reloadGrid');
+        };
+
+    </script>
+}
+
+
+
+

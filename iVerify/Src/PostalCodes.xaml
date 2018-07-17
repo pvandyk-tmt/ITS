@@ -1,0 +1,36 @@
+﻿<Controls:MetroWindow x:Class="TMT.iVerify.cPostalCodes"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        Title="Postal Codes" Height="397" Width="558" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Loaded="Window_Loaded">
+    
+    <Grid>
+        <TextBlock FontSize="14" FontWeight="Normal" Height="21" HorizontalAlignment="Left" Margin="10,10,0,0" Text="Please type at least 3 characters and press Search" TextWrapping="Wrap" VerticalAlignment="Top" Width="514" />
+        <Button Content="_Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,8,4" Name="btnCancel" TabIndex="11" VerticalAlignment="Bottom" Width="75" Click="btnCancel_Click" />
+        <Button Content="_OK" FontWeight="Bold" Height="23" HorizontalAlignment="Right" IsEnabled="False" Margin="0,0,89,4" Name="btnOK" TabIndex="10" VerticalAlignment="Bottom" Width="75" Click="btnOK_Click" />
+        <Label Content="City:" Height="28" HorizontalAlignment="Left" Margin="15,35,0,0" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="45,39,0,0" Name="txtCity" TabIndex="11" VerticalAlignment="Top" Width="91" TextChanged="txtCity_TextChanged" />
+        <Label Content="Suburb:" Height="28" HorizontalAlignment="Left" Margin="145,35,0,0" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="194,39,0,0" Name="txtSuburb" TabIndex="2" VerticalAlignment="Top" Width="91" TextChanged="txtSuburb_TextChanged" />
+        <Label Content="Code:" Height="28" HorizontalAlignment="Left" Margin="293,36,0,0" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="332,39,0,0" Name="txtCode" TabIndex="3" VerticalAlignment="Top" Width="91" TextChanged="txtCode_TextChanged" />
+        <Button Content="_Search" FontWeight="Bold" Height="23" HorizontalAlignment="Right" IsEnabled="False" Margin="0,40,12,0" Name="btnSearch" TabIndex="4" VerticalAlignment="Top" Width="75" Click="btnSearch_Click" />
+        <ListView DataContext="{Binding}" Margin="15,69,11,33" Name="listCodes" SelectionMode="Single" TabIndex="5" SelectionChanged="listCodes_SelectionChanged" MouseDoubleClick="listCodes_MouseDoubleClick">
+            <ListView.View>
+                <GridView x:Name="grdData">
+                    <GridViewColumn DisplayMemberBinding="{Binding pCity}" Width="200">
+                        <GridViewColumnHeader Content="City/Town" FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}" Name="City" />
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding pSuburb}" Width="190">
+                        <GridViewColumnHeader Content="Suburb" FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}" Name="Suburb" />
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding pCode}" Width="90">
+                        <GridViewColumnHeader Content="Code" FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}" Name="Code" />
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Controls:MetroWindow>

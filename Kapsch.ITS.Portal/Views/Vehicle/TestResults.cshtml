@@ -1,0 +1,248 @@
+﻿@model Kapsch.EVR.Gateway.Models.Vehicle.TestResultsSearchModel
+
+@{
+    var testCategories = Model.TestCategories;
+}
+
+<script src="~/Content/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<script>
+    $("#breadcrumbText").html("Vehicle Testing / <b>Search Inspections Completed</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search Inspections Completed</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Test Category</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownList("testCategory",
+                                    new SelectList(testCategories, "ID", "Name", ""),
+                                    new { @class = "form-control input-sm" }
+                                    )
+                            </div>
+
+                            <label class="col-sm-2 control-label">Reference No.</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="bookingReference" class="form-control" style="text-transform:uppercase" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Engine No.</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="engineNumber" class="form-control" style="text-transform:uppercase" />
+                            </div>
+
+                            <label class="col-sm-2 control-label">VIN</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="VIN" class="form-control" style="text-transform:uppercase" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">VLN</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="VLN" class="form-control" style="text-transform:uppercase" />
+                            </div>
+
+                            <label class="col-sm-2 control-label">Date Indicator</label>
+                            <div class="col-sm-4">
+                                <select id="dateIndicator" class="form-control">
+                                    <option value="1">Date</option>
+                                    <option value="0" selected>No Date</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Result</label>
+                            <div class="col-sm-4">
+                                <select id="result" name="result" class="form-control">
+                                    <option value="1">Passed</option>
+                                    <option value="0">Failed</option>
+                                </select>
+                            </div>
+
+
+                            <label class="control-label col-md-2" id="divBookingDate">Booking Date</label>
+                            <div class="col-sm-2" id="divBookingDate2">
+                                <div id="fromDate" class="input-group date">
+                                    <input type="text" id="TestBookingDate_" name="TestBookingDate_" class="form-control" placeholder="Choose Date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <input type="button" value="Search" class="btn btn-primary" onclick="reloadGrid()" style="width:100%" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="searchResults" class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script>
+
+        var searchUrl = '@Url.Action("ListTestResults", "Vehicle")';
+        var editUrl = '@Url.Action("EditVehicle", "Vehicle")';
+        var viewUrl = '@Url.Action("BookingResult", "Vehicle")';
+        var page = 1;
+        var grid = null;
+
+
+        $(function () {
+            $(function () {
+                $('#dateIndicator').change(function () {
+                    if ($('#dateIndicator :selected').text() == "Date") {
+                        $('#divBookingDate').slideDown(500);
+                        $('#divBookingDate2').slideDown(500);
+                    }
+                    else {
+                        $('#divBookingDate').slideUp(500);
+                        $('#divBookingDate2').slideUp(500);
+                    }
+                });
+            });
+
+            grid = $("#jqGrid").jqGrid({
+                url: searchUrl,
+                mtype: "POST",
+                postData: {
+                    testCategory: function () { return $("#testCategory").val() },
+                    bookingReference: function () { return $("#bookingReference").val().toUpperCase() },
+                    engineNumber: function () { return $("#engineNumber").val().toUpperCase() },
+                    testBookingDate: function () { return $("#TestBookingDate_").val() },
+                    VIN: function () { return $("#VIN").val().toUpperCase() },
+                    VLN: function () { return $("#VLN").val().toUpperCase() },
+                    result: function () { return $("#result").val() },
+                    dateIndicator: function () { return $("#dateIndicator").val() }
+                },
+                height: 450,
+                autowidth: true,
+                shrinkToFit: true,
+                datatype: "json",
+                colNames: [
+                    '',
+                    'Reference No.',
+                    'VIN',
+                    'Engine No.',
+                    'Make',
+                    'Model',
+                    'VLN',
+                    'Test Date',
+                    'Has Passed',
+                    'Type'
+
+                ],
+                colModel: [
+                    { name: 'ID', key: true, hidden: true },
+                    { name: 'BookingReference', key: false },
+                    { name: 'VIN', key: true, hidden: false },
+                    { name: 'EngineNumber', key: false },
+                    { name: 'Make', key: false },
+                    { name: 'Model', key: false },
+                    { name: 'VLN', key: false },
+                    { name: 'FormattedTestDate', key: false },
+                    { name: 'IsPassedString', key: false },
+                    { name: 'TestType', key: false }
+                ],
+                viewrecords: true,
+                rowNum: 20,
+                pager: "#jqGridPager",
+                page: page,
+                ondblClickRow: function (row_id) {
+                    var rowData = $("#jqGrid").getRowData(row_id);
+
+                    window.location.href = viewUrl + "?id=" + row_id;
+                }
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#jqGrid').setGridWidth(width);
+
+            });
+
+            function createEditLink(cellvalue, options, rowObject) {
+
+                var id = rowObject.ID;
+                var html = '';
+                html = "<a id='editLink" + id + "'  class='memberAction' href='" + editUrl + "?id=" + id + "' style='color:blue;cursor:pointer;' type='button' title='" + 'Edit' + "'>" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+
+                return html;
+            }
+
+            function getSelectedRow() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.jqGrid('getGridParam', "selrow");
+
+                if (rowKey)
+                    alert("Selected row primary key is: " + rowKey);
+                else
+                    alert("No rows are selected");
+            }
+
+        });
+
+        function doSearch() {
+            page = 1;
+            reloadGrid();
+        }
+
+        var reloadGrid = function () {
+            grid.setGridParam({
+                datatype: 'json',
+                page: page
+            }).trigger('reloadGrid');
+        };
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#TestBookingDate_').datepicker({
+                autoclose: true,
+                hidden: true,
+                todayHighlight: true,
+                format: "dd/mm/yyyy",
+                useCurrent: true,
+            });
+
+
+            $('#divBookingDate').css({ display: 'none' });
+            $('#divBookingDate2').css({ display: 'none' });
+        });
+
+    </script>
+
+}
+
+
+
+

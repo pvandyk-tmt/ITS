@@ -1,0 +1,335 @@
+﻿@model Kapsch.ITS.Portal.Models.PaymentSummary
+
+@{
+    var districts = ViewBag.Districts as IList<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+    var fines = Json.Encode(Model.Fines);
+}
+
+<script>
+    $("#breadcrumbText").html("Payments / <b>Court Payment</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        @using (Html.BeginForm("CourtPayment", "Payment", FormMethod.Post, new { id = "courtPaymentForm" }))
+        {
+            <div class="col-md-9">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Payment</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.PaymentMethod)
+                        @Html.HiddenFor(model => model.PaymentDate)
+                        @Html.HiddenFor(model => model.PaymentReference)
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DistrictID, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.DropDownList("DistrictID", new SelectList(districts, "ID", "BranchName", ""), "Select District", new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(model => model.DistrictID, null, new { @class = "text-danger" })
+                                </div>
+                                <label class="col-sm-2 control-label">First Name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBox("FirstName", string.Empty, new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CourtID, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    <select id="CourtID" name="CourtID" class="form-control input-sm"></select>
+                                    @Html.ValidationMessageFor(model => model.CourtID, null, new { @class = "text-danger" })
+                                </div>
+                                <label class="col-sm-2 control-label">Last Name</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBox("LastName", string.Empty, new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(model => model.LastName, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PaymentDate, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    <div id="paymentDate" class="input-group date">
+                                        <input type="text" id="paymentDate_" class="form-control" placeholder="Choose Date" disabled="disabled">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.PaymentDate, null, new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.MobileNumber, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.TextBox("MobileNumber", string.Empty, new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(model => model.MobileNumber, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                @Html.LabelFor(model => model.PaymentReference, new { @class = "control-label col-sm-2" })
+                                <div class="col-sm-4">
+                                    @Html.TextBox("PaymentReference", string.Empty, new { @class = "form-control input-sm" })
+                                    @Html.ValidationMessageFor(model => model.PaymentReference, null, new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        </div>
+                        <div id="searchResults" class="jqGrid_wrapper">
+                            <table id="jqGrid"></table>
+                            <div id="jqGridPager"></div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+            <div class="col-md-3">
+
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>Payment Summary</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">
+                                Total
+                            </label>
+
+                            <div class="col-sm-7">
+
+                                <div id="totalAmount" class="h2">0.00</div>
+
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">
+                                Payment Method
+                            </label>
+
+                            <label class="col-sm-7 control-label">
+                                @Model.PaymentMethod.ToString()
+                            </label>
+                            
+                        </div>
+
+                        <div class="m-t-sm">
+    
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-primary btn-sm" onclick="proceed()"><i class="fa fa-shopping-cart"></i> Proceed</a>
+                                <a href="@Url.Action("Index", "Payment", null)" class="btn btn-white btn-sm"> Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="changeAmountModal" class="modal inmodal fade">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <i class="fa fa-money modal-icon"></i>
+                <h4 class="modal-title">Update Amount</h4>
+            </div>
+            <div class="modal-body">
+                <div id="changeAmountDiv">
+                    @Html.Partial("_ChangeAmount", new Kapsch.ITS.Gateway.Models.Fine.ChangeAmountModel() { AccountTransactionType = Kapsch.ITS.Gateway.Models.Enums.AccountTransactionType.Reduction })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script src="~/Content/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+
+        var searchUrl = '@Url.Action("SearchUsers", "Management")';
+        var courtsURL = "@Url.Action("GetCourtsByDistrict", "Payment")";
+        var selectedFines = @Html.Raw(fines);
+        var totalAmount = 0.00;
+        var grid = null;
+
+        $(function () {
+            $('#paymentDate').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: "dd/mm/yyyy"
+            }).datepicker("setDate", "0");
+
+            $('#DistrictID').on('change', function () {
+                populateCourtsDropdown($(this).val());
+            });
+
+            grid = $("#jqGrid").jqGrid({
+                datatype: 'jsonstring',
+                datastr: selectedFines,
+                autowidth: true,
+                shrinkToFit: true,
+                colNames: ['Reference No.', 'ID No', 'Last Name', 'First Name', 'Offence Date', 'VLN', 'Outstanding Amount', ''],
+                colModel: [
+                    { name: 'ReferenceNumber', key: true },
+                    { name: 'OffenderIDNumber', key: false },
+                    { name: 'OffenderLastName', key: false },
+                    { name: 'OffenderFirstName', key: false },
+                    { name: 'FormattedOffenceDate', key: false },
+                    { name: 'VLN', key: false },
+                    { name: 'OutstandingAmount', key: false, align: "right" },
+                    { name: '', index: '', sortable: false, formatter: createEditLink, align: "center", width: "30px" }
+                ],
+                viewrecords: true,
+                pager: true,
+                rowNum: 10000,
+                pgbuttons: false,
+                pginput: false,
+                pgtext: "",
+                ondblClickRow: function (row_id) {
+                    //var rowData = $("#jqGrid").getRowData(row_id);
+
+                    //window.location.href = viewUrl + "?id=" + row_id;
+                },
+                gridComplete: function () {
+                    //alert("Inside gridComplete..");
+                },
+                loadComplete: function (data) {
+                    calculateTotal();
+                },
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#jqGrid').setGridWidth(width);
+
+            });
+
+            function createEditLink(cellvalue, options, rowObject) {
+
+                var outstandingAmount = rowObject.OutstandingAmount;
+                var referenceNumber = rowObject.ReferenceNumber;
+                var html = '';
+                html = "<a href=\"#\" onclick=\"showChangeAmountForm('" + referenceNumber + "'," + outstandingAmount + ")\"" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+
+                return html;
+            }
+
+            function getSelectedRow() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.jqGrid('getGridParam', "selrow");
+
+                if (rowKey)
+                    alert("Selected row primary key is: " + rowKey);
+                else
+                    alert("No rows are selected");
+            }
+
+        });
+
+        function calculateTotal() {
+            totalAmount = 0.00;
+
+            $.each(selectedFines, function () {
+                totalAmount += Number(this.OutstandingAmount);
+            });
+
+            $("#jqGrid").jqGrid('footerData', 'set', { 'OutstandingAmount': totalAmount.toFixed(2) });
+            $("#totalAmount").html(function () { return totalAmount.toFixed(2); });
+        }
+
+        function populateCourtsDropdown(districtID) {
+            $.ajax({
+                type: "GET",
+                url: courtsURL,
+                data: {
+                    districtID: districtID
+                },
+
+                success: function (data) {
+                    var dropdown = $("#CourtID");
+                    dropdown.html('');
+
+                    data.forEach(function (t) {
+                        dropdown.append('<option value="' + t.ID + '">' + t.CourtName + '</option>');
+                    });
+                }
+            });
+        }
+
+        var reloadGrid = function() {
+            grid.setGridParam({
+                datastr: selectedFines,
+                datatype: "jsonstring"
+            }).trigger("reloadGrid");
+        };
+
+        function showChangeAmountForm(referenceNumber, currentAmount) {
+            $("#Password").val('');
+            $("#ReferenceNumber").val(referenceNumber);
+            $("#CurrentAmount").val(currentAmount);
+            $("#NewAmount").val('');
+            $("#AccountTransactionType").val(1);
+
+            $("#changeAmountModal").modal('toggle');
+        }
+
+        function proceed() {
+            $("#PaymentDate").val($("#paymentDate_").val());
+            $("#courtPaymentForm").submit();
+        }
+
+        $("#changeAmountForm").submit(
+           function (e) {
+               e.preventDefault();
+
+               var form = $("#changeAmountForm");
+               form.data('validator', null);
+               $.validator.unobtrusive.parse(form);
+
+               if ($(this).valid()) {
+                   $.ajax({
+                       type: "POST",
+                       url: "@Url.Action("ChangeAmount", "Payment")",
+                       data: $(this).serialize(),
+                       success: function (data) {
+                           if (data.IsValid) {
+                               $.each(selectedFines, function () {
+                                   if (this.ReferenceNumber == data.ReferenceNumber) {
+                                       this.OutstandingAmount = data.Amount;
+                                   }
+                               });
+
+                               reloadGrid();
+
+                               $("#Password").val('');
+                               $("#changeAmountModal").modal('toggle');
+                           }
+                           else {
+                               alert("Change Amount Failed: " + data.ErrorMessage);
+                           }
+                       }
+                   });
+               }
+           }
+      );
+    </script>
+}
+
+
+
+

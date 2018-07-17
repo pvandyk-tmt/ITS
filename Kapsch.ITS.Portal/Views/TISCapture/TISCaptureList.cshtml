@@ -1,0 +1,252 @@
+﻿
+@model Kapsch.ITS.Gateway.Models.TISCapture.DistrictSelectionModel
+@{
+    var districts = Model.Districts;
+}
+
+<script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+
+<script>
+    $("#breadcrumbText").html("TIS / <b>Search TIS Capture List</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>TIS Capture List</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        @*<a class="close-link" href="@Url.Action("CreateComputer", "Management")">
+                    <span class="label label-primary pull-right">NEW</span>
+                </a>*@
+                    </div>
+                </div>
+                @*<form id="dropDownSelect" class="form-group-xs">
+            <div class="ibox float-e-margins">
+                <label class="col-sm-2 control-label">Search Criteria</label>
+                <div class="col-sm-4">
+                    <select id="searchType" class="form-control">
+                        <option value="0">VLN</option>
+                        <option value="1">Reference Number</option>
+                    </select>
+                </div>
+            </div>
+        </form>*@
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">VLN Search</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="vehicleRegistration" class="form-control" style="text-transform: uppercase" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Reference Number Search</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="referenceNumber" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">District</label>
+                            <div class="col-sm-4">
+                                @Html.DropDownList("district", new SelectList(districts, "ID", "BranchName", ""), new { @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                    </div>
+                        <div id="searchResults" class="jqGrid_wrapper">
+                            <table id="jqGrid"></table>
+                            <div id="jqGridPager"></div>     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section styles
+{
+    @*die deel is ook nuut*@
+    @*<style>
+        /*	start styles for the ContextMenu	*/
+        .context_menu {
+            background-color: white;
+            border: 1px solid gray;
+        }
+
+        .context_menu_item {
+            padding: 3px 6px;
+        }
+
+            .context_menu_item:hover {
+                background-color: #CCCCCC;
+            }
+
+        .context_menu_separator {
+            background-color: gray;
+            height: 1px;
+            margin: 0;
+            padding: 0;
+        }
+        /*	end styles for the ContextMenu	*/
+
+
+        .modal-dialog {
+            position: relative;
+            display: table;
+            overflow-x: auto;
+            width: auto;
+            min-width: 300px;
+        }
+
+        .ui-tabs .ui-tabs-hide {
+            position: absolute;
+            left: -10000px;
+        }
+    </style>*@
+
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @*<script src="~/Scripts/marker-contextmenu.js"></script>*@
+    @*<script src="~/Content/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>*@
+    @Scripts.Render("~/plugins/jqGrid")
+
+<script>
+
+        var searchUrl = '@Url.Action("SearchNatisExports", "TISCapture")';
+        var importUrl = '@Url.Action("ImportDetails", "TISCapture")';
+        var captureTISUrl = '@Url.Action("CaptureTISDetails", "TISCapture")';
+        var grid = null;
+
+        $(function () {
+            $("#vehicleRegistration").on('change keyup paste input', function () {
+                var vln = $("#vehicleRegistration").val();
+                if (vln.length >= 3 || vln.length == 0)
+                    reloadGrid();     
+            });
+
+            $("#referenceNumber").on('change keyup paste input', function () {
+                var refNumber = $("#referenceNumber").val();
+                if (refNumber.length >= 3 || refNumber.length == 0)
+                    reloadGrid();
+            });
+
+            $("#district").change(function () {
+                reloadGrid();
+            });
+
+            grid = $("#jqGrid").jqGrid({
+                url: searchUrl,
+                mtype: "GET",
+                postData: {
+                    vehicleRegistration: function () { return $("#vehicleRegistration").val().toUpperCase() },
+                    referenceNumber: function () { return $("#referenceNumber").val() },
+                    districtID: function () { return $("#district").val() }
+                    //searchType: function () { return $("#searchType").val() }
+                },
+                height: 450,
+                autowidth: true,
+                shrinkToFit: true,
+                datatype: "json",
+                colNames: ['', 'Vehicle Registration', 'Reference Number', 'Infringement Date', 'District', 'Export Date', 'Locked By', ''],
+                colModel: [
+                    { name: 'LockedByCredentialID', key: false, hidden: true },
+                    { name: 'VehicleRegistration', key: true },
+                    { name: 'ReferenceNumber', key: true },
+                    { name: 'InfringementDate', key: false },
+                    { name: 'DistrictName', key: false },
+                    { name: 'FormattedExportDate', key: false },
+                    { name: 'LockedByName', key: false },
+                    { name: '', index: '', sortable: false, formatter: createCaptureTISLink, align: "center", width: "30px" }
+                ],
+                viewrecords: true,
+                rowNum: 20,
+                pager: "#jqGridPager",
+                ondblClickRow: function (row_id) {
+                    var rowData = $("#jqGrid").getRowData(row_id);
+
+                    window.location.href = captureTISUrl + "?id=" + row_id;
+                }
+            });
+
+            //$('#startDate_').datepicker({
+            //    autoclose: true,
+            //    todayHighlight: true,
+            //    format: "yyyy/mm/dd"
+            //});
+
+            //$('#endDate_').datepicker({
+            //    autoclose: true,
+            //    todayHighlight: true,
+            //    format: "yyyy/mm/dd"
+            //});
+
+            //$('#collapse').click(function () {
+            //    if ($('#sidebar').hasClass('open')) {
+            //        $('#sidebar').removeClass('col-md-2');
+            //        $('#sidebar').removeClass('open');
+            //        $('#sidebar').addClass('hidden');
+            //        $('#content').addClass('col-md-12');
+            //        $('#content').removeClass('col-md-10');
+            //    }
+            //    else {
+            //        $('#sidebar').addClass('col-md-2');
+            //        $('#sidebar').addClass('open');
+            //        $('#sidebar').removeClass('hidden');
+            //        $('#content').removeClass('col-md-12');
+            //        $('#content').addClass('col-md-10');
+            //    }
+
+            //    $(window).trigger("resize");
+            //});
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#jqGrid').setGridWidth(width);
+
+            });
+
+            function createCaptureTISLink(cellvalue, options, rowObject) {
+
+                var referenceNumber = rowObject.ReferenceNumber;
+                var vehicleRegistration = rowObject.VehicleRegistration;
+                var lockedByCredentialID = rowObject.LockedByCredentialID;
+
+                var html = '';
+                if (lockedByCredentialID != null)
+                {
+                    html = "<a id='captureTISLink" + referenceNumber + "'  class='memberAction' href='" + captureTISUrl + "?referenceNumber=" + referenceNumber + "&vehicleRegistration=" + vehicleRegistration + "&lockedByCredentialID=" + lockedByCredentialID + "' style='color:blue;cursor:pointer;' type='button' title='" + 'Capture' + "'>" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+                }
+                else
+                {
+                    html = "<a id='captureTISLink" + referenceNumber + "'  class='memberAction' href='" + captureTISUrl + "?referenceNumber=" + referenceNumber + "&vehicleRegistration=" + vehicleRegistration + "' style='color:blue;cursor:pointer;' type='button' title='" + 'Capture' + "'>" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+                }
+                return html;
+            }
+
+            function getSelectedRow() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.jqGrid('getGridParam', "selrow");
+
+                if (rowKey)
+                    alert("Selected row primary key is: " + rowKey);
+                else
+                    alert("No rows are selected");
+            }
+
+        });
+
+        var reloadGrid = function() {
+            grid.trigger('reloadGrid');
+        };
+
+</script>
+}
+
+

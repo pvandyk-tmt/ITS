@@ -1,0 +1,190 @@
+﻿@model Kapsch.Core.Gateway.Models.User.UserModel
+@using Kapsch.ITS.Portal.Helpers
+
+@{
+    ViewBag.Title = "ViewUser";
+
+    var districts = ViewBag.Districts as List<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+    var systemFunctions = ViewBag.SystemFunctions as List<Kapsch.Core.Gateway.Models.User.SystemFunctionModel>;
+}
+
+<script>
+    $("#breadcrumbText").html("Administration / Users / <b>View User</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>View User</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="tabs-container" id="tabs">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#detailView"> Details</a></li>
+                            <li class=""><a data-toggle="tab" href="#districtView">Districts</a></li>
+                            <li class=""><a data-toggle="tab" href="#systemFunctionView">System Functions</a></li>
+
+                        </ul>
+                        <div class="tab-content">
+                            <div id="detailView" class="tab-pane active">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="wrapper wrapper-content animated fadeInLeft">
+
+                                                <div class="form-horizontal">
+                                                    @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+                                                        <div class="col-sm-4">
+                                                            @Html.TextBoxFor(model => model.FirstName, new { @class="form-control", @readonly = "readonly"})
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+                                                        <div class="col-sm-4">
+                                                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @readonly = "readonly" })
+                                                           
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                                                        <div class="col-sm-4">
+                                                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @readonly = "readonly" })
+                                                          
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.MobileNumber, new { @class = "control-label col-md-2" })
+                                                        <div class="col-sm-4">
+                                                            @Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control", @readonly = "readonly" })
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.IsOfficer, new { @class = "control-label col-md-2" })
+                                                        <div class="col-sm-4">
+                                                            @Html.CheckBoxFor(model => model.IsOfficer, new { @disabled = "disabled" })
+                                                            
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.ExternalID, new { @class = "control-label col-md-2" })
+                                                        <div class="col-sm-4">
+                                                            @Html.TextBoxFor(model => model.ExternalID, new { @class = "form-control", @readonly = "readonly" })
+                                                           
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+                                                        <div class="col-sm-4">
+                                                            @Html.TextBox("Model.Status", Model.Status.ToString(), new { @class = "form-control", @readonly = "readonly" })
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="districtView" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="wrapper wrapper-content animated fadeInLeft" style="min-height:350px">
+                                                <ul class="todo-list m-t" style="list-style: none outside none !important;">
+                                                    @foreach (var systemFunction in Model.Districts)
+                                                    {
+                                                        <li>
+                                                            <span class="m-l-xs">@systemFunction.BranchName</span>
+                                                        </li>
+                                                    }
+
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="systemFunctionView" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="wrapper wrapper-content animated fadeInLeft" style="min-height:350px">
+                                                <ul class="todo-list m-t" style="list-style: none outside none !important;">
+                                                    @foreach (var systemFunction in Model.SystemFunctions)
+                                                    {
+                                                        <li>
+                                                            <span class="m-l-xs">@systemFunction.Description</span>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="districtView" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-horizontal">
+
+                                        <div class="form-group">
+                                            <div class="pull-right">
+                                                @Html.ActionLink("Cancel", "Users", "Management", null, new { @class = "btn btn-white" })
+                                                @Html.ActionLink("Edit User", "EditUser", "Management", new { id = Model.ID}, new { @class = "btn btn-primary" })
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles
+{
+
+
+
+    <style>
+        /*.wizard > .content > .body position: relative;*/
+    </style>
+
+}
+
+@section scripts
+{
+
+
+    <script>
+
+
+    </script>
+}
+
+
+
+

@@ -1,0 +1,32 @@
+INSERT INTO CancellationReason(ID, Reason) VALUES (1, 'Emergency Vehicle');
+INSERT INTO CancellationReason(ID, Reason) VALUES (2, 'Other');
+INSERT INTO CancellationReason(ID, Reason) VALUES (3, 'No Infringement');
+INSERT INTO CancellationReason(ID, Reason) VALUES (4, 'Vehicle Escaped');
+
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (1, 'CoreGateway', 'http://192.168.0.33:81%s');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (2, 'SyntellGateway', 'http://192.168.0.33:82%s');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (3, 'EnforcementGateway', 'http://192.168.0.33:82%s');
+
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (4, 'HTTP_READ_TIMEOUT', '20000');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (5, 'HTTP_CONNECT_TIMEOUT', '30000');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (6, 'NAG_AMOUNT', '9999');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (7, 'PAY_DATE_FROM_COURT_DATE', '-14');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (8, 'COURT_DATE_FROM_NOW', 1);
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (9, 'OFFENCE_MINUTES_FROM_NOW', '-10');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (10, 'TMT_API_USER', 'TMT_API_USER');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (11, 'MIN_TICKETS', '5');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (12, 'TICKET_BOOK_SIZE', '10');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (13, 'PROCESSING_SYSTEM', '0');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (14, 'GPS_INTERVAL', 60000);
+
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (15, 'CHARGE_INFO_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (16, 'COURT_DETAIL_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (17, 'PUBLIC_HOLIDAY_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (18, 'VOSI_ACTION_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (19, 'LOCATION_CODE_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (20, 'INFRINGEMENT_LOCATION_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (21, 'PAYMENT_DETAILS_HEADING', 'PAYMENT LOCATIONS');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (22, 'PAYMENT_DETAIL_INFO', 'Lusaka Magistrate Court: John Mbita Road');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (23, 'IDENTIFICATION_TYPE_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (24, 'COUNTRY_VERSION', '0');
+

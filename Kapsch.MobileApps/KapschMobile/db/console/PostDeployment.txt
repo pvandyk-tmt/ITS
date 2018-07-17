@@ -1,0 +1,10 @@
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (1, 'CoreGateway', 'http://192.168.0.33:81%s');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (2, 'ItsGateway', 'http://192.168.0.33:82%s');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (4, 'HTTP_READ_TIMEOUT', '20000');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (5, 'HTTP_CONNECT_TIMEOUT', '30000');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (6, 'TMT_API_USER', 'TMT_API_USER');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (7, 'GPS_INTERVAL', 60000);
+
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (8, 'OFFICERS_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (9, 'SYSTEM_FUNCTIONS_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (10, 'DISTRICT_VERSION', '0');

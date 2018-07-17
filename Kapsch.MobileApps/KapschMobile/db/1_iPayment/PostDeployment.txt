@@ -1,0 +1,6 @@
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (1, 'CoreGateway', 'http://192.168.0.33:81%s');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (2, 'ItsGateway', 'http://192.168.0.33:82%s');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (4, 'HTTP_READ_TIMEOUT', '20000');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (5, 'HTTP_CONNECT_TIMEOUT', '30000');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (6, 'RECEIPT_WEBSITE_ADDRESS', 'www.rtsa.org.zm');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (7, 'RECEIPT_CALL_CENTRE_NO', '983  Toll Free Number');

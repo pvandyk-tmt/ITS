@@ -1,0 +1,59 @@
+﻿@model Kapsch.Core.Gateway.Models.Computer.ComputerModel
+@using Kapsch.ITS.Portal.Helpers
+
+@{
+    var districts = ViewBag.Districts as IList<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+}
+<script>
+    $("#breadcrumbText").html("Administration / Computers / <b>Edit Computer</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Edit Computer</h5>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("EditComputer", "Management", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID)
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                            <div class="col-sm-4">
+                                @Html.EditorFor(model => model.Name)
+                                @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IPAddress, new { @class = "control-label col-md-2" })
+                            <div class="col-sm-4">
+                                @Html.EditorFor(model => model.IPAddress)
+                                @Html.ValidationMessageFor(model => model.IPAddress, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DistrictID, new { @class = "control-label col-md-2" })
+                            <div class="col-sm-4">
+                                @Html.DropDownListFor(model => model.DistrictID, new SelectList(districts, "ID", "BranchName", ""), new { @class = "form-control input-sm" })
+                                @Html.ValidationMessageFor(model => model.DistrictID, null, new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                @Html.ActionLink("Cancel", "Computers", "Management", null, new { @class = "btn btn-white" })
+                                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

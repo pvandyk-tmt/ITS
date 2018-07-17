@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E26F5BDF-639D-456C-8E56-4120851293E3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kapsch.Core.Gateway.Models</RootNamespace>
+    <AssemblyName>Kapsch.Core.Gateway.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebApi Foolproof Validation, Version=0.9.5639.13860, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\foolproof.webapi.0.0.2\lib\WebApi Foolproof Validation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Authenticate\CredentialModel.cs" />
+    <Compile Include="Authenticate\SessionModel.cs" />
+    <Compile Include="Computer\ComputerConfigSettingModel.cs" />
+    <Compile Include="Computer\ComputerModel.cs" />
+    <Compile Include="Configuration\AddressInfoModel.cs" />
+    <Compile Include="Configuration\CameraModel.cs" />
+    <Compile Include="Configuration\ComputerConfigSettingModel.cs" />
+    <Compile Include="Configuration\CountryModel.cs" />
+    <Compile Include="Configuration\IdentificationTypeModel.cs" />
+    <Compile Include="Configuration\InfringementLocationModel.cs" />
+    <Compile Include="Configuration\GoogleGeoCodeResponse.cs" />
+    <Compile Include="Configuration\RegionModel.cs" />
+    <Compile Include="Configuration\DistrictModel.cs" />
+    <Compile Include="Configuration\CourtModel.cs" />
+    <Compile Include="Configuration\PublicHolidayModel.cs" />
+    <Compile Include="Configuration\SiteModel.cs" />
+    <Compile Include="Data\DataModel.cs" />
+    <Compile Include="Enums\AccountCurrencyType.cs" />
+    <Compile Include="Enums\AccountTransactionType.cs" />
+    <Compile Include="Enums\ComputerItemType.cs" />
+    <Compile Include="Enums\InfringementLocationType.cs" />
+    <Compile Include="Enums\PaymentMethod.cs" />
+    <Compile Include="Enums\ApplicationType.cs" />
+    <Compile Include="Enums\MobileDeviceStatus.cs" />
+    <Compile Include="Enums\PaymentTransactionStatus.cs" />
+    <Compile Include="Enums\Status.cs" />
+    <Compile Include="Enums\TerminalType.cs" />
+    <Compile Include="Log\GatewayUsageLogModel.cs" />
+    <Compile Include="MobileDevice\MobileDeviceApplicationModel.cs" />
+    <Compile Include="MobileDevice\MobileDeviceLocationModel.cs" />
+    <Compile Include="MobileDevice\MobileDeviceModel.cs" />
+    <Compile Include="MobileDevice\MobileDeviceItemModel.cs" />
+    <Compile Include="Configuration\OffenceCodeModel.cs" />
+    <Compile Include="Enums\MobileDeviceItemType.cs" />
+    <Compile Include="Enums\EntityType.cs" />
+    <Compile Include="Enums\UserStatus.cs" />
+    <Compile Include="MobileDevice\UserMobileDeviceActivityModel.cs" />
+    <Compile Include="Payment\PaymentTerminalModel.cs" />
+    <Compile Include="Payment\PaymentTransactionItemModel.cs" />
+    <Compile Include="Payment\ConfirmedPaymentModel.cs" />
+    <Compile Include="Payment\PaymentTransactionModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\ChangePasswordModel.cs" />
+    <Compile Include="User\ChangePasswordWithTokenModel.cs" />
+    <Compile Include="User\ResetPasswordModel.cs" />
+    <Compile Include="User\SystemRoleModel.cs" />
+    <Compile Include="User\SystemFunctionModel.cs" />
+    <Compile Include="User\UserModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kapsch.Gateway.Models.Shared\Kapsch.Gateway.Models.Shared.csproj">
+      <Project>{b44f6b37-9497-4a6a-ae70-76a2f9daa1ac}</Project>
+      <Name>Kapsch.Gateway.Models.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

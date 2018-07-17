@@ -1,0 +1,8 @@
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (1, 'CORE_GATEWAY', '192.168.0.33:60001');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (2, 'ITS_GATEWAY', '192.168.0.33:60002');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (3, 'EVR_GATEWAY', '192.168.0.33:60004');
+
+
+
+
+

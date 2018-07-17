@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F59F26</color>
+    <color name="colorPrimaryDark">#F59F26</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="listAlternatingColor">#24636161</color>
+    <color name="backGroundCaption">#d1cece</color>
+    <color name="backGroundPrompt">#e7e5e5</color>
+    <color name="backGroundQuestions">#24ccc7c7</color>
+</resources>

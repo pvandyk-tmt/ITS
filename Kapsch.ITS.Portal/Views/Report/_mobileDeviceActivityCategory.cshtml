@@ -1,0 +1,9 @@
+﻿@{
+    var mobileDeviceActivityCategories = ViewBag.MobileDeviceActivityCategories as IList<string>;
+}
+
+<div class="form-group">
+    <h5>Activity Category</h5>
+    @Html.DropDownList("mobileDeviceActivityCategory", new SelectList(mobileDeviceActivityCategories), "ALL Categories", new { @class = "form-control input-sm" })
+    <div class="hr-line-dashed"></div>
+</div>

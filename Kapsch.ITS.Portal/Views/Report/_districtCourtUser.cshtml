@@ -1,0 +1,73 @@
+﻿@{
+    var districts = ViewBag.Districts as IList<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+}
+
+<div class="form-group">
+    <h5>District</h5>
+    @Html.DropDownList("districtID", new SelectList(districts, "ID", "BranchName", ""), "Select District", new { @class = "form-control input-sm" })
+</div>
+
+<div class="form-group">
+    <h5>Court</h5>
+    <select id="courtID" class="form-control input-sm"></select>
+</div>
+
+<div class="form-group">
+    <h5>User</h5>
+    <select id="userID" class="form-control input-sm">
+    </select>
+    <div class="hr-line-dashed"></div>
+</div>
+
+<script type="text/javascript">
+    var officersURL = "@Url.Action("GetOfficersByDistrict", "Report")";
+    var courtsURL = "@Url.Action("GetCourtsByDistrict", "Report")";
+
+    $('#districtID').on('change', function () {
+        populateCourtsDropdown($(this).val());
+        populateUsersDropdown($(this).val());
+    });
+
+    populateUsersDropdown(null);
+    populateCourtsDropdown(null);
+
+    function populateUsersDropdown(districtID) {
+        $.ajax({
+            type: "GET",
+            url: officersURL,
+            data: {
+                districtID: districtID
+            },
+
+            success: function (data) {
+                var dropdown = $("#userID");
+                dropdown.html('');
+                dropdown.append('<option value="0">Select User</option>');
+
+                data.forEach(function (t) {
+                    dropdown.append('<option value="' + t.ID + '">' + t.FormattedName + '</option>');
+                });
+            }
+        });
+    }
+
+    function populateCourtsDropdown(districtID) {
+        $.ajax({
+            type: "GET",
+            url: courtsURL,
+            data: {
+                districtID: districtID
+            },
+
+            success: function (data) {
+                var dropdown = $("#courtID");
+                dropdown.html('');
+                dropdown.append('<option value="0">Select Court</option>');
+
+                data.forEach(function (t) {
+                    dropdown.append('<option value="' + t.ID + '">' + t.CourtName + '</option>');
+                });
+            }
+        });
+    }
+</script>

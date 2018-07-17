@@ -1,0 +1,1 @@
+include ':console', ':shared', ':1_iTicket', ':1_iPayment', ':1_iVehicleTest', 'barcodeScanner'

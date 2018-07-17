@@ -1,0 +1,109 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+namespace TMT.Build.OracleTableTypeClasses
+{
+	<# 
+		//Lets edit the xml document to include the relevant data items
+	    var xmlString  = "<root>"+
+							  "<Table name=\"GlobalProperties\">"+
+								"<column name=\"ClassName\">InfringementDocumentType</column>"+
+								"<column name=\"OracleType\">ITS.INFRINGEMENT_DOCUMENT_TYPE</column>"+
+								"<column name=\"OracleTableType\">ITS.INFRINGEMENT_DOCUMENT_TABLE_TYPE</column>"+
+							  "</Table>"+
+							    "<Table name=\"PropertyList\">"+
+								"<column name=\"REFERENCE_NUMBER\" type=\"string\"/>"+
+					    		"<column name=\"DOCUMENT_TYPE_ID\" type=\"long\"/>"+
+								"<column name=\"MIME_TYPE\" type=\"string\"/>"+
+								
+							  "</Table>"+
+							"</root>";
+		var doc = new System.Xml.XmlDocument();
+		doc.LoadXml(xmlString);
+		var ClassName = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='ClassName']")[0].InnerText;
+        var OracleType = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='OracleType']")[0].InnerText;
+        var OracleTableType = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='OracleTableType']")[0].InnerText;
+		var propertyNodes = doc.SelectNodes("//Table[@name='PropertyList']/column");
+	 #>
+    
+	//using Oracle.DataAccess.Client;
+    using Oracle.DataAccess.Types;
+    using System;
+
+    public class <#=  ClassName#> : Oracle.DataAccess.Types.INullable, Oracle.DataAccess.Types.IOracleCustomType
+    {   
+  
+        private readonly bool isNull = false;
+
+		bool INullable.IsNull
+        {
+            get
+            {
+                return this.isNull;
+            }
+        }
+
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+            {
+		 #>
+		 
+		
+        [Oracle.DataAccess.Types.OracleObjectMappingAttribute("<#= node.Attributes["name"].Value #>")]
+        public <#= node.Attributes["type"].Value #> <#= node.Attributes["name"].Value #> {get;set;}
+        
+		<# }
+		  #>
+          public void FromCustomObject(Oracle.DataAccess.Client.OracleConnection con, System.IntPtr pUdt)
+        {
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+            {
+		 #>
+            OracleUdt.SetValue(con, pUdt, "<#= node.Attributes["name"].Value #>", <#= node.Attributes["name"].Value #>);
+		 <# }
+		  #>
+		  }
+     
+	 public void ToCustomObject(Oracle.DataAccess.Client.OracleConnection con, System.IntPtr pUdt)
+        {
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+            {
+		 #>
+			<#= node.Attributes["name"].Value #> = (<#= node.Attributes["type"].Value #>)OracleUdt.GetValue(con, pUdt, "<#= node.Attributes["name"].Value #>");
+		 <# }
+		  #>
+		  }
+    }
+
+    [Oracle.DataAccess.Types.OracleCustomTypeMappingAttribute("<#=  OracleType#>")]
+    public class <#=  ClassName#>Factory : Oracle.DataAccess.Types.IOracleCustomTypeFactory
+    {
+
+        public virtual Oracle.DataAccess.Types.IOracleCustomType CreateObject()
+        {
+            return new <#=  ClassName#>();
+        }
+    }
+
+    [Oracle.DataAccess.Types.OracleCustomTypeMappingAttribute("<#=  OracleTableType#>")]
+    public class <#=  ClassName#>ArrayFactory : Oracle.DataAccess.Types.IOracleArrayTypeFactory
+    {
+
+        public System.Array CreateArray(int numElems)
+        {
+            return new <#=  ClassName#>[numElems];
+        }
+
+        public System.Array CreateStatusArray(int numElems)
+        {
+            return null;
+        }
+    }
+}

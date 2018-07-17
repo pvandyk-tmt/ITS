@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F59F26</color>
+    <color name="colorPrimaryDark">#F59F26</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBannerBackGround">#249b9696</color>
+    <color name="pressedColor">#24233a81</color>
+    <color name="defaultColor">#FFFFFF</color>
+    <color name="selectColor">#31bede</color>
+    <color name="buttonColor">#c4c7c7</color>
+    <color name="colorRed">#f91606</color>
+    <color name="activityBackgroundColor">#FAFAFA</color>
+    <color name="vosiColor">#F59F26</color>
+    <color name="speedColor">#0000ff</color>
+</resources>

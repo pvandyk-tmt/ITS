@@ -1,0 +1,40 @@
+﻿@model Kapsch.EVR.Gateway.Models.Vehicle.VehicleModelNumberModel
+
+@using (Html.BeginForm("UpdateVehicleModelNumber", "Vehicle", FormMethod.Post, new { id = "updateVehicleModelNumberForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID, new { id = "updateVehicleModelNumber_ID" })
+        @Html.HiddenFor(model => model.VehicleModelID, new { id = "updateVehicleModelNumber_VehicleModel_ID" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VehicleModelDescription, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.VehicleModelDescription, new { @class = "form-control", id = "updateVehicleModelNumber_VehicleModel_Description", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Description, new { @class = "form-control", id = "updateVehicleModelNumber_Description" })
+                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ExternalCode, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.ExternalCode, new { @class = "form-control", id = "updateVehicleModelNumber_ExternalCode" })
+                @Html.ValidationMessageFor(model => model.ExternalCode, null, new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+        <input type="submit" value="Save Changes" class="btn btn-primary" />
+    </div>
+}
+

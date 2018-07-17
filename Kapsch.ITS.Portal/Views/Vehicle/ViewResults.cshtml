@@ -1,0 +1,178 @@
+﻿@model Kapsch.Gateway.Models.Shared.PaginationListModel<Kapsch.EVR.Gateway.Models.Vehicle.VehicleModel>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Vehicle Testing</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Dashboard")">Home</a>
+            </li>
+            <li>
+                <a>Vehicles</a>
+            </li>
+            <li class="active">
+                <strong>Vehicles</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search Vehicles</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+
+                        <a class="close-link" href="@Url.Action("CreateVehicle", "Vehicle")">
+                            <span class="label label-primary pull-right">NEW</span>
+                        </a>
+                        <a class="close-link" href="@Url.Action("Search", "Vehicle")">
+                            <span class="label label-primary pull-right">TEST</span>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Booking reference Number</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="vehicleIDNumber" class="form-control" style='text-transform:uppercase' />
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">Engine Number</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="engineNumber" class="form-control" style='text-transform:uppercase' />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="searchResults" class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script>
+
+        var searchUrl = '@Url.Action("ListBookingResults", "Vehicle")';
+        var editUrl = '@Url.Action("EditVehicle", "Vehicle")';
+        var viewUrl = '@Url.Action("BookingResult", "Vehicle")';
+        console.log(searchUrl);
+        var grid = null;
+
+        $(function () {
+            $("#vehicleIDNumber").on('change keyup paste input', function () {
+                var vehicleIDNumber = $("#vehicleIDNumber").val();
+                if (vehicleIDNumber.length >= 3 || vehicleIDNumber.length == 0)
+                    reloadGrid();
+            });
+
+            $("#engineNumber").on('change keyup paste input', function () {
+                var idNumber = $("#engineNumber").val();
+                if (engineNumber.length >= 3 || engineNumber.length == 0)
+                    reloadGrid();
+            });
+
+            grid = $("#jqGrid").jqGrid({
+                url: searchUrl,
+                mtype: "GET",
+                postData: {
+                    vehicleIDNumber: function () { return $("#VehicleIDNumber").val() },
+                    engineNumber: function () { return $("#EngineNumber").val() }
+                },
+                height: 450,
+                autowidth: true,
+                shrinkToFit: true,
+                datatype: "json",
+                colNames: [
+                    '',
+                    'Vehicle Identification Number',
+                    'Vehicle Detail ID',
+                    'Booking Reference',
+                    'Test Date',
+                    'Is Passed',
+                    'Test Type ID',
+                    'Captured Credential ID',
+                    'Captured Date',
+                    'Site ID',
+                    ''
+                    ],
+                colModel: [
+                    { name: 'ID', key: true, hidden: true },
+                    { name: 'ID', key: true, hidden: false },
+                    { name: 'VehicleDetailID', key: false },
+                    { name: 'BookingReference', key: false },
+                    { name: 'TestDate', key: false },
+                    { name: 'IsPassed', key: false },
+                    { name: 'TestTypeID', key: false },
+                    { name: 'CapturedCredentialID', key: false },
+                    { name: 'CapturedDate', key: false },
+                    { name: 'SiteID', key: false },
+                    { name: '', index: '', sortable: false, formatter: createEditLink, align: "center", width: "30px" }
+                ],
+                viewrecords: true,
+                rowNum: 20,
+                pager: "#jqGridPager",
+                ondblClickRow: function (row_id) {
+                    var rowData = $("#jqGrid").getRowData(row_id);
+
+                    window.location.href = viewUrl + "?id=" + row_id;
+                }
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#jqGrid').setGridWidth(width);
+
+            });
+
+            function createEditLink(cellvalue, options, rowObject) {
+
+                var id = rowObject.ID;
+                var html = '';
+                html = "<a id='editLink" + id + "'  class='memberAction' href='" + editUrl + "?id=" + id + "' style='color:blue;cursor:pointer;' type='button' title='" + 'Edit' + "'>" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+
+                return html;
+            }
+
+            function getSelectedRow() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.jqGrid('getGridParam', "selrow");
+
+                if (rowKey)
+                    alert("Selected row primary key is: " + rowKey);
+                else
+                    alert("No rows are selected");
+            }
+
+        });
+
+        var reloadGrid = function() {
+            grid.trigger('reloadGrid');
+        };
+
+    </script>
+}
+
+
+
+

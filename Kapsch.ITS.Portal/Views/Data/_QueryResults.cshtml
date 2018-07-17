@@ -1,0 +1,44 @@
+﻿@model Kapsch.Core.Gateway.Models.Data.DataModel
+@if (Model == null)
+{
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">×</a>
+        <h4>@ViewBag.ErrorMessage</h4>
+    </div>
+}
+else if (Model.Data == null)
+{
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert">×</a>
+        <h4>No data to display</h4>
+    </div>
+}
+else
+{
+    <table class="table table-responsive table-striped table-bordered table-hover ui-datatable table-condensed small">
+        <thead>
+            <tr>
+                @foreach (var column in Model.Data.Columns.Cast<System.Data.DataColumn>())
+                {
+                    <th>
+                        @column.ColumnName
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.Data.Rows.Cast<System.Data.DataRow>())
+            {
+                <tr>
+                    @foreach (var col in Model.Data.Columns.Cast<System.Data.DataColumn>())
+                    {
+                        <td>
+                            @row[col]
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

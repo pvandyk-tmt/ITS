@@ -1,0 +1,13 @@
+﻿@{
+    var values = new [] 
+    { 
+        new { ID = 0, FormattedName = "Payment Date" },
+        new { ID = 1, FormattedName = "Captured Date" },
+    } ;
+}
+
+<div class="form-group">
+    <h5>Payment Date Filter</h5>
+    @Html.DropDownList("paymentDateFilter", new SelectList(values, "ID", "FormattedName", ""), new { @class = "form-control input-sm" })
+    <div class="hr-line-dashed"></div>
+</div>

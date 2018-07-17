@@ -1,0 +1,56 @@
+﻿@{
+    var districts = ViewBag.Districts as IList<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+}
+
+<div class="form-group">
+    <h5>District</h5>
+    @if (districts.Count == 1)
+    {
+        var district = districts.First();
+
+        <select id="districtID" class="form-control input-sm">
+            <option value="@district.ID">@district.BranchName</option>
+        </select>
+    }
+    else
+    {
+        @Html.DropDownList("districtID", new SelectList(districts, "ID", "BranchName", ""), "All Districts", new { @class = "form-control input-sm" })
+    }
+</div>
+
+<div class="form-group">
+    <h5>Officer</h5>
+    <select id="officerID" class="form-control input-sm">
+    </select>
+    <div class="hr-line-dashed"></div>
+</div>
+
+<script type="text/javascript">
+    var officersURL = "@Url.Action("GetOfficersByDistrict", "Report")";
+    
+    $('#districtID').on('change', function () {
+        populateUsersDropdown($(this).val());
+    });
+
+    populateUsersDropdown(null);
+
+    function populateUsersDropdown(districtID) {
+        $.ajax({
+            type: "GET",
+            url: officersURL,
+            data: {
+                districtID: districtID
+            },
+            
+            success: function (data) {
+                var dropdown = $("#officerID");
+                dropdown.html('');
+                dropdown.append('<option value="">ALL Officers</option>');
+
+                data.forEach(function (t) {
+                    dropdown.append('<option value="' + t.ID + '">' + t.FormattedName + '</option>');
+                });
+            }
+        });
+    }
+</script>

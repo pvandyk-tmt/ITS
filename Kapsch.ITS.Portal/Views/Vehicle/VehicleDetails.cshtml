@@ -1,0 +1,110 @@
+﻿@model Kapsch.EVR.Gateway.Models.Vehicle.VehicleModel
+
+@{
+                /**/
+
+                ViewBag.Title = "Booking Test Results";
+                var user = User as Kapsch.ITS.Portal.Models.AuthenticatedUser;
+                var url = @System.Configuration.ConfigurationManager.AppSettings["CoreGatewayEndpoint"] + "api/Report/Export?sessionToken=" + user.SessionToken + "&reportName=" + "Inspection Results" + "&exportType=" + "2" + "&parameters=vehicleTestBookingReference=" + Model.BookingReference;
+
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Vehicle Testing</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Dashboard")">Home</a>
+            </li>
+            <li>
+                <a>Vehicles</a>
+            </li>
+            <li class="active">
+                <strong>Vehicle Details</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>@string.Format("Vehicle Identification Number : {1}", Model.VIN)</h5>
+                    <div class="ibox-tools">
+                        <a href="@url" target="_blank">
+                            <i class="fa fa-print"></i>
+                        </a>
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div id="searchResults" class="jqGrid_wrapper">
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EngineNumber, new { @class = "control-label col-md-4" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.EngineNumber, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VIN, new { @class = "control-label col-md-4" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.VIN, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VehicleMakeName, new { @class = "control-label col-md-4" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.VehicleMakeName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VehicleModelName, new { @class = "control-label col-md-4" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.VehicleModelName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VehicleModelNumberName, new { @class = "control-label col-md-4" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.VehicleModelNumberName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model., new { @class = "control-label col-md-4" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.ColourName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GVM, new { @class = "control-label col-md-4" })
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(model => model.GVM, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/plugins/jqGrid")
+
+
+
+
+
+

@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7DACA9F7-7A69-4CD1-AAD4-B6A8E6B7EED5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kapsch.ITS.Gateway.Models</RootNamespace>
+    <AssemblyName>Kapsch.ITS.Gateway.Models</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zxing, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net461\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net461\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adjudicate\CaseModel.cs" />
+    <Compile Include="Adjudicate\FirstFishpondCaseModel.cs" />
+    <Compile Include="Adjudicate\FirstCaseModel.cs" />
+    <Compile Include="Adjudicate\FishpondCaseModel.cs" />
+    <Compile Include="Adjudicate\OffenceCodeModel.cs" />
+    <Compile Include="Adjudicate\RejectReasonModel.cs" />
+    <Compile Include="Capture\AcceptCaseModel.cs" />
+    <Compile Include="Capture\CaptureTypeModel.cs" />
+    <Compile Include="Capture\CaseModel.cs" />
+    <Compile Include="Capture\FirstCaseModel.cs" />
+    <Compile Include="Capture\NewCaseModel.cs" />
+    <Compile Include="Capture\OfficerModel.cs" />
+    <Compile Include="Capture\RejectCaseModel.cs" />
+    <Compile Include="Capture\RejectReasonModel.cs" />
+    <Compile Include="Capture\SessionModel.cs" />
+    <Compile Include="Capture\SessionsModel.cs" />
+    <Compile Include="Capture\SubmitCaseModel.cs" />
+    <Compile Include="Correspondence\SendResponseModel.cs" />
+    <Compile Include="Document\FirstNoticeModel.cs" />
+    <Compile Include="Enums\InfringementType.cs" />
+    <Compile Include="Enums\ReferenceTransactionType.cs" />
+    <Compile Include="Enums\AccountCurrencyType.cs" />
+    <Compile Include="Enums\AccountTransactionType.cs" />
+    <Compile Include="Enums\ApplicationType.cs" />
+    <Compile Include="Enums\EventType.cs" />
+    <Compile Include="CameraEvent\EncStatisticModel.cs" />
+    <Compile Include="CameraEvent\EventMediaModel.cs" />
+    <Compile Include="Enums\EvidenceType.cs" />
+    <Compile Include="Enums\RegisterStatus.cs" />
+    <Compile Include="Enums\SearchCriteria.cs" />
+    <Compile Include="Enums\Status.cs" />
+    <Compile Include="Fine\AccountTransactionModel.cs" />
+    <Compile Include="Fine\ChangeAmountModel.cs" />
+    <Compile Include="Fine\FineModel.cs" />
+    <Compile Include="Monitor\CameraLastStatisticModel.cs" />
+    <Compile Include="Monitor\CameraStatisticsModel.cs" />
+    <Compile Include="Monitor\CameraStatusModel.cs" />
+    <Compile Include="Monitor\CameraThumbNailModel.cs" />
+    <Compile Include="Monitor\FilterCameraLastStatisticsModel.cs" />
+    <Compile Include="TISCapture\DistrictSelectionModel.cs" />
+    <Compile Include="TISCapture\NatisExportModel.cs" />
+    <Compile Include="TISCapture\TISCaptureModel.cs" />
+    <Compile Include="TISCapture\TISDataModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CameraEvent\EventModel.cs" />
+    <Compile Include="CameraEvent\EventVLNModel.cs" />
+    <Compile Include="Tasks\TaskModel.cs" />
+    <Compile Include="Ticket\CourtDateModel.cs" />
+    <Compile Include="Ticket\CourtModel.cs" />
+    <Compile Include="Ticket\CourtRoomModel.cs" />
+    <Compile Include="Ticket\CourtsInfoModel.cs" />
+    <Compile Include="Ticket\DbUpdateScript.cs" />
+    <Compile Include="Ticket\EvidenceTypeModel.cs" />
+    <Compile Include="Ticket\HandWrittenCaptureModel.cs" />
+    <Compile Include="Ticket\Section341Model.cs" />
+    <Compile Include="Ticket\Section56Model.cs" />
+    <Compile Include="Ticket\ReferenceNumberModel.cs" />
+    <Compile Include="Ticket\VosiActionCaptureModel.cs" />
+    <Compile Include="Ticket\VosiActionModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kapsch.Core.Gateway.Models\Kapsch.Core.Gateway.Models.csproj">
+      <Project>{E26F5BDF-639D-456C-8E56-4120851293E3}</Project>
+      <Name>Kapsch.Core.Gateway.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.Core\Kapsch.Core.csproj">
+      <Project>{CA35DE4A-3054-4900-AD34-FB550D0CF927}</Project>
+      <Name>Kapsch.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.EVR.Gateway.Models\Kapsch.EVR.Gateway.Models.csproj">
+      <Project>{4307BC2E-9A17-4271-925A-FAC683C25D24}</Project>
+      <Name>Kapsch.EVR.Gateway.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.Gateway.Models.Shared\Kapsch.Gateway.Models.Shared.csproj">
+      <Project>{b44f6b37-9497-4a6a-ae70-76a2f9daa1ac}</Project>
+      <Name>Kapsch.Gateway.Models.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.min.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

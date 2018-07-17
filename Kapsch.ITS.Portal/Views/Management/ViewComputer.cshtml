@@ -1,0 +1,110 @@
+﻿@model Kapsch.Core.Gateway.Models.Computer.ComputerModel
+@using Kapsch.ITS.Portal.Helpers
+
+@{
+    ViewBag.Title = "ViewUser";
+
+    var districts = ViewBag.Districts as List<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+    var systemFunctions = ViewBag.SystemFunctions as List<Kapsch.Core.Gateway.Models.User.SystemFunctionModel>;
+}
+
+<script>
+    $("#breadcrumbText").html("Administration / Computers / <b>View Computer</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>View Computer</h5>
+                </div>
+                <div class="ibox-content">
+
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IPAddress, new { @class = "control-label col-md-2" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.IPAddress, new { @class = "form-control", @readonly = "readonly" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DistrictName, new { @class = "control-label col-md-2" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(model => model.DistrictName, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Configuration Items", new { @class = "control-label col-md-2" })
+                            <div class="col-sm-10">
+                                <a class="close-link" href="@Url.Action("CreateComputerSetting", "Management", new { computerID = Model.ID })">
+                                    <span class="label label-primary pull-right">NEW</span>
+                                </a>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th width="200px">Type</th>
+                                            <th>Value</th>
+                                            <th width="30px">Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var systemFunction in Model.ComputerConfigSettings)
+            {
+                            <tr>
+                                <td>@systemFunction.ComputerItemType.ToString()</td>
+                                <td>@systemFunction.Value</td>
+                                <td align="center">
+                                    <a class='memberAction' href='@Url.Action("EditComputerSetting", "Management", new { id = systemFunction.ID })' style='color:blue;cursor:pointer;' type='button' title='Edit'><span class='ui-icon ui-icon-pencil'></span></a>
+                                </td>
+                            </tr>
+}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles
+{
+
+
+
+    <style>
+        /*.wizard > .content > .body position: relative;*/
+    </style>
+
+}
+
+@section scripts
+{
+
+
+    <script>
+
+
+    </script>
+}
+
+
+
+

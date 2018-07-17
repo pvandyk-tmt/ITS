@@ -1,0 +1,273 @@
+
+DROP TABLE IF EXISTS CourtDetail; 
+
+CREATE TABLE CourtDetail(
+	ID						INTEGER PRIMARY KEY,
+    Name 					TEXT,
+    AddressID				INTEGER,
+    PersonInfoID 			INTEGER,
+    ContemptAmount 			INTEGER,
+    ContemptDays 			INTEGER,
+    BankingInfoID 			INTEGER,
+    DistrictID 				INTEGER,
+    CasePre 				TEXT,
+    CasePost 				TEXT,
+    SequenceName 			TEXT,
+    StatusId 				INTEGER,
+    WarrantPre 				TEXT,
+    WarrantPost 			TEXT,
+    CaptureDate 			Date,
+    TypeOfServiceAllowed 	INTEGER,
+    WarrantLetterGrace 		INTEGER,
+    WarrantExpireDays 		INTEGER,
+    SummonsExpireDays 		INTEGER,
+    UserId 					INTEGER,
+    CourtTime 				TEXT,
+    DaysToCourtDate 		INTEGER,
+    OverAllocation 			INTEGER,
+    ReIssueInvalidServing 	INTEGER);
+	
+DROP TABLE IF EXISTS Court; 
+
+CREATE TABLE Court(
+	ID					INTEGER PRIMARY KEY,
+    Name 				TEXT,
+	Room 				TEXT);
+
+DROP TABLE IF EXISTS CourtRoom;
+
+CREATE TABLE CourtRoom(
+	ID			INTEGER PRIMARY KEY,
+	CourtID		INTEGER,
+	RoomNumber	TEXT);
+
+DROP TABLE IF EXISTS CourtDate;
+
+CREATE TABLE CourtDate(
+	ID			INTEGER PRIMARY KEY,
+	Date		Date,
+	CourtID 	INTEGER,
+	CourtRoomID	INTEGER);
+
+DROP TABLE IF EXISTS ChargeBook;
+
+CREATE TABLE ChargeInfo(
+	ID						INTEGER PRIMARY KEY,
+	OffenceSetID			INTEGER,
+	Code					TEXT,
+	Description				TEXT,
+	FineAmount      		DOUBLE,
+	VehicleType				TEXT,
+	Zone					INTEGER,
+	MinSpeed				INTEGER,
+	MaxSpeed				INTEGER,
+	OffenceSet				INTEGER,
+	WimVehicleTypeID 		INTEGER, 
+	WimOffenceDescription 	TEXT, 
+	MimOverWeightPersent 	INTEGER, 
+	MaxOverWeightPersent 	INTEGER, 
+	CaseTypeID				INTEGER,
+	IsFavourite     		BOOLEAN DEFAULT('FALSE'));
+
+CREATE INDEX IX_ChargeInfo_Code ON ChargeInfo (Code DESC);
+
+DROP TABLE IF EXISTS ConfigItem;
+
+CREATE TABLE ConfigItem(
+	ID			INTEGER PRIMARY KEY,
+	Name		TEXT UNIQUE,
+	Value		TEXT);
+
+DROP TABLE IF EXISTS Evidence; 
+
+CREATE TABLE Evidence(
+	ID				INTEGER PRIMARY KEY,
+	TicketNumber	TEXT,
+	EvidenceType	TEXT,
+	Evidence		BLOB,
+	Uploaded		BOOLEAN DEFAULT('FALSE'),
+	UploadDateTime  DATE,
+	EvidenceDate    DATE);
+
+DROP TABLE IF EXISTS PublicHoliday;
+
+CREATE TABLE PublicHoliday(
+	ID			INTEGER PRIMARY KEY,
+	Description	TEXT,
+	HolidayDate	DATE,
+	Active		TEXT);
+
+DROP TABLE IF EXISTS HandWritten; 
+
+CREATE TABLE HandWritten(
+	ID							INTEGER PRIMARY KEY,
+	CredentialID				INTEGER,
+	Uploaded					BOOLEAN DEFAULT('FALSE'),
+	Completed					BOOLEAN DEFAULT('FALSE'),
+	UploadDateTime  			DATE,
+	SavedDateTime 				DATE,
+	Printed 					BOOLEAN DEFAULT('FALSE'),
+	OfficerName					TEXT,
+	OffenceSetID				INTEGER,
+	TicketNumber 				TEXT UNIQUE, 
+	ExternalToken 				TEXT UNIQUE, 
+	ExternalTokenReference		TEXT UNIQUE, 
+	PersonInfoID				INTEGER,
+	Title						TEXT,
+	FirstName 					TEXT, 
+	MiddleNames					TEXT, 
+	Surname 					TEXT, 
+	Initials					TEXT,
+	IdentificationNumber		TEXT,
+	IdentificationTypeID		INTEGER,
+	IdentificationCountryID		INTEGER,
+	CitizenTypeID				INTEGER,
+	Gender						TEXT,
+	Age 						INTEGER,
+	BirthDate  					DATE,
+	Occupation					TEXT,
+	Telephone					TEXT,
+	MobileNumber				TEXT,
+	Fax							TEXT,
+	Email						TEXT,
+    Company						TEXT,
+    BusinessTelephone			TEXT,
+    PhysicalAddressInfoID		INTEGER,
+	PhysicalAddressTypeID		INTEGER,
+    PhysicalStreet1				TEXT,
+    PhysicalStreet2				TEXT,
+    PhysicalSuburb				TEXT,
+    PhysicalTown				TEXT,
+    PhysicalCode				TEXT,
+    PostalAddressInfoID			INTEGER,
+	PostalAddressTypeID			INTEGER,
+    PostalPoBox					TEXT,
+    PostalStreet				TEXT,
+    PostalSuburb				TEXT,
+    PostalTown					TEXT,
+    PostalCode					TEXT,
+    OffenceLocationStreet		TEXT,
+    OffenceLocationSuburb		TEXT,
+    OffenceLocationTown			TEXT,
+    OffenceLocationLatitude		DOUBLE, 
+    OffenceLocationLongitude	DOUBLE, 
+    VehicleRegistrationMain		TEXT,
+    VehicleRegistrationNo2		TEXT,
+    VehicleRegistrationNo3		TEXT,
+    VehicleMakeMain				TEXT,
+    VehicleModelMain			TEXT,
+    VehicleTypeMain				TEXT,
+    VehicleLicenceExpiryDate  	DATE,
+    VehicleColour				TEXT,
+    VehicleRegisterNumber		TEXT,
+    VehicleEngineNumber			TEXT,
+    VehicleChassisNumber		TEXT,
+    Gaurdian					TEXT,
+    Direction					TEXT,
+    MeterNumber					TEXT,
+    CaseNumber					TEXT,
+    CcNumber					TEXT,
+    ChargeCode1					TEXT,
+    ChargeCode1ID				INTEGER,
+	ChargeDescription1			TEXT,
+    Amount1						DOUBLE,
+    ChargeCode2					TEXT,
+    ChargeCode2ID				INTEGER,
+	ChargeDescription2			TEXT,
+    Amount2						DOUBLE,
+    ChargeCode3					TEXT,
+    ChargeCode3ID				INTEGER,
+	ChargeDescription3			TEXT,
+    Amount3						DOUBLE,
+    HasAlternativeCharge		TEXT,
+    OffenceDate  				DATE,
+	IssueDate  					DATE,
+    CourtDate  					DATE,
+    CourtName					TEXT,
+    CourtRoom					TEXT,
+    DistrictName				TEXT,
+    PaymentPlace				TEXT,
+    PaymentDate  				DATE,
+    OfficerCredentialID			INTEGER,
+    CapturedDate  				DATE,
+    CapturedCredentialID		INTEGER,
+    LicenceCode					TEXT,
+    LicenceType					TEXT,
+    DriverLicenceCertificateNo	TEXT,
+    ModifiedDate  				DATE,
+    ModifiedCredentialID		INTEGER,
+    Speed						INTEGER,
+    MassPercentage				DOUBLE,
+	IsCancelled					BOOLEAN DEFAULT('FALSE'),
+	CancelledReason 			TEXT,   
+	SendToCourtRole				INTEGER,
+    Notes						TEXT,
+    ApplicationAndVersion		TEXT,
+	DeviceID					TEXT,
+	CameraID					TEXT,
+	EventID						TEXT,
+	InfringementLocationCode    TEXT);
+	
+CREATE INDEX IX_HandWritten_IssueDate ON HandWritten (IssueDate DESC);
+
+DROP TABLE IF EXISTS CancellationReason;
+
+CREATE TABLE CancellationReason(
+	ID			INTEGER PRIMARY KEY,
+	Reason		TEXT);
+	
+DROP TABLE IF EXISTS TicketNumber;
+
+CREATE TABLE TicketNumber(
+	ID						INTEGER PRIMARY KEY,
+	NumberValue				TEXT NOT NULL UNIQUE,
+	ExternalToken 			TEXT NOT NULL UNIQUE,
+	ExternalTokenReference	TEXT NOT NULL UNIQUE, 
+	DocumentType			INTEGER,
+	Status  				INTEGER);
+	
+DROP TABLE IF EXISTS VosiAction;
+
+CREATE TABLE VosiAction(
+	ID				INTEGER PRIMARY KEY,
+	Description		TEXT);
+	
+DROP TABLE IF EXISTS VosiActionCapture;
+
+CREATE TABLE VosiActionCapture(
+	ID						INTEGER PRIMARY KEY,
+    VosiActionID 			INTEGER, 
+    VLN 					TEXT,
+    LocationStreet 			TEXT,
+    LocationSuburb 			TEXT,
+    LocationTown 			TEXT,
+    LocationLatitude 		DOUBLE,
+    Locationlongitude 		DOUBLE,
+    Comments 				TEXT,
+    CapturedDateTime 		DATE,
+    CapturedCredentialID 	INTEGER,
+	Uploaded				BOOLEAN DEFAULT('FALSE'));
+
+DROP TABLE IF EXISTS InfringementLocation;
+	
+CREATE TABLE InfringementLocation(
+	ID							INTEGER PRIMARY KEY,
+    Code 						TEXT, 
+    Description 				TEXT,
+    CourtID 					INTEGER,
+    GpsLatitude 				DOUBLE,
+    GpsLongitude 				DOUBLE,
+    InfringementLocationType 	INTEGER,
+    CourtName 					TEXT);
+
+DROP TABLE IF EXISTS IdentificationType;
+
+CREATE TABLE IdentificationType(
+	ID				INTEGER PRIMARY KEY,
+	Description		TEXT);
+	
+DROP TABLE IF EXISTS Country;
+
+CREATE TABLE Country(
+	ID				INTEGER PRIMARY KEY,
+	Description		TEXT);

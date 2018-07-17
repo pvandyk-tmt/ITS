@@ -1,0 +1,31 @@
+﻿<Controls:MetroWindow x:Class="TMT.iAdjudicate.cFishpondPrompt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="SingleBorderWindow" 
+        GlowBrush="{DynamicResource AccentColorBrush}"              
+        Title="New or Fishpond Cases" Height="181" Width="319" Loaded="Window_Loaded"
+        Icon="/iAdjudicate;component/Images/app.png">
+    
+    <!--<Window.Background>
+        <SolidColorBrush Color = "CornflowerBlue"  />
+    </Window.Background>-->
+    
+    <!--<Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>-->
+    
+    <Grid>
+        <TextBlock Height="62" Margin="12,7,0,0" VerticalAlignment="Top" FontWeight="Normal" FontSize="14" TextWrapping="Wrap" HorizontalAlignment="Left" Width="275" ><Run Text="Select which Cases you want to load"/><Run Text="."/><Run Text=" &#xA;"/><Run Text="N"/><Run Text="ew Cases only or Cases from the Fishpond?"/></TextBlock>
+        <Button Content="_New Cases" Height="32" HorizontalAlignment="Left" Margin="12,88,0,0" Name="buttNewCases" VerticalAlignment="Top" Width="89" Click="buttNewCases_Click" TabIndex="1" />
+        <Button Content="_Fishpond" Height="32" HorizontalAlignment="Left" Margin="198,88,0,0" Name="buttFishpond" VerticalAlignment="Top" Width="89" Click="buttFishpond_Click" TabIndex="2" />
+    </Grid>
+</Controls:MetroWindow>

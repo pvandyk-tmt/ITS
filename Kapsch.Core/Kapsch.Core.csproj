@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA35DE4A-3054-4900-AD34-FB550D0CF927}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kapsch.Core</RootNamespace>
+    <AssemblyName>Kapsch.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.DataAccess, Version=4.112.1.2, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Oracle.DataAccesss\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Caching\ICache.cs" />
+    <Compile Include="Caching\MemoryCache.cs" />
+    <Compile Include="Cryptography\MessageDigest.cs" />
+    <Compile Include="Cryptography\Random.cs" />
+    <Compile Include="Data\Account.cs" />
+    <Compile Include="Data\AccountTransaction.cs" />
+    <Compile Include="Data\AddressInfo.cs" />
+    <Compile Include="Data\Application.cs" />
+    <Compile Include="Data\ComputerConfigSetting.cs" />
+    <Compile Include="Data\Computer.cs" />
+    <Compile Include="Data\CameraLastStatistics.cs" />
+    <Compile Include="Data\ChargeInfo.cs" />
+    <Compile Include="Data\CorrespondenceEmailPayload.cs" />
+    <Compile Include="Data\CorrespondenceSmsPayload.cs" />
+    <Compile Include="Data\CorrespondenceItem.cs" />
+    <Compile Include="Data\CorrespondenceRoute.cs" />
+    <Compile Include="Data\CorrespondenceTemplate.cs" />
+    <Compile Include="Data\Country.cs" />
+    <Compile Include="Data\CourtRoom.cs" />
+    <Compile Include="Data\CourtDate.cs" />
+    <Compile Include="Data\Court.cs" />
+    <Compile Include="Data\Enums\AddressType.cs" />
+    <Compile Include="Data\Enums\CorrespondenceItemStatus.cs" />
+    <Compile Include="Data\Enums\CorrespondenceProvider.cs" />
+    <Compile Include="Data\Enums\CorrespondenceType.cs" />
+    <Compile Include="Data\Enums\Country.cs" />
+    <Compile Include="Data\Enums\DocumentType.cs" />
+    <Compile Include="Data\Enums\InspectionEvidenceType.cs" />
+    <Compile Include="Data\Enums\MobileNetwork.cs" />
+    <Compile Include="Data\Enums\ResultType.cs" />
+    <Compile Include="Data\Enums\QueueStatus.cs" />
+    <Compile Include="Data\Enums\RequestStatus.cs" />
+    <Compile Include="Data\Enums\PaymentProvider.cs" />
+    <Compile Include="Data\Enums\RegisterStatus.cs" />
+    <Compile Include="Data\Enums\RollingRegisterStatus.cs" />
+    <Compile Include="Data\Enums\RollingRegisterType.cs" />
+    <Compile Include="Data\GeneratedReferenceNumber.cs" />
+    <Compile Include="Data\Enums\AccountTransactionStatus.cs" />
+    <Compile Include="Data\Enums\AccountTransactionType.cs" />
+    <Compile Include="Data\Enums\AccountCurrencyType.cs" />
+    <Compile Include="Data\Enums\AccountType.cs" />
+    <Compile Include="Data\Enums\ApplicationType.cs" />
+    <Compile Include="Data\Enums\ComputerItemType.cs" />
+    <Compile Include="Data\Enums\InfringementType.cs" />
+    <Compile Include="Data\Enums\IDType.cs" />
+    <Compile Include="Data\Enums\PaymentMethod.cs" />
+    <Compile Include="Data\Enums\PaymentTransactionStatus.cs" />
+    <Compile Include="Data\Enums\OffenceStatus.cs" />
+    <Compile Include="Data\Enums\TerminalType.cs" />
+    <Compile Include="Data\Enums\EvidenceType.cs" />
+    <Compile Include="Data\Enums\LanguageType.cs" />
+    <Compile Include="Data\Enums\Status.cs" />
+    <Compile Include="Data\EvidenceLog.cs" />
+    <Compile Include="Data\GatewayUsageLog.cs" />
+    <Compile Include="Data\HandWrittenCaptureLog.cs" />
+    <Compile Include="Data\InfringementEvidence.cs" />
+    <Compile Include="Data\IdentificationType.cs" />
+    <Compile Include="Data\MobileDeviceApplication.cs" />
+    <Compile Include="Data\MobileDeviceLocation.cs" />
+    <Compile Include="Data\MobileDeviceDbScript.cs" />
+    <Compile Include="Data\MobileDeviceItem.cs" />
+    <Compile Include="Data\MobileDeviceConfigItem.cs" />
+    <Compile Include="Data\MobileDevice.cs" />
+    <Compile Include="Data\NatisExport.cs" />
+    <Compile Include="Data\OffenceCodeOffenceRegulation.cs" />
+    <Compile Include="Data\OffenceCodeOffenceDescription.cs" />
+    <Compile Include="Data\OffenceRegulation.cs" />
+    <Compile Include="Data\OffenceDescription.cs" />
+    <Compile Include="Data\TISData.cs" />
+    <Compile Include="Data\PaymentProviderQueueItem.cs" />
+    <Compile Include="Data\PaymentProviderRequest.cs" />
+    <Compile Include="Data\ReferenceVehicle.cs" />
+    <Compile Include="Data\RepresentationTransaction.cs" />
+    <Compile Include="Data\RollingRegister.cs" />
+    <Compile Include="Data\Register.cs" />
+    <Compile Include="Data\OffenceRegister.cs" />
+    <Compile Include="Data\OffenceSet.cs" />
+    <Compile Include="Data\OffenceCode.cs" />
+    <Compile Include="Data\PaymentTerminal.cs" />
+    <Compile Include="Data\PaymentTransactionItem.cs" />
+    <Compile Include="Data\Person.cs" />
+    <Compile Include="Data\PublicHoliday.cs" />
+    <Compile Include="Data\Region.cs" />
+    <Compile Include="Data\District.cs" />
+    <Compile Include="Data\Enums\InfringementLocationType.cs" />
+    <Compile Include="Data\InfringementLocation.cs" />
+    <Compile Include="Data\Credential.cs" />
+    <Compile Include="Data\CredentialResetToken.cs" />
+    <Compile Include="Data\DataContext.cs" />
+    <Compile Include="Data\Camera.cs" />
+    <Compile Include="Data\CameraStatus.cs" />
+    <Compile Include="Data\Enums\CameraAdapterType.cs" />
+    <Compile Include="Data\Enums\CameraConnectionType.cs" />
+    <Compile Include="Data\Enums\CameraStatusType.cs" />
+    <Compile Include="Data\Enums\EntityType.cs" />
+    <Compile Include="Data\Company.cs" />
+    <Compile Include="Data\DistrictOffenceSet.cs" />
+    <Compile Include="Data\PaymentTransaction.cs" />
+    <Compile Include="Data\SpeedLog.cs" />
+    <Compile Include="Data\Site.cs" />
+    <Compile Include="Data\SystemRoleFunction.cs" />
+    <Compile Include="Data\SystemRole.cs" />
+    <Compile Include="Data\TestCategory.cs" />
+    <Compile Include="Data\UserDistrict.cs" />
+    <Compile Include="Data\CredentialSystemFunction.cs" />
+    <Compile Include="Data\User.cs" />
+    <Compile Include="Data\Session.cs" />
+    <Compile Include="Data\UserMobileDeviceActivity.cs" />
+    <Compile Include="Data\Vehicle.cs" />
+    <Compile Include="Data\VehicleCategory.cs" />
+    <Compile Include="Data\VehicleColor.cs" />
+    <Compile Include="Data\VehicleMake.cs" />
+    <Compile Include="Data\VehicleModel.cs" />
+    <Compile Include="Data\VehicleModelNumber.cs" />
+    <Compile Include="Data\VehicleFuelType.cs" />
+    <Compile Include="Data\VehiclePropeller.cs" />
+    <Compile Include="Data\VehicleTestQuestionAnswer.cs" />
+    <Compile Include="Data\VehicleTestQuestion.cs" />
+    <Compile Include="Data\VehicleTestBooking.cs" />
+    <Compile Include="Data\VehicleTestResult.cs" />
+    <Compile Include="Data\VehicleCategoryTestType.cs" />
+    <Compile Include="Data\TestType.cs" />
+    <Compile Include="Data\VehicleType.cs" />
+    <Compile Include="Data\VosiAction.cs" />
+    <Compile Include="Data\VosiActionCapture.cs" />
+    <Compile Include="ErrorBase.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\QueryableExtensions.cs" />
+    <Compile Include="Filters\ExpressionBuilder.cs" />
+    <Compile Include="Filters\Filter.cs" />
+    <Compile Include="Filters\FilterJoin.cs" />
+    <Compile Include="Filters\Op.cs" />
+    <Compile Include="ICorrespondent.cs" />
+    <Compile Include="Types\InfringementDocumentType.cs">
+      <DependentUpon>InfringementDocumentType.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ValueTypes\Msisdn.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\SystemFunction.cs" />
+    <Compile Include="Types\BookingSearchType.cs" />
+    <Compile Include="Types\InfringementEvidenceType.cs">
+      <DependentUpon>InfringementEvidenceType.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Types\HandWrittenCaptureType.cs">
+      <DependentUpon>HandWrittenCaptureType.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Types\InspectionEvidence.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InspectionEvidence.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Types\QuestionAnswerResult.cs" />
+    <Compile Include="Types\QuestionAnswerResultItemFactory.cs" />
+    <Compile Include="Types\QuestionAnswerResultItemFactoryArray.cs" />
+    <Compile Include="Types\VehicleBooking.cs" />
+    <Compile Include="Types\VehicleTestBooking.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Types\InspectionEvidence.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InspectionEvidence.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Types\InfringementDocumentType.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InfringementDocumentType.cs</LastGenOutput>
+    </Content>
+    <Content Include="Types\InfringementEvidenceType.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InfringementEvidenceType.cs</LastGenOutput>
+    </Content>
+    <Content Include="Types\HandWrittenCaptureType.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HandWrittenCaptureType.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

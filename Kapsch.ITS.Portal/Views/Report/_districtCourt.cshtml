@@ -1,0 +1,45 @@
+﻿@{
+    var districts = ViewBag.Districts as IList<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+}
+
+<div class="form-group">
+    <h5>District</h5>
+    @Html.DropDownList("districtID", new SelectList(districts, "ID", "BranchName", ""), "Select District", new { @class = "form-control input-sm" })
+</div>
+
+<div class="form-group">
+    <h5>Court</h5>
+    <select id="courtID" class="form-control input-sm">
+    </select>
+    <div class="hr-line-dashed"></div>
+</div>
+
+<script type="text/javascript">
+    var courtsURL = "@Url.Action("GetCourtsByDistrict", "Report")";
+
+    $('#districtID').on('change', function () {
+        populateCourtsDropdown($(this).val());
+    });
+
+    populateCourtsDropdown(null);
+
+    function populateCourtsDropdown(districtID) {
+        $.ajax({
+            type: "GET",
+            url: courtsURL,
+            data: {
+                districtID: districtID
+            },
+            
+            success: function (data) {
+                var dropdown = $("#courtID");
+                dropdown.html('');
+                dropdown.append('<option value="0">Select Court</option>');
+
+                data.forEach(function (t) {
+                    dropdown.append('<option value="' + t.ID + '">' + t.CourtName + '</option>');
+                });
+            }
+        });
+    }
+</script>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:title="Logout" android:id="@+id/logoutItem"></item>-->
+    <item android:title="About" android:id="@+id/aboutItem"></item>
+    <item android:title="Config" android:id="@+id/configItem"></item>
+    <item android:title="Printer" android:id="@+id/printerItem"></item>
+</menu>

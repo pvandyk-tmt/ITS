@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AAB7007F-B48A-4AC2-A5B8-A8C3D4C5D53D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kapsch.Camera.Adapters</RootNamespace>
+    <AssemblyName>Kapsch.Camera.Adapters</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdapterFactory.cs" />
+    <Compile Include="Impl\BaseAdapter.cs" />
+    <Compile Include="Impl\BaseAdapterOptions.cs" />
+    <Compile Include="Impl\BaseTCPAdapter.cs" />
+    <Compile Include="Impl\iCam\iCamClientAdapter.cs" />
+    <Compile Include="Impl\iCam\iCamClientAdapterOptions.cs" />
+    <Compile Include="Impl\iCam\iCamEventArgs.cs" />
+    <Compile Include="Impl\iCam\iCamEventModel.cs" />
+    <Compile Include="Impl\iCam\iCamInfo.cs" />
+    <Compile Include="Impl\iCam\iCamListener.cs" />
+    <Compile Include="Impl\StateObject.cs" />
+    <Compile Include="Interfaces\IAdapter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Authorize.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kapsch.Core.Gateway.Clients\Kapsch.Core.Gateway.Clients.csproj">
+      <Project>{6d023f1c-2561-480b-be68-213d70a3f6e1}</Project>
+      <Name>Kapsch.Core.Gateway.Clients</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.Core.Gateway.Models\Kapsch.Core.Gateway.Models.csproj">
+      <Project>{e26f5bdf-639d-456c-8e56-4120851293e3}</Project>
+      <Name>Kapsch.Core.Gateway.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.Gateway.Models.Shared\Kapsch.Gateway.Models.Shared.csproj">
+      <Project>{b44f6b37-9497-4a6a-ae70-76a2f9daa1ac}</Project>
+      <Name>Kapsch.Gateway.Models.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.ITS.Gateway.Clients\Kapsch.ITS.Gateway.Clients.csproj">
+      <Project>{de40ce6f-29dc-4a22-b1a0-e5e8d02ee614}</Project>
+      <Name>Kapsch.ITS.Gateway.Clients</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.ITS.Gateway.Models\Kapsch.ITS.Gateway.Models.csproj">
+      <Project>{7daca9f7-7a69-4cd1-aad4-b6a8e6b7eed5}</Project>
+      <Name>Kapsch.ITS.Gateway.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,18 @@
+INSERT INTO CancellationReason(ID, Reason) VALUES (1, 'Incomplete Info');
+INSERT INTO CancellationReason(ID, Reason) VALUES (2, 'System Offline');
+INSERT INTO CancellationReason(ID, Reason) VALUES (3, 'Cancelled by customer');
+INSERT INTO CancellationReason(ID, Reason) VALUES (4, 'Other');
+
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (4, 'HTTP_READ_TIMEOUT', '20000');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (5, 'HTTP_CONNECT_TIMEOUT', '30000');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (6, 'TMT_API_USER', 'TMT_API_USER');
+INSERT INTO ConfigItem(ID, Name, Value) VALUES (7, 'PROCESSING_SYSTEM', '0');
+
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (8, 'VEHICLE_MAKE_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (9, 'VEHICLE_MODEL_NUMBER_VERSION', '0');
+INSERT INTO ConfigItem (ID, Name, Value) VALUES (10, 'VEHICLE_MAKE_MODEL_VERSION', '0');
+
+
+
+
+

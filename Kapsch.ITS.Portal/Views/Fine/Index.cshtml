@@ -1,0 +1,142 @@
+﻿@model IList<Kapsch.ITS.Gateway.Models.Fine.FineModel>
+
+<script>
+    $("#breadcrumbText").html("View / <b>Search Fines</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Search Fines</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group" >
+                            <label class="col-sm-2 control-label">Search Type</label>
+                            <div class="col-sm-4">
+                                <select id="searchCriteria" class="form-control input-sm">
+                                   
+                                    <option value="0">ID Number</option>
+                                    <option value="1">VLN</option>
+                                    <option value="2">Reference Number</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-sm-2 control-label">Search Value</label>
+                            <div class="col-sm-4">
+                                <input type="text" id="searchValue" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <input type="button" value="Search" class="btn btn-primary" onclick="reloadGrid()" style="width:100%"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="searchResults" class="jqGrid_wrapper">
+                        <table id="jqGrid"></table>
+                        <div id="jqGridPager"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles
+{
+    @Styles.Render("~/Content/plugins/jqGrid/jqGridStyles")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/plugins/jqGrid")
+
+    <script>
+
+        var searchUrl = '@Url.Action("SearchFines", "Fine")';
+        var viewUrl = '@Url.Action("ViewFine", "Fine")';
+        var grid = null;
+
+        $(function () {
+          
+            grid = $("#jqGrid").jqGrid({
+                url: searchUrl,
+                mtype: "GET",
+                postData: {
+                    searchCriteria: function () { return $("#searchCriteria").val() },
+                    searchValue: function () { return $("#searchValue").val() }
+                },
+                height: 450,
+                autowidth: true,
+                shrinkToFit: true,
+                datatype: "json",
+                colNames: ['Reference No.', 'ID No', 'Last Name', 'First Name', 'Offence Date', 'VLN', 'Outstanding Amount'],
+                colModel: [
+                    { name: 'ReferenceNumber', key: true },
+                    { name: 'OffenderIDNumber', key: false },
+                    { name: 'OffenderLastName', key: false },
+                    { name: 'OffenderFirstName', key: false },
+                    { name: 'FormattedOffenceDate', key: false },
+                    { name: 'VLN', key: false },
+                    { name: 'FormattedOutstandingAmount', key: false }
+                ],
+                viewrecords: true,
+                pager: true,
+                rowNum: 10000,
+                pgbuttons: false,
+                pginput: false,
+                pgtext: "",
+                ondblClickRow: function (row_id) {
+                    var rowData = $("#jqGrid").getRowData(row_id);
+
+                    window.location.href = viewUrl + "?referenceNumber=" + row_id;
+                }
+            });
+
+            $(window).bind('resize', function () {
+                var width = $('.jqGrid_wrapper').width();
+                $('#jqGrid').setGridWidth(width);
+
+            });
+
+            function createEditLink(cellvalue, options, rowObject) {
+
+                var id = rowObject.ID;
+                var html = '';
+                html = "<a id='editLink" + id + "'  class='memberAction' href='" + editUrl + "?id=" + id + "' style='color:blue;cursor:pointer;' type='button' title='" + 'Edit' + "'>" + "<span class='ui-icon ui-icon-pencil'></span>" + "</a>";
+
+                return html;
+            }
+
+            function getSelectedRow() {
+                var grid = $("#jqGrid");
+                var rowKey = grid.jqGrid('getGridParam', "selrow");
+
+                if (rowKey)
+                    alert("Selected row primary key is: " + rowKey);
+                else
+                    alert("No rows are selected");
+            }
+
+        });
+
+        var reloadGrid = function() {
+            grid.trigger('reloadGrid');
+        };
+
+    </script>
+}
+
+
+
+

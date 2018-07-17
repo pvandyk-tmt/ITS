@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">iPayment</string>
+    <string name="value">Value</string>
+    <string name="ticket_no">Ticket No</string>
+    <string name="person">Person:</string>
+    <string name="vln">VLN:</string>
+    <string name="date">Date:</string>
+    <string name="amount">Amount</string>
+    <string name="id">ID:</string>
+    <string name="ref_number">REF NUMBER:</string>
+    <string name="about">About</string>
+    <string name="vehicle">Vehicle</string>
+    <string name="fine">Fine</string>
+    <string name="fine_number">Fine Number</string>
+    <string name="qr_code">QR Code</string>
+    <string name="id_number">ID Number</string>
+    <string name="scan">Scan</string>
+    <string name="total">Total</string>
+    <string name="proceed">Proceed</string>
+    <string name="search_fines">Search Fines</string>
+    <string name="fine_basket">Fine Basket</string>
+    <string name="cash_payment">Cash Payment</string>
+    <string name="a_transaction_with_this_receipt_number_already_exists">A transaction with this receipt number already exists.</string>
+    <string name="printer_blank_line">\u0020</string>
+    <string name="available_printers">Available Printers</string>
+    <string name="possible_Address">Possible Addresses</string>
+    <string name="save_failed">Save Failed!</string>
+    <string name="printer_saved">Printer Saved</string>
+    <string name="friendly_name">Friendly Name:</string>
+    <string name="mac_address">Mac Address:</string>
+    <string name="search_for_printers">Search For Printers</string>
+    <string name="save_printer">Save Printer</string>
+    <string name="no_fines_found">No fines found</string>
+    <string name="traffic_fines">Traffic Fines</string>
+    <string name="print">PRINT</string>
+    <string name="payment_successful">Payment successful</string>
+    <string name="printing_receipt">Printing receipt</string>
+    <string name="available_receipts">Available Receipts</string>
+    <string name="this_option_requires_a_printer_to_be_configured">This option requires a printer to be configured.</string>
+    <string name="invalid_value">Invalid value</string>
+    <string name="downloading_configuration_info_failed">downloading configuration info failed</string>
+    <string name="configuration_info_downloaded">configuration info downloaded</string>
+
+    <string name="uploading_user_activity_log">uploading user activity log</string>
+    <string name="uploading_user_activity_log_failed">uploading user activity log failed</string>
+    <string name="uploading_user_activity_log_successful">uploading user activity log successful</string>
+
+</resources>

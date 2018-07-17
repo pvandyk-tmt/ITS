@@ -1,0 +1,660 @@
+﻿@model Kapsch.EVR.Gateway.Models.Vehicle.VehicleBookingModel
+@using Kapsch.ITS.Portal.Helpers
+
+
+@{
+    ViewBag.Title = "CreateVehicle";
+    var vehicleMakes = Model.VehicleMakes;
+    var vehicleModels = Model.VehicleModels;
+    var vehicleCategories = Model.VehicleCategories;
+    var vehiclePropellers = Model.VehiclePropellers;
+    var vehicleFuelType = Model.VehicleFuelType;
+    var vehicleColors = Model.VehicleColors;
+    var vehicleModelNumbers = Model.VehicleModelNumbers;
+    var testCategories = Model.TestCategories;
+    var vehicleTypes = Model.VehicleTypes;
+    var Districts = Model.Districts;
+    var Sites = Model.Sites;
+
+    var selectedDistrict = 0;
+    var selectedSite = 0;
+
+    if(Request.Cookies["DistrictID"]!= null)
+    {
+        selectedDistrict = Convert.ToInt32(Request.Cookies["DistrictID"].Value);
+    }
+
+    if (Request.Cookies["SiteID"] != null)
+    {
+        selectedSite = Convert.ToInt32(Request.Cookies["SiteID"].Value);
+    }
+
+}
+
+
+<script src="~/Content/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<script>
+    $("#breadcrumbText").html("Vehicle Testing / <b>Create Inspection Booking</b>");
+</script>
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+
+
+            <div class="ibox float-e-margins">
+                
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Create Inspection Booking</h5>
+                                </div>
+
+
+                                <div class="ibox-content">
+                                    @using (Html.BeginForm("Booking", "Vehicle", FormMethod.Post, new { id = "wizard" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <h1>Booking information</h1>
+                                        <fieldset>
+                                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-md-4 col-lg-4 control-label">District</label>
+                                                    <div class="col-sm-6 col-md-4 col-lg-4">
+                                                        @Html.DropDownList("district",
+                                                               new SelectList(Districts, "ID", "BranchName", ""),
+                                                          new { @class = "form-control" }
+                                                          )
+                                                        <div id="divDistrict" class="text-danger"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-md-4 col-lg-4 control-label">Site</label>
+                                                    <div class="col-sm-6 col-md-4 col-lg-4">
+                                                        @Html.DropDownList("site",
+                                                          new SelectList(Sites, "ID", "Name", ""),
+                                                          new { @class = "form-control" }
+                                                          )
+                                                        <div id="divSite" class="text-danger"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 col-md-4 col-lg-4 control-label">Vehicle Test Category</label>
+                                                    <div class="col-sm-6 col-md-4 col-lg-4">
+                                                        @Html.DropDownList("testCategory",
+                                                          new SelectList(testCategories, "ID", "Name", ""),
+                                                          new { @class = "form-control" }
+                                                          )
+                                                        <div id="divTestCategory" class="text-danger"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <h1>Vehicle Identification</h1>
+                                        <fieldset>
+                                            <label class="step-content" >Enter one or more of the following.</label>         
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-6 col-md-4 col-lg-4 control-label">Chassis No. / VIN</label>
+                                                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                                                <input type="text" id="VIN" class="form-control" style='text-transform:uppercase' />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-6 col-md-4 col-lg-4 control-label">Engine No.</label>
+                                                            <div class="col-sm-6 col-md-4 col-lg-4">
+                                                                <input type="text" id="engineNumber" class="form-control" style='text-transform:uppercase' />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div id="divSearch" class="text-danger"></div>
+                                                </div>
+                                        </fieldset>
+
+                                        <h1>Vehicle Details</h1>
+                                        <fieldset>
+                                            <div class="step-content">
+
+                                                <div class="form-horizontal">
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.BookingReference, new { @class = "control-label col-sm-6 col-md-4 col-lg-4" })
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.TextBoxFor(model => model.BookingReference, new { style = "text-transform:uppercase", @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.BookingReference, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Vehicle.VIN, new { @class = "control-label col-sm-6 col-md-4 col-lg-4" })
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.TextBoxFor(model => model.Vehicle.VIN, new { style = "text-transform:uppercase", @class="form-control" })
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.VIN, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Vehicle.EngineNumber, new { @class = "control-label col-sm-6 col-md-4 col-lg-4" })
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.TextBoxFor(model => model.Vehicle.EngineNumber, new { style = "text-transform:uppercase", @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.EngineNumber, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+
+                                                    @*@using (Html.BeginForm("CreateVehicle", "Vehicle", FormMethod.Post, new { id = "TheForm" }))
+                                                        {*@
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-md-4 col-lg-4 control-label">Vehicle Make</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.DropDownListFor(model => model.Vehicle.VehicleMakeId,
+                                                                       new SelectList(vehicleMakes, "ID", "Description", ""), "Select Vehicle Make",
+                                         new { @class = "form-control", id = "vehicleMakeDropDownList" }
+                                                             )
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.VehicleMakeId, null, new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-md-4 col-lg-4 control-label">Vehicle Model</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.DropDownListFor(model => model.Vehicle.VehicleModelId,
+                                                         new SelectList(vehicleModels, "ID", "Description", ""), "Select Vehicle Model",
+                                                                        new { @class = "form-control", id = "vehicleModelDropDownList" }
+                                                                        )
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.VehicleModelId, null, new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-md-4 col-lg-4 control-label">Vehicle Model Number</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.DropDownListFor(model => model.Vehicle.VehicleModelNumberId,
+                                                 new SelectList(vehicleModelNumbers, "ID", "Description", ""), "Select Vehicle Model Number",
+                                  new { @class = "form-control", id = "vehicleModelNumberDropDownList" }
+                                                                )
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.VehicleModelNumberId, null, new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-md-4 col-lg-4 control-label">Vehicle Color</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.DropDownListFor(model => model.Vehicle.VehicleColourId,
+                                                 new SelectList(vehicleColors, "ID", "Description", ""), "Select Vehicle Color",
+                                                 new { @class = "form-control", id = "vehicleColorDropDownList" }
+                                                                )
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.VehicleColourId, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-md-4 col-lg-4 control-label">Propelled By</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.DropDownListFor(model => model.Vehicle.PropelledById,
+                                                  new SelectList(vehiclePropellers, "ID", "Description", ""), "Select Propelled By",
+                                                                 new { @class = "form-control", id = "vehiclePropellDropDownList" }
+                                                                 )
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.PropelledById, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-md-4 col-lg-4 control-label">Fuel Type</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.DropDownListFor(model => model.Vehicle.FuelTypeId,
+                                                  new SelectList(vehicleFuelType, "ID", "Description", ""), "Select Fuel Type",
+                                                                 new { @class = "form-control", id = "vehicleFuelTypeDropDownList" }
+                                                                 )
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.FuelTypeId, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-md-4 col-lg-4 control-label">Vehicle Category</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.DropDownListFor(model => model.Vehicle.VehicleCategoryId,
+                                             new SelectList(vehicleCategories, "ID", "Description", ""), "Select Vehicle Category",
+                                                new { @class = "form-control", id = "vehicleCategoryDropDownList" }
+                                                               )
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.VehicleCategoryId, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-6 col-md-4 col-lg-4 control-label">Vehicle Type</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.DropDownListFor(model => model.Vehicle.VehicleTypeId,
+                                             new SelectList(vehicleTypes, "ID", "Description", ""), "Select Vehicle Type",
+                                                new { @class = "form-control", id = "vehicleTypeDropDownList" }
+                                                               )
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.VehicleTypeId, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Vehicle.YearOfMake, new { @class = "control-label col-sm-6 col-md-4 col-lg-4" })
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.EditorFor(model => model.Vehicle.YearOfMake)
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.YearOfMake, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Vehicle.VLN, new { @class = "control-label col-sm-6 col-md-4 col-lg-4" })
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.TextBoxFor(model => model.Vehicle.VLN, new { style = "text-transform:uppercase", @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.VLN, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Vehicle.NetWeight, new { @class = "control-label col-sm-6 col-md-4 col-lg-4" })
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.EditorFor(model => model.Vehicle.NetWeight)
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.NetWeight, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Vehicle.GVM, new { @class = "control-label col-sm-6 col-md-4 col-lg-4" })
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.EditorFor(model => model.Vehicle.GVM)
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.GVM, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        @Html.LabelFor(model => model.Vehicle.SeatingCapacity, new { @class = "control-label col-sm-6 col-md-4 col-lg-4" })
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            @Html.EditorFor(model => model.Vehicle.SeatingCapacity)
+                                                            @Html.ValidationMessageFor(model => model.Vehicle.SeatingCapacity, null, new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-6 col-md-4 col-lg-4">Roadworthy Expiry Date</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            <div id="fromDate" class="input-group date">
+                                                                <input type="text" id="RoadworthyExpiryDate_" name="RoadworthyExpiryDate_" class="form-control" placeholder="Choose Date">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-6 col-md-4 col-lg-4">Insurance Expiry Date</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            <div id="fromDate" class="input-group date">
+                                                                <input type="text" id="InsuranceExpiryDate_" name="InsuranceExpiryDate_" class="form-control" placeholder="Choose Date">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-6 col-md-4 col-lg-4">Licence Expiry Date</label>
+                                                        <div class="col-sm-6 col-md-4 col-lg-4">
+                                                            <div id="fromDate" class="input-group date">
+                                                                <input type="text" id="LicenceExpiryDate_" name="LicenceExpiryDate_" class="form-control" placeholder="Choose Date" >
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Submit New Vehicle-->
+<script>
+    $("#wizard").submit(
+        function (e) {
+            e.preventDefault();
+
+            var form = $("#wizard");
+            form.data('validator', null);
+            $.validator.unobtrusive.parse(form);
+
+            // Uppercase
+            $("#BookingReference").val($("#BookingReference").val().toUpperCase());
+            $("#Vehicle_VIN").val($("#Vehicle_VIN").val().toUpperCase());
+            $("#Vehicle_EngineNumber").val($("#Vehicle_EngineNumber").val().toUpperCase());
+            $("#Vehicle_VLN").val($("#Vehicle_VLN").val().toUpperCase());
+
+            if ($(this).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Booking", "Vehicle")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data.IsValid) {
+                            if (data.model.IsSuccessfull == 1) {
+                                alert("Create Vehicle booking has been saved.");
+                                window.location.href = '/Vehicle/Index/';
+                            }
+                            else {
+                                alert("Add vehicle booking failed: " + data.model.Message + ". ");
+                            }
+                        }
+                        else {
+                            alert("Add vehicle booking failed: " + data.ErrorMessage);
+                        }
+                    }
+                });
+            }
+        }
+      );
+</script>
+
+@section Styles
+{
+
+    <link href="~/Content/plugins/steps/jquery.steps.css" rel="stylesheet">
+
+    @Styles.Render("~/plugins/duallistStyles")
+
+    <style>
+        /*.wizard > .content > .body position: relative;*/
+    </style>
+
+}
+
+@section scripts
+{
+    <!-- Steps -->
+    <script src="~/Scripts/plugins/staps/jquery.steps.min.js"></script>
+
+    @Scripts.Render("~/plugins/duallist")
+
+    <script>
+    var cancelUrl = '@Url.Action("", "Vehicle")';
+        
+        $(document).ready(function () {
+
+            var district = @selectedDistrict;
+            var site = @selectedSite;
+
+            $("#wizard").steps({
+                bodyTag: "fieldset",
+                onCanceled: function (event) {
+                    window.location.href = cancelUrl;
+                },
+                onStepChanging: function (event, currentIndex, newIndex) {
+
+                    // Always allow going backward even if the current step contains invalid fields!
+                    var validBookingInformation = false;
+
+                    if ($('#district :selected').val() == 0 ||
+                        $('#site :selected').val() == 0 ||
+                        $('#testCategory :selected').val() == 0) {
+
+                        if ($('#district :selected').val() == 0) {
+                            $('#divDistrict').html("Please select a District");
+                        }
+                        else {
+                            $('#divDistrict').html("");
+                        }
+
+                        if ($('#site :selected').val() == 0) {
+                            $('#divSite').html("Please select a Site");
+                        }
+                        else {
+                            $('#divSite').html("");
+                        }
+
+                        if ($('#testCategory :selected').val() == 0) {
+                            $('#divTestCategory').html("Please select a test category");
+                        }
+                        else {
+                            $('#divTestCategory').html("");
+                        }
+
+                        return false;
+                    }
+
+
+
+                    if (currentIndex == 1) {
+                       // alert('sdasdsa');
+                    }
+
+                    if (newIndex == 2) {
+                        var engineNumber = $('#engineNumber').val().toUpperCase();
+                        var VIN = $('#VIN').val().toUpperCase();
+                        if (engineNumber.length == 0 && VIN.length == 0) {
+                            $('#divSearch').html("Please enter at least one of the search criteria");
+                            return false
+                        }                    
+                        else {   
+                            $.getJSON("@Url.Action("SearchVehicles", "Vehicle")/?webVin="+  VIN + "&webEngineNumber=" + engineNumber, null, function (data) {   
+                                if(data.vehicleDetail.VIN == null){
+                                    setFieldsReadonlyProperty(false);
+                                    $("#Vehicle_VIN").val("");
+                                    $("#Vehicle_EngineNumber").val("");
+                                    $("#vehicleMakeDropDownList").val("");
+                                    $("#vehicleModelDropDownList").val("");
+                                    $("#vehicleModelNumberDropDownList").val("");
+                                    $("#vehicleColorDropDownList").val("");
+                                    $("#vehiclePropellDropDownList").val("");
+                                    $("#vehicleFuelTypeDropDownList").val("");
+                                    $("#vehicleCategoryDropDownList").val("");
+                                    $("#vehicleTypeDropDownList").val("");
+                                    $("#Vehicle_YearOfMake").val("");
+                                    $("#Vehicle_NetWeight").val("");
+                                    $("#Vehicle_GVM").val("");
+                                    $("#Vehicle_VLN").val("");
+                                    $("#Vehicle_SeatingCapacity").val("");
+                                    $("#RoadworthyExpiryDate_").val("");
+                                    $("#InsuranceExpiryDate_").val("");
+                                    $("#LicenceExpiryDate_").val("");
+                                    return true;
+                                }
+                                else {
+                                    $("#Vehicle_VIN").val(data.vehicleDetail.VIN);
+                                    $("#Vehicle_EngineNumber").val(data.vehicleDetail.EngineNumber);
+                                    $("#vehicleMakeDropDownList").val(data.vehicleDetail.VehicleMakeId);
+                                    setVehicleModels(data.vehicleDetail.VehicleMakeId, data.vehicleDetail.VehicleModelId);                                
+                                    setVehicleModelNumbers(data.vehicleDetail.VehicleModelId, data.vehicleDetail.VehicleModelNumberId)                               
+                                    $("#vehicleColorDropDownList").val(data.vehicleDetail.VehicleColourId);
+                                    $("#vehiclePropellDropDownList").val(data.vehicleDetail.PropelledById);
+                                    $("#vehicleFuelTypeDropDownList").val(data.vehicleDetail.FuelTypeId);
+                                    $("#vehicleCategoryDropDownList").val(data.vehicleDetail.VehicleCategoryId);
+                                    $("#vehicleTypeDropDownList").val(data.vehicleDetail.VehicleTypeId);
+                                    $("#Vehicle_YearOfMake").val(data.vehicleDetail.YearOfMake);
+                                    $("#Vehicle_NetWeight").val(data.vehicleDetail.NetWeight);
+                                    $("#Vehicle_GVM").val(data.vehicleDetail.GVM);
+                                    $("#Vehicle_VLN").val(data.vehicleDetail.VLN);
+                                    $("#Vehicle_SeatingCapacity").val(data.vehicleDetail.SeatingCapacity);
+                                    $("#RoadworthyExpiryDate_").val(data.vehicleDetail.FormattedRoadworthyExpiryDate);
+                                    $("#InsuranceExpiryDate_").val(data.vehicleDetail.FormattedInsuranceExpiryDate);
+                                    $("#LicenceExpiryDate_").val(data.vehicleDetail.FormattedLicenceExpiryDate);
+
+                                    setFieldsReadonlyProperty(true);
+                                    return true;
+                            }
+                            });
+                            }
+                    }
+
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+
+                    var form = $(this);
+                    form.data('validator', null);
+                    $.validator.unobtrusive.parse(form);
+
+                    return form.valid();
+                },
+                onFinishing: function (event, currentIndex) {
+                    var form = $(this);
+
+                    //Enable all fields here so they are submitted
+                    setFieldsReadonlyProperty(false);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex) {
+                    var form = $(this);
+                    
+                    // Submit form input
+                    form.submit();
+                }
+            }).validate({
+                errorPlacement: function (error, element) {
+                    element.before(error);
+                },
+                rules: {
+                    confirm: {
+                        equalTo: "#password"
+                    }
+                }
+            });
+
+            $('.dual_select').bootstrapDualListbox({
+                selectorMinimalHeight: 300
+            });
+
+            $('#LicenceExpiryDate_').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: "dd/mm/yyyy"
+            });
+
+            $('#InsuranceExpiryDate_').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: "dd/mm/yyyy"
+            });
+
+            $('#RoadworthyExpiryDate_').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: "dd/mm/yyyy"
+            });
+
+            $('#vehicleMakeDropDownList').change(function () {
+                $.getJSON("@Url.Action("GetModelsByMake", "Vehicle")" + "/" + $(this).val(), null, function (data) {
+                    $("#vehicleModelDropDownList").empty();
+                    $("#vehicleModelDropDownList").append('<option value="">Select Vehicle Model</option>');
+                    $("#vehicleModelDropDownList").addItems(data);
+                });
+            });
+
+            $('#vehicleModelDropDownList').change(function () {
+                $.getJSON("@Url.Action("GetModelNumberByModel", "Vehicle")" + "/" + $(this).val(), null, function (data) {
+                    $("#vehicleModelNumberDropDownList").empty();
+                    $("#vehicleModelNumberDropDownList").append('<option value="">Select Vehicle Model Number</option>');
+                    $("#vehicleModelNumberDropDownList").addItems(data);
+                });
+            });
+
+
+            $('#district').change(function () {
+                $.getJSON("@Url.Action("GetSites", "Vehicle")" + "/" + $(this).val(), null, function (data) {
+                    $("#site").empty();
+                    $("#site").addItems(data);
+
+                    if (district > 0) {
+                        $('#site').val(site);
+                    }
+                });
+            });
+
+
+            $('#site').change(function () {
+                $.getJSON("@Url.Action("SetSite", "Vehicle")" + "/" + $(this).val(), null, null);
+            });
+
+            //fire when page loads
+            if (district > 0) {
+                $('#district').val(district);
+                $("#district").change();
+            }
+
+        });
+
+
+        $.fn.addItems = function (data) {
+            return this.each(function () {
+                var list = this;
+                $.each(data, function (index, itemData) {
+                    var option = new Option(itemData.Text, itemData.Value);
+                    list.add(option);
+                });
+            });
+        };
+
+        function setVehicleModels(vehicleMakeID, vehicleModelID) {
+            $.getJSON("@Url.Action("GetModelsByMake", "Vehicle")" + "/" + vehicleMakeID, null, function (data) {
+                $("#vehicleModelDropDownList").empty();
+                $("#vehicleModelDropDownList").addItems(data);
+                $("#vehicleModelDropDownList").val(vehicleModelID);
+            });
+        }
+
+        function setVehicleModelNumbers(vehicleModelID, vehicleModelNumberID) {
+            $.getJSON("@Url.Action("GetModelNumberByModel", "Vehicle")" + "/" + vehicleModelID, null, function (data) {
+                $("#vehicleModelNumberDropDownList").empty();
+                $("#vehicleModelNumberDropDownList").addItems(data);
+                $("#vehicleModelNumberDropDownList").val(vehicleModelNumberID);
+            });
+        }
+
+        function setFieldsReadonlyProperty(BooleanValue) {
+            $("#Vehicle_VIN").prop("disabled", BooleanValue);
+            $("#Vehicle_EngineNumber").prop("disabled", BooleanValue);
+            
+            $("#vehicleMakeDropDownList").prop("disabled", BooleanValue); 
+            $("#vehicleModelDropDownList").prop("disabled", BooleanValue);
+            $("#vehicleModelNumberDropDownList").prop("disabled", BooleanValue);
+            $("#vehicleColorDropDownList").prop("disabled", BooleanValue);
+            $("#vehiclePropellDropDownList").prop("disabled", BooleanValue);
+            $("#vehicleFuelTypeDropDownList").prop("disabled", BooleanValue);
+            $("#vehicleCategoryDropDownList").prop("disabled", BooleanValue);
+            $("#vehicleTypeDropDownList").prop("disabled", BooleanValue);
+            
+            $("#Vehicle_YearOfMake").prop("disabled", BooleanValue);
+            $("#Vehicle_NetWeight").prop("disabled", BooleanValue);
+            $("#Vehicle_GVM").prop("disabled", BooleanValue);
+            $("#Vehicle_VLN").prop("disabled", BooleanValue);
+            $("#Vehicle_SeatingCapacity").prop("disabled", BooleanValue);
+           
+            $("#RoadworthyExpiryDate_").prop('disabled', BooleanValue);
+            $("#InsuranceExpiryDate_").prop("disabled", BooleanValue);
+            $("#LicenceExpiryDate_").prop("disabled", BooleanValue);
+        }
+
+    </script>
+}
+
+
+

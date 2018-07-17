@@ -1,0 +1,114 @@
+﻿@using Kapsch.ITS.Portal.Helpers;
+@{
+    var user = User as Kapsch.ITS.Portal.Models.AuthenticatedUser;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>IMS</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    
+    <!-- Add local styles, mostly for plugins css file -->
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+    
+    <!-- Add jQuery Style direct - used for jQGrid plugin -->
+    <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+    <!-- Primary Inspinia style -->     
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")     
+    @Styles.Render("~/plugins/jasnyBootstrapStyles")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+</head>
+<body>
+
+    <!-- Wrapper-->
+    <!-- PageClass give you ability to specify custom style for specific view based on action -->
+    <div id="wrapper" class="@Html.PageClass()">
+
+        <!-- Navigation -->
+        @Html.Partial("_Navigation")
+
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar")
+
+            <!-- Main view  -->
+            @RenderBody()
+
+            <!-- Footer -->
+            @Html.Partial("_Footer")
+
+        </div>
+        <!-- End page wrapper-->
+
+        <!-- Right Sidebar -->
+        @*@Html.Partial("_RightSidebar")*@
+
+    </div>
+    <!-- End wrapper-->
+
+    <!-- Section for main scripts render -->
+    @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>*@
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
+    @Scripts.Render("~/bundles/foolproof")
+    @Scripts.Render("~/plugins/jasnyBootstrap")
+    
+
+    <!-- Handler for local scripts -->
+    @RenderSection("scripts", required: false)
+
+    <script>
+    $("#changePasswordForm").submit(
+        function (e) {
+            e.preventDefault();
+
+            var form = $("#changePasswordForm");
+            form.data('validator', null);
+            $.validator.unobtrusive.parse(form);
+
+            if ($(this).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("ChangePassword", "Account")",
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        if (data.IsValid) {
+                            alert("Password changed.");
+
+                            $("#CurrentPassword").val('');
+                            $("#NewPassword").val('');
+                            $("#ConfirmNewPassword").val('');
+
+                            $("#changePasswordModal").modal('toggle');
+                        }
+                        else {
+                            alert("Password change failed: " + data.ErrorMessage);
+                        }
+                    }
+                });
+            }
+        }
+      );
+    </script>
+</body>
+</html>

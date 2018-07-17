@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="About" android:id="@+id/aboutMenuItem"></item>
+    <item android:title="Printer" android:id="@+id/printerMenuItem"></item>
+    <item android:title="Print receipt" android:id="@+id/reprintReceiptMenuItem"></item>
+</menu>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{90A49CE1-9FFF-4C19-8CAA-3300A9F82462}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kapsch.DistanceOverTime.Adapter</RootNamespace>
+    <AssemblyName>Kapsch.DistanceOverTime.Adapter</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.11\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Calculations\SectionCalculationResult.cs" />
+    <Compile Include="Calculations\SectionCalculator.cs" />
+    <Compile Include="Factory\ListenerFactory.cs" />
+    <Compile Include="Framework\CommandLineAttribute.cs" />
+    <Compile Include="Framework\CommandLineParser.cs" />
+    <Compile Include="Framework\Default.cs" />
+    <Compile Include="Framework\HashtableExt.cs" />
+    <Compile Include="Framework\StringExt.cs" />
+    <Compile Include="ConfigHelper.cs" />
+    <Compile Include="Mock\MockSectionConfiguration.cs" />
+    <Compile Include="PhysicalInfringement.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Kapsch.RTE.Gateway.Clients\Kapsch.RTE.Gateway.Clients.csproj">
+      <Project>{6338C0FE-3639-40BE-8FA7-3EB66B433DF2}</Project>
+      <Name>Kapsch.RTE.Gateway.Clients</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kapsch.RTE.Gateway.Models\Kapsch.RTE.Gateway.Models.csproj">
+      <Project>{706C34A1-8DDE-4703-BDCF-DCD85A9CBDAD}</Project>
+      <Name>Kapsch.RTE.Gateway.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.Camera.Listener\Kapsch.Camera.Listener.csproj">
+      <Project>{2fbfeae0-0794-4ac1-b2c1-7c8a874fd6df}</Project>
+      <Name>Kapsch.Camera.Listener</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.Camera.Translator\Kapsch.Camera.Translator.csproj">
+      <Project>{5559dd7d-6383-4b11-ab07-699ad7011cd7}</Project>
+      <Name>Kapsch.Camera.Translator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kapsch.Device.Listener\Kapsch.Device.Listener.csproj">
+      <Project>{7f4aa836-7a86-4170-b8e0-467ca49f08d6}</Project>
+      <Name>Kapsch.Device.Listener</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

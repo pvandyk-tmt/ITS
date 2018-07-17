@@ -1,0 +1,98 @@
+﻿<script>
+    $("#breadcrumbText").html("Data / <b>SQL Query</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>SQL Query</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.Label("Query", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextArea("Query", new { @class = "form-control", id = "query", rows = "5" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="button" onclick="query()" class="btn btn-secondary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @using (Html.BeginForm("ExportToPDF", "Data", FormMethod.Post, new { id = "downloadForm" }))
+                    {
+                        @Html.Hidden("html", null, new { id = "html" });
+                        <button onclick="exportToPDF()">Export</button>
+                    }
+                    <div class="sk-spinner sk-spinner-wave" id="spinner" style="display:none">
+                        <div class="sk-rect1"></div>
+                        <div class="sk-rect2"></div>
+                        <div class="sk-rect3"></div>
+                        <div class="sk-rect4"></div>
+                        <div class="sk-rect5"></div>
+                    </div>
+                    <div id="queryResults" class="table-responsive">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        var searchUrl = '@Url.Action("Query", "Data")';
+        var exportUrl = '@Url.Action("ExportToPDF", "Data")';
+
+        function query() {
+
+            var formData = {
+                'query': $('#query').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: searchUrl,
+                beforeSend: showSpinner(),
+                data: formData,
+                success: function (data) {
+                    $("#queryResults").html(data);
+                    hideSpinner();
+                },
+                error: function () {
+                    alert('Error');
+                    hideSpinner();
+                }
+            });
+        }
+
+        function exportToPDF() {
+            $('#html').val($('#queryResults').html());
+            document.getElementById("downloadForm").submit();
+            
+        }
+
+        function showSpinner() {
+            $('#spinner').show();
+        }
+
+        function hideSpinner() {
+            $('#spinner').hide();
+        }
+    </script>
+}
+
+
+

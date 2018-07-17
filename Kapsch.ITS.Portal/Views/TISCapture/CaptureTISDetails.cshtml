@@ -1,0 +1,293 @@
+﻿@model IList<Kapsch.ITS.Gateway.Models.TISCapture.TISDataModel>
+
+<script>
+    $("#breadcrumbText").html("TIS / <b>Capture TIS Details</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Capture TIS Details</h5>
+                </div>
+                <div class="ibox-content">
+                    @using (Html.BeginForm("CaptureTISDetails", "TISCapture", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].ReferenceNumber, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].ReferenceNumber)
+                                    @Html.ValidationMessageFor(model => model[0].ReferenceNumber, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleRegistrationNumber, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleRegistrationNumber)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleRegistrationNumber, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleMake, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleMake)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleMake, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleModelID, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleModelID)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleModelID, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleModel, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleModel)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleModel, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleTypeID, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleTypeID)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleTypeID, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleType, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleType)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleType, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleUsageID, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleUsageID)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleUsageID, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleColourID, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleColourID)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleColourID, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].LicenseExpireDate, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].LicenseExpireDate)
+                                    @Html.ValidationMessageFor(model => model[0].LicenseExpireDate, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].YearOfMake, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].YearOfMake)
+                                    @Html.ValidationMessageFor(model => model[0].YearOfMake, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerIDType, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerIDType)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerIDType, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerID, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerID)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerID, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerName, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerName)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerName, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].Surname, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].Surname)
+                                    @Html.ValidationMessageFor(model => model[0].Surname, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerInitials, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerInitials)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerInitials, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerGender, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerGender)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerGender, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].EmailAddress, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].EmailAddress)
+                                    @Html.ValidationMessageFor(model => model[0].EmailAddress, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerTelephone, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerTelephone)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerTelephone, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerPostal, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerPostal)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerPostal, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerPostalStreet, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerPostalStreet)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerPostalStreet, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerPostalSuburb, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerPostalSuburb)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerPostalSuburb, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerPostalTown, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerPostalTown)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerPostalTown, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].PostalCode, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].PostalCode)
+                                    @Html.ValidationMessageFor(model => model[0].PostalCode, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerPhysical, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerPhysical)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerPhysical, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerPhysicalStreet, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerPhysicalStreet)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerPhysicalStreet, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerPhysicalSuburb, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerPhysicalSuburb)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerPhysicalSuburb, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerPhysicalTown, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerPhysicalTown)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerPhysicalTown, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].PhysicalCode, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].PhysicalCode)
+                                    @Html.ValidationMessageFor(model => model[0].PhysicalCode, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerCellphone, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerCellphone)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerCellphone, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].VehicleColour, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].VehicleColour)
+                                    @Html.ValidationMessageFor(model => model[0].VehicleColour, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].ClearanceCertificateNumber, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].ClearanceCertificateNumber)
+                                    @Html.ValidationMessageFor(model => model[0].ClearanceCertificateNumber, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].DateOfOwnership, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].DateOfOwnership)
+                                    @Html.ValidationMessageFor(model => model[0].DateOfOwnership, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].ImportFileName, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].ImportFileName)
+                                    @Html.ValidationMessageFor(model => model[0].ImportFileName, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].NatureOfOwnership, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].NatureOfOwnership)
+                                    @Html.ValidationMessageFor(model => model[0].NatureOfOwnership, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].OwnerCompany, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].OwnerCompany)
+                                    @Html.ValidationMessageFor(model => model[0].OwnerCompany, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model[0].ProxyIndicator, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-4">
+                                    @Html.EditorFor(model => model[0].ProxyIndicator)
+                                    @Html.ValidationMessageFor(model => model[0].ProxyIndicator, null, new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    @Html.ActionLink("Cancel", "TISCaptureList", "TISCapture", null, new { @class = "btn btn-white" })
+                                    <input type="submit" value="Save Changes" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

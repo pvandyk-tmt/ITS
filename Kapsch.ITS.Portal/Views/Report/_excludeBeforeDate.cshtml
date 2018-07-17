@@ -1,0 +1,16 @@
+﻿<div class="form-group">
+    <h5>Exclude Before</h5>
+    <div id="excludeBeforeDate" class="input-group date">
+        <input type="text" id="excludeBeforeDate_" class="form-control" placeholder="Choose Date">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+    </div>
+</div>
+
+<script src="~/Content/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">   
+    $('#excludeBeforeDate').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: "dd/mm/yyyy"
+    });
+</script>

@@ -1,0 +1,143 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+namespace Kapsch.ITS.Types
+{
+	<# 
+		//Lets edit the xml document to include the relevant data items
+		var xmlString  = "<root>"+
+							  "<Table name=\"GlobalProperties\">"+
+								"<column name=\"ClassName\">TISType</column>"+
+								"<column name=\"OracleType\">ITS.NATIS_VEHICLE_DETAIL_TYPE</column>"+
+								"<column name=\"OracleTableType\">ITS.TABLE_NATIS_VEH_DETAIL_TYPE</column>"+
+							  "</Table>"+
+								"<Table name=\"PropertyList\">"+
+								
+								"<column name=\"REFERENCE_NUMBER\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_REGISTRATION_NUMBER\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_MAKE_ID\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_MAKE\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_MODEL_ID\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_MODEL\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_TYPE_ID\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_TYPE\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_USAGE_ID\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_COLOUR_ID\" type=\"string\"/>"+
+								"<column name=\"YEAR_OF_MAKE\" type=\"string\"/>"+
+								"<column name=\"LICENSE_EXPIRE_DATE\" type=\"DateTime?\"/>"+
+								"<column name=\"CLEARENCE_CERT_NO\" type=\"string\"/>"+
+								"<column name=\"OWNER_ID\" type=\"string\"/>"+
+								"<column name=\"OWNER_ID_TYPE\" type=\"string\"/>"+
+								"<column name=\"OWNER_NAME\" type=\"string\"/>"+
+								"<column name=\"OWNER_INIT\" type=\"string\"/>"+
+								"<column name=\"OWNER_SURNAME\" type=\"string\"/>"+
+								"<column name=\"OWNER_GENDER\" type=\"string\"/>"+
+								"<column name=\"OWNER_POSTAL\" type=\"string\"/>"+
+								"<column name=\"OWNER_POSTAL_STREET\" type=\"string\"/>"+
+								"<column name=\"OWNER_POSTAL_SUBURB\" type=\"string\"/>"+
+								"<column name=\"OWNER_POSTAL_TOWN\" type=\"string\"/>"+
+								"<column name=\"OWNER_POSTAL_CODE\" type=\"string\"/>"+
+								"<column name=\"OWNER_PHYS\" type=\"string\"/>"+
+								"<column name=\"OWNER_PHYS_STREET\" type=\"string\"/>"+
+								"<column name=\"OWNER_PHYS_SUBURB\" type=\"string\"/>"+
+								"<column name=\"OWNER_PHYS_TOWN\" type=\"string\"/>"+
+								"<column name=\"OWNER_PHYS_CODE\" type=\"string\"/>"+
+								"<column name=\"OWNER_TELEPHONE\" type=\"string\"/>"+
+								"<column name=\"OWNER_CELLPHONE\" type=\"string\"/>"+
+								"<column name=\"OWNER_COMPANY\" type=\"string\"/>"+
+								"<column name=\"DATE_OF_OWNERSHIP\" type=\"DateTime?\"/>"+
+								"<column name=\"IMPORT_FILE_NAME\" type=\"string\"/>"+
+								"<column name=\"NATURE_OF_OWNERSHIP\" type=\"string\"/>"+
+								"<column name=\"PROXY_INDICATOR\" type=\"string\"/>"+
+								"<column name=\"EMAIL_ADDRESS\" type=\"string\"/>"+
+							  "</Table>"+
+							"</root>";
+		var doc = new System.Xml.XmlDocument();
+		doc.LoadXml(xmlString);
+		var ClassName = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='ClassName']")[0].InnerText;
+		var OracleType = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='OracleType']")[0].InnerText;
+		var OracleTableType = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='OracleTableType']")[0].InnerText;
+		var propertyNodes = doc.SelectNodes("//Table[@name='PropertyList']/column");
+	 #>
+	
+	//using Oracle.DataAccess.Client;
+	using Oracle.DataAccess.Types;
+	using System;
+
+	public class <#=  ClassName#> : Oracle.DataAccess.Types.INullable, Oracle.DataAccess.Types.IOracleCustomType
+	{   
+  
+		private readonly bool isNull = false;
+
+		bool INullable.IsNull
+		{
+			get
+			{
+				return this.isNull;
+			}
+		}
+
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+			{
+		 #>
+		 
+		
+		[Oracle.DataAccess.Types.OracleObjectMappingAttribute("<#= node.Attributes["name"].Value #>")]
+		public <#= node.Attributes["type"].Value #> <#= node.Attributes["name"].Value #> {get;set;}
+		
+		<# }
+		  #>
+		  public void FromCustomObject(Oracle.DataAccess.Client.OracleConnection con, System.IntPtr pUdt)
+		{
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+			{
+		 #>
+			OracleUdt.SetValue(con, pUdt, "<#= node.Attributes["name"].Value #>", <#= node.Attributes["name"].Value #>);
+		 <# }
+		  #>
+		  }
+	 
+	 public void ToCustomObject(Oracle.DataAccess.Client.OracleConnection con, System.IntPtr pUdt)
+		{
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+			{
+		 #>
+			<#= node.Attributes["name"].Value #> = (<#= node.Attributes["type"].Value #>)OracleUdt.GetValue(con, pUdt, "<#= node.Attributes["name"].Value #>");
+		 <# }
+		  #>
+		  }
+	}
+
+	[Oracle.DataAccess.Types.OracleCustomTypeMappingAttribute("<#=  OracleType#>")]
+	public class <#=  ClassName#>Factory : Oracle.DataAccess.Types.IOracleCustomTypeFactory
+	{
+
+		public virtual Oracle.DataAccess.Types.IOracleCustomType CreateObject()
+		{
+			return new <#=  ClassName#>();
+		}
+	}
+
+	[Oracle.DataAccess.Types.OracleCustomTypeMappingAttribute("<#=  OracleTableType#>")]
+	public class <#=  ClassName#>ArrayFactory : Oracle.DataAccess.Types.IOracleArrayTypeFactory
+	{
+
+		public System.Array CreateArray(int numElems)
+		{
+			return new <#=  ClassName#>[numElems];
+		}
+
+		public System.Array CreateStatusArray(int numElems)
+		{
+			return null;
+		}
+	}
+}

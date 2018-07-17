@@ -1,0 +1,68 @@
+﻿<Controls:MetroWindow x:Class="iTask.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChartEx"
+        xmlns:local="clr-namespace:iTask"
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800"
+                      d:DesignHeight="300" d:DesignWidth="659" Loaded="ModuleWindow_Loaded">
+    <Grid x:Name="GridLayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="66"/>
+        </Grid.RowDefinitions>
+
+        <metroChart:StackedBarChart
+               x:Name="MainChart"
+                ChartTitle="Pending Tasks"                                
+                ChartSubTitle=""
+                Palette="{DynamicResource MonoChrome}"
+                FontSize="14"
+                IsRowColumnSwitched="True"
+                ChartTitleVisibility="Visible"
+                ChartLegendVisibility="Visible"
+                Foreground="Black" 
+                Background="WhiteSmoke"
+                Grid.Row="0"
+            MouseDown="MainChart_OnMouseDown"
+            MouseDoubleClick="ChartSeries_OnMouseDoubleClick"
+            >
+            <metroChart:StackedBarChart.Series>
+                <metroChart:ChartSeries
+                    x:Name ="ChartSeries1"
+                        SeriesTitle="OK"
+                        DisplayMember="Category"
+                        ValueMember="Number"/>
+
+                <metroChart:ChartSeries
+                    x:Name ="ChartSeries2"
+                        SeriesTitle="Warning"
+                        DisplayMember="Category"
+                        ValueMember="Number" MouseDoubleClick="ChartSeries_OnMouseDoubleClick"/>
+
+                <metroChart:ChartSeries
+                    x:Name ="ChartSeries3"
+                        SeriesTitle="Critical"
+                        DisplayMember="Category"
+                        ValueMember="Number"
+                       />
+
+            </metroChart:StackedBarChart.Series>
+        </metroChart:StackedBarChart>
+        <!--<Image Style="{DynamicResource HomeModuleImageStyle}" Height="auto" Name="image1" Stretch="UniformToFill" Width="auto">
+            
+        </Image>-->
+
+
+        <!--<StackPanel Grid.Row="1" Background="{DynamicResource ModuleBrush}" Width="Auto">
+            <Label Style="{DynamicResource CopyrightLabelStyle}" MinWidth="100" Width="Auto" FontSize="12" Foreground="{DynamicResource FooterBrush}" Margin="38,15,38,2" VerticalAlignment="Top" HorizontalAlignment="Left" Name="labelCopyright" Padding="1" />
+            <Label Style="{DynamicResource HomeModuleFooterLabelStyle}" MinWidth="150" Width="Auto" FontSize="12" Foreground="{DynamicResource FooterBrush}" Margin="38,0,38,2" HorizontalAlignment="Left" Name="labelFooter" Padding="0" />
+        </StackPanel>-->
+    </Grid>
+</Controls:MetroWindow>

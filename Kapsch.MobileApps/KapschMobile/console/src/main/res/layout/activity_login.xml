@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/rootView"
+    tools:context="za.co.kapsch.console.LoginActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/backgroundLinearLayout">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/outerLinearLayout">
+
+            <TextView
+                android:id="@+id/txtusername"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/username"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/usernameEditText"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/password"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/paswordEditText"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:id="@+id/button"
+                android:onClick="login"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
+
+    <!--android:text="csenekal@tmtservices.co.za"-->
+    <!--android:text="cs@2017"-->
+
+    <!--"CSenekal36" Zambia laptop-->
+    <!--"eP|Y3}}FFu"-->
+
+    <!--android:text="CSenekal77"-->
+    <!--android:text="12345678"-->
+
+    <!--android:text="Super User"-->
+    <!--android:text="Q!w2e3r4t5"-->
+
+    <!--android:text="ZDemo26"-->
+    <!--android:text="12345678"-->

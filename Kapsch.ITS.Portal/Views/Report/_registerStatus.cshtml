@@ -1,0 +1,25 @@
+﻿@{
+    var enums = Enum.GetValues(typeof(Kapsch.ITS.Gateway.Models.Enums.RegisterStatus));
+}
+
+<div class="form-group">
+    <h5>Register Status</h5>
+    <select id="registerStatus" class="form-control input-sm">
+        <option value="">Any Status</option>
+        @foreach (var en in enums)
+        {
+            var en_ = ((Kapsch.ITS.Gateway.Models.Enums.RegisterStatus)en);
+            
+            if (((Kapsch.ITS.Gateway.Models.Enums.RegisterStatus)en) == Kapsch.ITS.Gateway.Models.Enums.RegisterStatus.PrintNotice)
+            {
+                <option value="@((int)en_)" selected>@en.ToString()</option>
+            }
+            else
+            {
+                <option value="@((int)en_)">@en.ToString()</option>
+            }
+        }
+       
+    </select>
+    <div class="hr-line-dashed"></div>
+</div>

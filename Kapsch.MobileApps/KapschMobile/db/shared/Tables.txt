@@ -1,0 +1,19 @@
+DROP TABLE IF EXISTS UserActivityLog; 
+
+CREATE TABLE UserActivityLog(
+	ID					INTEGER PRIMARY KEY,
+	CredentialID		INTEGER,
+	DeviceID			TEXT,
+	CreatedTimestamp	DATE,
+	Category			TEXT,
+	ActionDescription	TEXT,
+	Uploaded			BOOLEAN DEFAULT('FALSE'));
+	
+DROP TABLE IF EXISTS ConfigItem;
+
+CREATE TABLE ConfigItem(
+	ID			INTEGER PRIMARY KEY,
+	Name		TEXT UNIQUE,
+	Value		TEXT);
+
+

@@ -1,0 +1,74 @@
+﻿@model Kapsch.Core.Gateway.Models.Authenticate.CredentialModel
+
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+    
+    var buildNumber = System.Configuration.ConfigurationManager.AppSettings["BuildNumber"];
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IMS</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+
+    <style>
+        .validation-summary-errors ul, .validation-summary-errors li { 
+            list-style: none;
+            display: inline;
+            padding: 0;
+            color: red;
+            text-align:left
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <img alt="image" src="~/Images/IMS-logo-180x66.png" style="margin-top: 100px; padding-bottom: 20px;" />
+            </div>
+            <h3>Welcome to iSolution</h3>
+            
+            <p>Please provide your login credentials to log in.</p>
+           @using (Html.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { }))
+           {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)              
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.UserName, new {  @class = "form-control", placeholder = "Username", required = "" })
+                    @Html.ValidationMessageFor(model => model.UserName)
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.Password, new { type = "password", @class = "form-control", placeholder = "Password", required = "" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                <a href="@Url.Action("ResetPassword", "Account")"><small>Forgot password?</small></a>
+            }
+
+            @*<form class="m-t" role="form" action="#">
+                
+            </form>*@
+            <p class="m-t"> <small>Intelligent Mobility Solutions &copy; 2017 <br/><strong>Build Number</strong> @buildNumber</small> </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
+

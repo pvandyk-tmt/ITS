@@ -1,0 +1,83 @@
+<resources>
+    <string name="about">About</string>
+
+    <string name="app_name">iVehicleTest</string>
+
+    <string name="question">question</string>
+    <string name="comment">Comment</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="finish">Finish</string>
+    <string name="ok">OK</string>
+
+    <string name="other">Other</string>
+    <string name="cancellation_reason">Cancellation Reason</string>
+    <string name="please_provide_a_reason">Please provide a reason</string>
+    <string name="please_provide_a_valid_reason">Please provide a valid reason</string>
+
+    <string name="downloading_configuration_info">downloading configuration info</string>
+    <string name="downloading_configuration_info_failed">downloading configuration info failed</string>
+    <string name="configuration_info_downloaded">configuration info downloaded</string>
+
+    <string name="uploading_user_activity_log">uploading user activity log</string>
+    <string name="uploading_user_activity_log_failed">uploading user activity log failed</string>
+    <string name="uploading_user_activity_log_successful">uploading user activity log successful</string>
+
+    <string name="downloading_vehicle_lookup">downloading vehicle lookup</string>
+    <string name="downloading_vehicle_lookup_failed">downloading vehicle lookup failed</string>
+    <string name="vehicle_lookup_downloaded">vehilce lookup downloaded</string>
+
+    <string name="uploading_inspection_results">uploading inspection results</string>
+    <string name="uploading_inspection_failed">uploading inspection results failed</string>
+    <string name="uploading_inspection_successful">uploading inspection results successful</string>
+
+    <string name="data_service_title">Data Updates</string>
+    <string name="query_updates">QUERY UPDATES</string>
+    <string name="synchronisation_required">Synchronization required\r\nPlease press \'UPDATE\' to synchronise.</string>
+    <string name="update">UPDATE</string>
+    <string name="data_is_up_to_date">Data is up to date.</string>
+
+    <string name="vehicle_inspection">VEHICLE INSPECTION</string>
+    <string name="booking_reference_number">Booking Reference Number</string>
+    <string name="reference_no">Reference No:</string>
+    <string name="scan_barcode">Scan Barcode</string>
+    <string name="query">Query</string>
+    <string name="printer_blank_line">\u0020</string>
+    <string name="date">Date:</string>
+    <string name="is_not_a_valid_value">is not a valid value</string>
+    <string name="double_value_entries_do_not_match">Double entry values do not match</string>
+    <string name="value_required">Value required</string>
+    <string name="comment_required">Comment required</string>
+    <string name="site_name">Site Name:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="please_enter_a_booking_reference">Please enter a booking reference</string>
+
+    <string name="officer_signature">officer signature</string>
+    <string name="officer_official_details">OFFICER/OFFICIAL DETAILS</string>
+    <string name="officer_official_name">Officer/Official Name</string>
+    <string name="officer_official_code">Officer/Official Code</string>
+
+    <string name="inspection_terminated">Inspection Terminated: %1$s.</string>
+    <string name="value_for_does_not_match_reference_value">Value for %1$s does not match reference value</string>
+    <string name="captured_value_matches_previous_value">Captured value for %s matches previous value.</string>
+    <string name="failing_this_question_will_terminate_the_inspection">Failing this question will terminate the inspection.</string>
+    <string name="are_you_sure_you_want_to_cancel_the_test">Are you sure you want to cancel the test?</string>
+    <string name="did_the_slip_print_successfully">Did the slip print successfully</string>
+    <string name="capture_vehicle_photos">Capture vehicle photos</string>
+    <string name="maximum_of_three_images_can_be_captured">Maximum of three images can be captured</string>
+
+    <string name="delete_evidence_failed">delete evidence failed</string>
+    <string name="uploading_evidence_successfull">uploading evidence successfull</string>
+    <string name="uploading_evidence_failed">uploading evidence failed</string>
+    <string name="uploading_evidence">uploading evidence</string>
+    <string name="data_service_updating_evidence_message">Updating evidence file...</string>
+    <string name="question_list_is_empty">Question list is empty</string>
+    <string name="pass">Pass</string>
+    <string name="fail">Fail</string>
+    <string name="final_result">Final Result</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

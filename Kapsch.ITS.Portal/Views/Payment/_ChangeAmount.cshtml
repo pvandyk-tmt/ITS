@@ -1,0 +1,83 @@
+﻿@model Kapsch.ITS.Gateway.Models.Fine.ChangeAmountModel
+@{
+    var reasons = ViewBag.Reasons as IList<string>;
+    var accountTypeSelectionList = 
+        new[] 
+        { 
+            Kapsch.ITS.Gateway.Models.Enums.AccountTransactionType.Reduction, 
+            Kapsch.ITS.Gateway.Models.Enums.AccountTransactionType.Withdrawn 
+        }.Select(f => 
+        
+            new SelectListItem
+            {
+                Selected = (f == Kapsch.ITS.Gateway.Models.Enums.AccountTransactionType.Reduction),
+                Text = f.ToString(),
+                Value = ((int)f).ToString()
+            }
+        ).ToList();
+}
+
+@using (Html.BeginForm("ChangeAmount", "Payment", FormMethod.Post, new { id = "changeAmountForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+        @Html.Hidden("UserName", User.Identity.Name)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Password, new { type = "password", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReferenceNumber, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.ReferenceNumber, new { @class = "form-control", @readonly = "readonly"})
+                @Html.ValidationMessageFor(model => model.ReferenceNumber, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CurrentAmount, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.CurrentAmount, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NewAmount, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.NewAmount, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NewAmount, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AccountTransactionType, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(model => model.AccountTransactionType, accountTypeSelectionList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AccountTransactionType, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApplicantReason, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.ApplicantReason, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ApplicantReason, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ApprovedBy, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.ApprovedBy, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ApprovedBy, null, new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+        <input type="submit" value="Save Changes" class="btn btn-primary" />
+    </div>
+}
+

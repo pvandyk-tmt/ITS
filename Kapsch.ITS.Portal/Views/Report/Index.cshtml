@@ -1,0 +1,441 @@
+﻿@model Kapsch.Core.Reports.Models.ReportDefinitionModel
+@{
+    var user = User as Kapsch.ITS.Portal.Models.AuthenticatedUser;
+}
+
+<script>
+    $("#breadcrumbText").html("Reports / @Model.CategoryName / @Model.SubCategoryName / <b>@Model.ReportName</b>");
+</script>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                @*<div class="ibox-title">
+                    <h5>@Model.ReportName</h5>
+                    <div class="ibox-tools">
+
+                    </div>
+                </div>*@
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="ibox-tools">
+                                <a href="#">
+                                    <i class="fa fa-bars" id="collapse"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 open" id="sidebar">
+                            <form id="filterForm" class="form-group-sm">
+                                <div class="ibox float-e-margins">
+                                    <h5>Filter</h5>
+
+
+                                    @foreach (var parameterType in Model.ParameterTypes)
+                                    {
+                                        switch (parameterType)
+                                        {
+                                            case Kapsch.Core.Reports.Enums.ParameterType.User:
+                                                @Html.Partial("_user")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.PaymentMethod:
+                                            @Html.Partial("_paymentMethod")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.DistrictOfficer:
+                                            @Html.Partial("_districtOfficer")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.Officer:
+                                            @Html.Partial("_officer")
+
+                                                break;
+                                            case Kapsch.Core.Reports.Enums.ParameterType.StartDate:
+                                            @Html.Partial("_startDate")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.EndDate:
+                                            @Html.Partial("_endDate")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.PaymentDateFilter:
+                                            @Html.Partial("_paymentDateFilter")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.DistrictCourt:
+                                            @Html.Partial("_districtCourt")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.DistrictCourtOfficer:
+                                            @Html.Partial("_districtCourtOfficer")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.DistrictCourtUser:
+                                            @Html.Partial("_districtCourtUser")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.District:
+                                            @Html.Partial("_district")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.Period:
+                                            @Html.Partial("_period")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.RegisterStatus:
+                                            @Html.Partial("_registerStatus")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.InfringementType:
+                                            @Html.Partial("_infringementType")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.InfringementValue:
+                                            @Html.Partial("_infringementValue")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.DistrictMobileDeviceOfficer:
+                                            @Html.Partial("_districtDeviceOfficer")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.MobileDeviceActivityCategory:
+                                            @Html.Partial("_mobileDeviceActivityCategory")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.ExcludeBeforeDate:
+                                            @Html.Partial("_excludeBeforeDate")
+                                                break;
+                                                
+                                            case Kapsch.Core.Reports.Enums.ParameterType.VehicleTestBookingReference:
+                                            @Html.Partial("_vehicleTestBookingReference")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.DistrictSite:
+                                            @Html.Partial("_districtSite")
+                                                break;
+
+                                            case Kapsch.Core.Reports.Enums.ParameterType.TestCategory:
+                                            @Html.Partial("_testCategory")
+                                                break;
+
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    <div class="btn-group" style="width:100%">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%">
+                                            Export &nbsp;<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            @foreach (var exportType in Model.ExportTypes)
+                                            {
+                                                if (exportType == Kapsch.Core.Reports.Enums.ExportType.PDF)
+                                                {
+                                                    <li><a href="#" onclick="exportToPDF()">Pdf Format</a></li>
+                                                }
+                                                else if (exportType == Kapsch.Core.Reports.Enums.ExportType.Excel)
+                                                {
+                                                    <li><a href="#" onclick="exportToExcel()">Excel Format</a></li>
+                                                }
+                                                else if (exportType == Kapsch.Core.Reports.Enums.ExportType.CSV)
+                                                {
+                                                    <li><a href="#" onclick="exportToCSV()">CSV Format</a></li>
+                                                }
+
+                                            }
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="content" class="col-md-10">
+                            <div class="sk-spinner sk-spinner-wave" id="spinner" style="display:none">
+                                <div class="sk-rect1"></div>
+                                <div class="sk-rect2"></div>
+                                <div class="sk-rect3"></div>
+                                <div class="sk-rect4"></div>
+                                <div class="sk-rect5"></div>
+                            </div>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe id="reportViewer" class="embed-responsive-item" src="" allowfullscreen onload="reportLoaded()"></iframe>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .scrollable-menu {
+        height: auto;
+        max-height: 300px;
+        overflow-x: hidden;
+    }
+</style>
+
+@section styles {
+    <style>
+        .ui-tabs .ui-tabs-hide {
+            position: absolute;
+            left: -10000px;
+        }
+    </style>
+
+}
+
+@section scripts {
+
+    <section class="scripts">
+
+        <script type="text/javascript">
+
+    var sessionToken = "@user.SessionToken";
+
+    function reportLoaded() {
+        hideSpinner();
+
+        $("body").addClass('mini-navbar');
+        SmoothlyMenu();
+    }
+
+    $('#collapse').click(function () {
+        if ($('#sidebar').hasClass('open')) {
+            $('#sidebar').removeClass('col-md-2');
+            $('#sidebar').removeClass('open');
+            $('#sidebar').addClass('hidden');
+            $('#content').addClass('col-md-12');
+            $('#content').removeClass('col-md-10');
+        }
+        else {
+            $('#sidebar').addClass('col-md-2');
+            $('#sidebar').addClass('open');
+            $('#sidebar').removeClass('hidden');
+            $('#content').removeClass('col-md-12');
+            $('#content').addClass('col-md-10');
+        }
+
+        $(window).trigger("resize");
+    });
+
+    function exportToPDF() {
+        viewReport(2);
+    }
+
+    function exportToExcel() {
+        viewReport(3);
+    }
+
+    function exportToCSV() {
+        viewReport(4);
+    }
+
+    function showSpinner() {
+        $('#spinner').show();
+    }
+
+    function hideSpinner() {
+        $('#spinner').hide();
+    }
+
+    function viewReport(exportType) {
+
+        var url = '@System.Configuration.ConfigurationManager.AppSettings["CoreGatewayEndpoint"]' + 'api/Report/Export?sessionToken=' + sessionToken + '&reportName=' + '@Model.ReportName' + '&exportType=' + exportType;
+
+        @foreach (var parameterType in Model.ParameterTypes)
+        {
+            switch (parameterType)
+            {
+                case Kapsch.Core.Reports.Enums.ParameterType.DistrictOfficer:
+                    <text>if ($("#districtID").val() == '') {</text>
+                    <text>    $("#districtID option").each(function () {</text>
+                    <text>        url += '&parameters=districtID=' + $(this).val();</text>
+                    <text> });</text>
+                    <text> } else {</text>
+                    <text>  url += '&parameters=districtID=' + $('#districtID').val();</text>
+                    <text> }</text>
+                    <text>url += '&parameters=officerID=' + $('#officerID').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.Officer:
+                    <text>url += '&parameters=officerID=' + $('#officerID').val();</text>
+
+                    break;
+                case Kapsch.Core.Reports.Enums.ParameterType.StartDate:
+                    <text>if ($('#fromDate_').val() == '') {</text>
+                    <text>  alert('Please complete the Search Criteria.');</text>
+                    <text>  return;</text>
+                    <text> }</text>
+
+                    <text>url += '&parameters=startDate=' + $('#fromDate_').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.EndDate:
+                    <text>if ($('#toDate_').val() == '') {</text>
+                    <text>  alert('Please complete the Search Criteria.');</text>
+                    <text>  return;</text>
+                    <text> }</text>
+
+                    <text>url += '&parameters=endDate=' + $('#toDate_').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.PaymentMethod:
+                    <text>url += '&parameters=paymentMethod=' + $('#paymentMethod').val();</text>
+
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.PaymentDateFilter:
+                    <text>url += '&parameters=paymentDateFilter=' + $('#paymentDateFilter').val();</text>
+
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.DistrictCourtOfficer:
+                    <text>url += '&parameters=districtID=' + $('#districtID').val();</text>
+                    <text>url += '&parameters=courtID=' + $('#courtID').val();</text>
+                    <text>url += '&parameters=officerID=' + $('#officerID').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.DistrictCourtUser:
+                    <text>if ($('#districtID').val() == '') {</text>
+                    <text>  alert('Please complete the Search Criteria.');</text>
+                    <text>  return;</text>
+                    <text> }</text>
+                    <text>url += '&parameters=districtID=' + $('#districtID').val();</text>
+                    <text>url += '&parameters=courtID=' + $('#courtID').val();</text>
+                    <text>url += '&parameters=userID=' + $('#userID').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.District:
+
+                    <text>if ($("#districtID").val() == '') {</text>
+                    <text>    $("#districtID option").each(function () {</text>
+                    <text>        url += '&parameters=districtID=' + $(this).val();</text>
+                    <text> });</text>
+                    <text> } else {</text>
+                    <text>  url += '&parameters=districtID=' + $('#districtID').val();</text>
+                    <text> }</text>
+
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.Period:
+                    <text>url += '&parameters=periodType=' + $('#periodType').val();</text>
+                    <text>if ($('#periodType').val() == 'dateRange') {</text>
+                    <text>  if ($('#fromDate_').val() == '') {</text>
+                    <text>      alert('Please complete the Search Criteria.');</text>
+                    <text>      return;</text>
+                    <text> }</text>
+                    <text>  url += '&parameters=startDate=' + $('#fromDate_').val();</text>
+                    <text>  if ($('#toDate_').val() == '') {</text>
+                    <text>      alert('Please complete the Search Criteria.');</text>
+                    <text>      return;</text>
+                    <text> }</text>
+                    <text>  url += '&parameters=endDate=' + $('#toDate_').val();</text>
+                    <text> }</text>
+
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.RegisterStatus:
+                    <text>url += '&parameters=registerStatus=' + $('#registerStatus').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.InfringementType:
+                    <text>url += '&parameters=infringementType=' + $('#infringementType').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.InfringementValue:
+                    <text>url += '&parameters=infringementValue=' + $('#infringementValue').val();</text>
+
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.DistrictMobileDeviceOfficer:
+                    <text>if ($("#districtID").val() == '') {</text>
+                    <text>    $("#districtID option").each(function () {</text>
+                    <text>        url += '&parameters=districtID=' + $(this).val();</text>
+                    <text> });</text>
+                    <text> } else {</text>
+                    <text>  url += '&parameters=districtID=' + $('#districtID').val();</text>
+                    <text> }</text>
+
+
+                    <text>url += '&parameters=mobileDeviceID=' + $('#mobileDeviceID').val();</text>
+                    <text>url += '&parameters=officerID=' + $('#officerID').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.MobileDeviceActivityCategory:
+                    <text>url += '&parameters=mobileDeviceActivityCategory=' + $('#mobileDeviceActivityCategory').val();</text>
+
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.ExcludeBeforeDate:
+                    <text>url += '&parameters=excludeBeforeDate=' + $('#excludeBeforeDate_').val();</text>
+                    break;
+
+
+                case Kapsch.Core.Reports.Enums.ParameterType.VehicleTestBookingReference:
+                    <text>if ($('#vehicleTestBookingReference').val() == '') {</text>
+                    <text>  alert('Please complete the Search Criteria.');</text>
+                    <text>  return;</text>
+                    <text> }</text>
+                    <text>url += '&parameters=vehicleTestBookingReference=' + $('#vehicleTestBookingReference').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.DistrictSite:
+                    <text>if ($("#districtID").val() == '') {</text>
+                    <text>    $("#districtID option").each(function () {</text>
+                    <text>        url += '&parameters=districtID=' + $(this).val();</text>
+                    <text> });</text>
+                    <text> } else {</text>
+                    <text>  url += '&parameters=districtID=' + $('#districtID').val();</text>
+                    <text> }</text>
+                    <text>url += '&parameters=siteID=' + $('#siteID').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.User:
+                    <text>url += '&parameters=userID=' + $('#userID').val();</text>
+                    break;
+
+                case Kapsch.Core.Reports.Enums.ParameterType.TestCategory:
+                    <text>url += '&parameters=testCategoryID=' + $('#testCategoryID').val();</text>
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        if (exportType == 2) {
+            showSpinner();
+        }
+
+        $('#reportViewer').attr('src', url);
+
+        $('#sidebar').removeClass('col-md-2');
+        $('#sidebar').removeClass('open');
+        $('#sidebar').addClass('hidden');
+        $('#content').addClass('col-md-12');
+        $('#content').removeClass('col-md-10');
+   
+    $(window).trigger("resize");
+
+
+    }
+
+
+
+</script>
+    </section>
+}
+
+
+
+

@@ -1,0 +1,204 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+namespace TMT.Build.OracleTableTypeClasses
+{
+	<# 
+		//Lets edit the xml document to include the relevant data items
+	    var xmlString  = "<root>"+
+							  "<Table name=\"GlobalProperties\">"+
+								"<column name=\"ClassName\">HandWrittenCapture</column>"+
+								"<column name=\"OracleType\">ITS.TYPE_HANDWRITTEN_CAPTURE</column>"+
+								"<column name=\"OracleTableType\">ITS.TABLE_TYPE_HANDWRITTEN_CAPTURE</column>"+
+							  "</Table>"+
+							    "<Table name=\"PropertyList\">"+							     
+								"<column name=\"TICKET_NUMBER\" type=\"string\"/>"+
+								"<column name=\"PERSON_INFO_ID\" type=\"long?\"/>"+
+								"<column name=\"TITLE\" type=\"string\"/>"+
+								"<column name=\"FIRST_NAME\" type=\"string\"/>"+
+								"<column name=\"MIDDLE_NAMES\" type=\"string\"/>"+
+								"<column name=\"SURNAME\" type=\"string\"/>"+
+								"<column name=\"INITIALS\" type=\"string\"/>"+
+								"<column name=\"IDENTIFICATION_NUMBER\" type=\"string\"/>"+
+								"<column name=\"IDENTIFICATION_TYPE_ID\" type=\"long?\"/>"+
+								"<column name=\"IDENTIFICATION_COUNTRY_ID\" type=\"long?\"/>"+
+								"<column name=\"CITIZEN_TYPE_ID\" type=\"long?\"/>"+ 
+								"<column name=\"GENDER\" type=\"string\"/>"+
+								"<column name=\"AGE\" type=\"int?\"/>"+
+								"<column name=\"BIRTHDATE\" type=\"DateTime?\"/>"+
+								"<column name=\"OCCUPATION\" type=\"string\"/>"+
+								"<column name=\"TELEPHONE\" type=\"string\"/>"+
+								"<column name=\"MOBILE_NUMBER\" type=\"string\"/>"+
+								"<column name=\"FAX\" type=\"string\"/>"+
+								"<column name=\"EMAIL\" type=\"string\"/>"+
+								"<column name=\"COMPANY\" type=\"string\"/>"+
+								"<column name=\"BUSINESS_TELEPHONE\" type=\"string\"/>"+
+								"<column name=\"PHYSICAL_ADDRESS_INFO_ID\" type=\"long?\"/>"+
+								"<column name=\"PHYSICAL_ADDRESS_TYPE_ID\" type=\"long?\"/>"+      
+								"<column name=\"PHYSICAL_STREET_1\" type=\"string\"/>"+
+								"<column name=\"PHYSICAL_STREET_2\" type=\"string\"/>"+
+								"<column name=\"PHYSICAL_SUBURB\" type=\"string\"/>"+
+								"<column name=\"PHYSICAL_TOWN\" type=\"string\"/>"+
+								"<column name=\"PHYSICAL_CODE\" type=\"string\"/>"+
+								"<column name=\"POSTAL_ADDRESS_INFO_ID\" type=\"long?\"/>"+
+								"<column name=\"POSTAL_ADDRESS_TYPE_ID\" type=\"long?\"/>"+     
+								"<column name=\"POSTAL_PO_BOX\" type=\"string\"/>"+
+								"<column name=\"POSTAL_STREET\" type=\"string\"/>"+
+								"<column name=\"POSTAL_SUBURB\" type=\"string\"/>"+
+								"<column name=\"POSTAL_TOWN\" type=\"string\"/>"+
+								"<column name=\"POSTAL_CODE\" type=\"string\"/>"+
+								"<column name=\"OFFENCE_LOCATION_STREET\" type=\"string\"/>"+   
+								"<column name=\"OFFENCE_LOCATION_SUBURB\" type=\"string\"/>"+
+								"<column name=\"OFFENCE_LOCATION_TOWN\" type=\"string\"/>"+
+								"<column name=\"OFFENCE_LOCATION_LATITUDE\" type=\"decimal?\"/>"+
+								"<column name=\"OFFENCE_LOCATION_LONGITUDE\" type=\"decimal?\"/>"+   
+								"<column name=\"VEHICLE_REGISTRATION_MAIN\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_REGISTRATION_NO_2\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_REGISTRATION_NO_3\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_MAKE_MAIN\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_MODEL_MAIN\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_TYPE_MAIN\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_LICENCE_EXPIRY_DATE\" type=\"DateTime?\"/>"+
+								"<column name=\"VEHICLE_COLOUR\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_REGISTER_NUMBER\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_ENGINE_NUMBER\" type=\"string\"/>"+
+								"<column name=\"VEHICLE_CHASSIS_NUMBER\" type=\"string\"/>"+
+								"<column name=\"GUARDIAN\" type=\"string\"/>"+
+								"<column name=\"DIRECTION\" type=\"string\"/>"+
+								"<column name=\"METER_NUMBER\" type=\"string\"/>"+
+								"<column name=\"CASE_NUMBER\" type=\"string\"/>"+
+								"<column name=\"CC_NUMBER\" type=\"string\"/>"+
+								"<column name=\"CHARGE_CODE_1\" type=\"string\"/>"+
+								"<column name=\"CHARGE_CODE_1_ID\" type=\"long?\"/>"+
+								"<column name=\"AMOUNT_1\" type=\"decimal?\"/>"+
+								"<column name=\"CHARGE_CODE_2\" type=\"string\"/>"+
+								"<column name=\"CHARGE_CODE_2_ID\" type=\"long?\"/>"+
+								"<column name=\"AMOUNT_2\" type=\"decimal?\"/>"+
+								"<column name=\"CHARGE_CODE_3\" type=\"string\"/>"+
+								"<column name=\"CHARGE_CODE_3_ID\" type=\"long?\"/>"+
+								"<column name=\"AMOUNT_3\" type=\"decimal?\"/>"+
+								"<column name=\"HAS_ALTERNATIVE_CHARGE\" type=\"long?\"/>"+   
+								"<column name=\"OFFENCE_DATE\" type=\"DateTime?\"/>"+    
+								"<column name=\"COURT_DATE\" type=\"DateTime?\"/>"+
+								"<column name=\"COURT_NAME\" type=\"string\"/>"+
+								"<column name=\"COURT_ROOM\" type=\"string\"/>"+
+								"<column name=\"DISTRICT_NAME\" type=\"string\"/>"+
+								"<column name=\"PAYMENT_PLACE\" type=\"string\"/>"+
+								"<column name=\"PAYMENT_DATE\" type=\"DateTime?\"/>"+
+								"<column name=\"OFFICER_CREDENTIAL_ID\" type=\"long?\"/>"+
+								"<column name=\"CAPTURED_DATE\" type=\"DateTime?\"/>"+
+								"<column name=\"CAPTURED_CREDENTIAL_ID\" type=\"long?\"/>"+
+								"<column name=\"LICENCE_CODE\" type=\"string\"/>"+
+								"<column name=\"LICENCE_TYPE\" type=\"string\"/>"+   
+								"<column name=\"DRIVER_LICENCE_CERTIFICATE_NO\" type=\"string\"/>"+    
+								"<column name=\"MODIFIED_DATE\" type=\"DateTime?\"/>"+
+								"<column name=\"MODIFIED_CREDENTIAL_ID\" type=\"long?\"/>"+
+								"<column name=\"SPEED\" type=\"long?\"/>"+
+								"<column name=\"MASS_PERCENTAGE\" type=\"decimal?\"/>"+
+								"<column name=\"IS_CANCELLED\" type=\"long?\"/>"+
+								"<column name=\"CANCEL_REASON\" type=\"string\"/>"+    
+								"<column name=\"SEND_TO_COURT_ROLE\" type=\"long?\"/>"+
+								"<column name=\"NOTES\" type=\"string\"/>"+
+								"<column name=\"APPLICATION_AND_VERSION\" type=\"string\"/>"+
+								"<column name=\"ISSUED_DATE\" type=\"DateTime?\"/>"+
+								"<column name=\"MACHINE_IDENTIFIER\" type=\"string\"/>"+
+								"<column name=\"CAMERA_HWID\" type=\"string\"/>"+
+								"<column name=\"EVENT_ID\" type=\"string\"/>"+
+								"<column name=\"INFRINGEMENT_LOCATION_CODE\" type=\"string\"/>"+
+								"<column name=\"EXTERNAL_TOKEN\" type=\"string\"/>"+
+								"<column name=\"EXTERNAL_REFERENCE\" type=\"string\"/>"+
+								"<column name=\"CHARGE_DESCRIPTION_1\" type=\"string\"/>"+
+								"<column name=\"CHARGE_DESCRIPTION_2\" type=\"string\"/>"+
+								"<column name=\"CHARGE_DESCRIPTION_3\" type=\"string\"/>"+
+
+							  "</Table>"+
+							"</root>";
+		var doc = new System.Xml.XmlDocument();
+		doc.LoadXml(xmlString);
+		var ClassName = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='ClassName']")[0].InnerText;
+        var OracleType = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='OracleType']")[0].InnerText;
+        var OracleTableType = doc.SelectNodes("//Table[@name='GlobalProperties']/column[@name='OracleTableType']")[0].InnerText;
+		var propertyNodes = doc.SelectNodes("//Table[@name='PropertyList']/column");
+	 #>
+    
+	//using Oracle.DataAccess.Client;
+    using Oracle.DataAccess.Types;
+    using System;
+
+    public class <#=  ClassName#> : Oracle.DataAccess.Types.INullable, Oracle.DataAccess.Types.IOracleCustomType
+    {   
+  
+        private readonly bool isNull = false;
+
+		bool INullable.IsNull
+        {
+            get
+            {
+                return this.isNull;
+            }
+        }
+
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+            {
+		 #>
+		 
+		
+        [Oracle.DataAccess.Types.OracleObjectMappingAttribute("<#= node.Attributes["name"].Value #>")]
+        public <#= node.Attributes["type"].Value #> <#= node.Attributes["name"].Value #> {get;set;}
+        
+		<# }
+		  #>
+          public void FromCustomObject(Oracle.DataAccess.Client.OracleConnection con, System.IntPtr pUdt)
+        {
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+            {
+		 #>
+            OracleUdt.SetValue(con, pUdt, "<#= node.Attributes["name"].Value #>", <#= node.Attributes["name"].Value #>);
+		 <# }
+		  #>
+		  }
+     
+	 public void ToCustomObject(Oracle.DataAccess.Client.OracleConnection con, System.IntPtr pUdt)
+        {
+		<# 
+			foreach (System.Xml.XmlNode node in propertyNodes)
+            {
+		 #>
+			<#= node.Attributes["name"].Value #> = (<#= node.Attributes["type"].Value #>)OracleUdt.GetValue(con, pUdt, "<#= node.Attributes["name"].Value #>");
+		 <# }
+		  #>
+		  }
+    }
+
+    [Oracle.DataAccess.Types.OracleCustomTypeMappingAttribute("<#=  OracleType#>")]
+    public class <#=  ClassName#>Factory : Oracle.DataAccess.Types.IOracleCustomTypeFactory
+    {
+
+        public virtual Oracle.DataAccess.Types.IOracleCustomType CreateObject()
+        {
+            return new <#=  ClassName#>();
+        }
+    }
+
+    [Oracle.DataAccess.Types.OracleCustomTypeMappingAttribute("<#=  OracleTableType#>")]
+    public class <#=  ClassName#>ArrayFactory : Oracle.DataAccess.Types.IOracleArrayTypeFactory
+    {
+
+        public System.Array CreateArray(int numElems)
+        {
+            return new <#=  ClassName#>[numElems];
+        }
+
+        public System.Array CreateStatusArray(int numElems)
+        {
+            return null;
+        }
+    }
+}

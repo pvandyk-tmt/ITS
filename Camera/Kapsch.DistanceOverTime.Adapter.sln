@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapsch.Camera.Translator", "Kapsch.Camera.Translator\Kapsch.Camera.Translator.csproj", "{5559DD7D-6383-4B11-AB07-699AD7011CD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapsch.Camera.Listener", "Kapsch.Camera.Listener\Kapsch.Camera.Listener.csproj", "{2FBFEAE0-0794-4AC1-B2C1-7C8A874FD6DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapsch.DistanceOverTime.Adapter", "Kapsch.DistanceOverTime.Adapter\Kapsch.DistanceOverTime.Adapter.csproj", "{90A49CE1-9FFF-4C19-8CAA-3300A9F82462}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapsch.Device.Listener", "Kapsch.Device.Listener\Kapsch.Device.Listener.csproj", "{7F4AA836-7A86-4170-B8E0-467CA49F08D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapsch.RTE.Gateway.Models", "..\Kapsch.RTE.Gateway.Models\Kapsch.RTE.Gateway.Models.csproj", "{706C34A1-8DDE-4703-BDCF-DCD85A9CBDAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kapsch.RTE.Gateway.Clients", "..\Kapsch.RTE.Gateway.Clients\Kapsch.RTE.Gateway.Clients.csproj", "{6338C0FE-3639-40BE-8FA7-3EB66B433DF2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5559DD7D-6383-4B11-AB07-699AD7011CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5559DD7D-6383-4B11-AB07-699AD7011CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5559DD7D-6383-4B11-AB07-699AD7011CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5559DD7D-6383-4B11-AB07-699AD7011CD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FBFEAE0-0794-4AC1-B2C1-7C8A874FD6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FBFEAE0-0794-4AC1-B2C1-7C8A874FD6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FBFEAE0-0794-4AC1-B2C1-7C8A874FD6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FBFEAE0-0794-4AC1-B2C1-7C8A874FD6DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90A49CE1-9FFF-4C19-8CAA-3300A9F82462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90A49CE1-9FFF-4C19-8CAA-3300A9F82462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90A49CE1-9FFF-4C19-8CAA-3300A9F82462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90A49CE1-9FFF-4C19-8CAA-3300A9F82462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F4AA836-7A86-4170-B8E0-467CA49F08D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F4AA836-7A86-4170-B8E0-467CA49F08D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F4AA836-7A86-4170-B8E0-467CA49F08D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F4AA836-7A86-4170-B8E0-467CA49F08D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{706C34A1-8DDE-4703-BDCF-DCD85A9CBDAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{706C34A1-8DDE-4703-BDCF-DCD85A9CBDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{706C34A1-8DDE-4703-BDCF-DCD85A9CBDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{706C34A1-8DDE-4703-BDCF-DCD85A9CBDAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6338C0FE-3639-40BE-8FA7-3EB66B433DF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6338C0FE-3639-40BE-8FA7-3EB66B433DF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6338C0FE-3639-40BE-8FA7-3EB66B433DF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6338C0FE-3639-40BE-8FA7-3EB66B433DF2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

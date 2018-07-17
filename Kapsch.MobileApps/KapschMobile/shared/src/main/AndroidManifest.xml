@@ -1,0 +1,29 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="za.co.kapsch.shared">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <service
+            android:name=".Services.LocationService"
+            android:exported="false" />
+
+        <receiver
+            android:name=".Services.LocationAlarm"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="za.co.kapsch.console.START_ALARM" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

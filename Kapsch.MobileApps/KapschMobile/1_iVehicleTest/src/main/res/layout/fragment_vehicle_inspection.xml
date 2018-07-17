@@ -1,0 +1,261 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="za.co.kapsch.ivehicletest.VehicleInspectionFragment">
+
+    <LinearLayout
+        android:background="@color/backGroundQuestions"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <LinearLayout
+            android:background="@color/backGroundCaption"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/lastWizardPageImageButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:layout_margin="10dp"
+                android:layout_gravity="right"
+                android:src="@drawable/report"
+                android:background="@color/backGroundCaption"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:background="@color/backGroundCaption"
+            android:id="@+id/questionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:text="@string/question"/>
+
+        <LinearLayout
+            android:id="@+id/questionLinearLayout"
+            android:background="@color/backGroundQuestions"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+
+                <!--<TextView-->
+                    <!--android:background="@color/backGroundCaption"-->
+                    <!--android:id="@+id/questionTextView"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:padding="10dp"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:text="@string/question"/>-->
+
+                <LinearLayout
+                    android:id="@+id/answerLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/answerTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/backGroundPrompt"
+                        android:padding="10dp"
+                        android:text="multipleChoiceText"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:id="@+id/innerAnswerLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/answerEditText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:inputType="textCapCharacters"
+                            android:longClickable="false"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/answerValidationImageButtonLinearLayout">
+
+                            <ImageButton
+                                android:id="@+id/answerValidationImageButton"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="20dp"
+                                android:background="@color/zxing_transparent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/check" />
+                            </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/confirmLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/confirmAnswerEditText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:longClickable="false"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:id="@+id/confirmAnswerValidationImageButtonLinearLayout">
+
+                            <ImageButton
+                                android:id="@+id/confirmAnswerValidationImageButton"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@color/zxing_transparent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/check" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/radioGroup">
+
+                </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/commentLinearLayout">
+
+                    <TextView
+                        android:id="@+id/commentTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/comment"/>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            android:layout_gravity="center_horizontal">
+
+                            <EditText
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/commentEditText"/>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:id="@+id/commentValidationImageButtonLinearLayout">
+
+                                <ImageButton
+                                    android:id="@+id/commentValidationImageButton"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/check"
+                                    android:background="@color/zxing_transparent"/>
+                                </LinearLayout>
+
+                        </LinearLayout>
+                   </LinearLayout>
+                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/photoLinearLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:choiceMode="singleChoice"
+                    android:listSelector="#31bede"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:background="#FFFFFF"
+                    android:layout_margin="1dp"
+                    android:id="@+id/evidenceListView"/>
+
+                <ImageButton
+                    android:id="@+id/capturePhotoImageButton"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_margin="20dp"
+                    android:background="@color/zxing_transparent"
+                    android:layout_gravity="center"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/camera" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>

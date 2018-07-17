@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#000000">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="1dp"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:id="@+id/typeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text = "VOSI"
+            android:background="#f59f26"
+            android:textColor="@color/defaultColor"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:id="@+id/itemImage"
+                android:layout_width="wrap_content"
+                android:layout_height="96dp"
+                android:adjustViewBounds="true"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top">
+
+                <TextView
+                    android:id="@+id/infoTextView"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text = "vln: CY12345"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/timeTextView"
+                    android:layout_width="match_parent"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text = "time: 08:38:32"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/reasonTextView"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text = "reason: 60"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_margin="5dp">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/timeTextView"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="2"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text = "time: 08:38:32.08"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/zoneTextView"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text = "zone: 60"-->
+                <!--android:textStyle="bold"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/speedTextView"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center"-->
+                <!--android:text = "speed: 71"-->
+                <!--android:textStyle="bold"/>-->
+
+        <!--</LinearLayout>-->
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+﻿@{
+    var districts = ViewBag.Districts as IList<Kapsch.Core.Gateway.Models.Configuration.DistrictModel>;
+}
+
+<div class="form-group">
+    <h5>District</h5>
+    @if (districts.Count == 1)
+    {
+        var district = districts.First();
+        
+        <select id="districtID" class="form-control input-sm">
+            <option value="@district.ID">@district.BranchName</option>
+        </select>
+    }
+    else
+    {
+        @Html.DropDownList("districtID", new SelectList(districts, "ID", "BranchName", ""), "ALL Districts", new { @class = "form-control input-sm" })
+    }
+   
+</div>

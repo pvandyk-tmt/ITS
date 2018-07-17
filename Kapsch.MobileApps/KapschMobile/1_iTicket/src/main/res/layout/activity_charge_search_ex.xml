@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="za.co.kapsch.iticket.ChargeSearchActivityEx">
+
+     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+           <LinearLayout
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="#000000"
+              android:id="@+id/searchBoxLinearLayout">
+
+               <LinearLayout
+                   android:id="@+id/searchLinearLayout"
+                   android:orientation="horizontal"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="1dp"
+                   android:background="#FFFFFF">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/message_search"
+                       android:textAppearance="?android:textAppearanceMedium"
+                       android:textStyle="bold"
+                       android:gravity="right"
+                       android:layout_marginLeft="5dp"
+                       android:id="@+id/searchTextView"/>
+
+                   <EditText
+                       android:layout_width="200dp"
+                       android:layout_height="wrap_content"
+                       android:textAppearance="?android:textAppearanceMedium"
+                       android:id="@+id/editText"/>
+
+                   <ImageButton
+                       android:id="@+id/searchButton"
+                       android:layout_width="40dp"
+                       android:layout_height="40dp"
+                       android:layout_margin ="3dp"
+                       android:background="@color/buttonColor"
+                       android:onClick="searchCharges"
+                       android:scaleType="fitXY"
+                       android:src="@drawable/search" />
+
+               </LinearLayout>
+
+                 <!--<LinearLayout-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_margin="1dp"-->
+                    <!--android:background="#FFFFFF">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="@string/charges"-->
+                        <!--android:textAppearance="?android:textAppearanceMedium"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:gravity="right"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:id="@+id/searchTextView"/>-->
+
+                    <!--<EditText-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_weight="2"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:textAppearanceMedium"-->
+                        <!--android:layout_marginRight="5dp"-->
+                        <!--android:id="@+id/editText"/>-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="@string/message_zone"-->
+                        <!--android:textAppearance="?android:textAppearanceMedium"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:gravity="right"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:id="@+id/zoneTextView"/>-->
+
+                    <!--<Spinner-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_weight="4"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:spinnerMode="dropdown"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:textAppearance="?android:textAppearanceMedium"-->
+                        <!--android:layout_marginLeft="5dp"-->
+                        <!--android:id="@+id/zoneSpinner"/>-->
+
+                    <!--<ImageButton-->
+                        <!--android:layout_width="40dp"-->
+                        <!--android:layout_height="40dp"-->
+                        <!--android:layout_margin="3dp"-->
+                        <!--android:scaleType="fitXY"-->
+                        <!--android:src="@drawable/search"-->
+                        <!--android:id="@+id/searchButton"-->
+                        <!--android:background="@color/buttonColor"-->
+                        <!--android:onClick="searchCharges"/>-->
+
+                <!--</LinearLayout>-->
+
+            </LinearLayout>
+
+           <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:layout_gravity="center_horizontal"
+                android:background="#000000">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:choiceMode="none"
+                    android:listSelector="@android:color/transparent"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:background="#FFFFFF"
+                    android:layout_margin="1dp"
+                    android:scrollbars="vertical"
+                    android:id="@+id/chargeCodeListView"/>
+
+           </LinearLayout>
+
+           <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_horizontal"
+                android:background="#000000">
+
+                <ScrollView
+                    android:id="@+id/SCROLLER_ID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:fillViewport="true">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/text_place_holder"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:gravity="center"
+                        android:layout_margin="1dp"
+                        android:scrollbars = "vertical"
+                        android:background="#FFFFFF"
+                        android:id="@+id/descriptionTextView"/>
+
+                </ScrollView>
+           </LinearLayout>
+
+           <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="#FFFFFF">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ok_text"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/okButton"
+                    android:layout_gravity="right"
+                    android:onClick="okButtonClick"/>
+
+            </RelativeLayout>
+     </LinearLayout>
+</RelativeLayout>

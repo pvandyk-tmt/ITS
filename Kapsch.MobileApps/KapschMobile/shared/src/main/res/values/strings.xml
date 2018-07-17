@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Shared</string>
+    <string name="message_network_not_available">Network connection not available.</string>
+    <string name="this_application_can_only_be_started_via_the_console">This application can only be started via the console.</string>
+    <string name="user_cannot_be_null">User cannot be null</string>
+    <string name="district_cannot_be_null">District cannot be null</string>
+    <string name="payment_context_cannot_be_null">Payment context cannot be null</string>
+    <string name="search_fines_criteria_cannot_be_null">Search fines criterea cannot be null</string>
+    <string name="mobile_device_cannot_be_null">Mobile device cannot be null</string>
+    <string name="printer_mac_address_cannot_be_null">Printer mac address cannot be null</string>
+    <string name="end_point_cannot_be_null">End point cannot be null</string>
+    <string name="n_a">N/A</string>
+    <string name="slip_seperator">.............................................</string>
+
+    <string name="ipay_receipt">iPay Receipt</string>
+    <string name="receipt_number">Receipt Number:</string>
+    <string name="website">Website:</string>
+    <string name="call_centre_tel">Call Centre Tel:</string>
+    <string name="payment_date">Payment Date:</string>
+    <string name="person">Person:</string>
+    <string name="person_ex">PERSON</string>
+    <string name="vehicle">VEHICLE</string>
+    <string name="location">Location:</string>
+    <string name="item_Description">Item Description</string>
+    <string name="qty">QTY</string>
+    <string name="price">Price</string>
+    <string name="value">Value</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="thank_you_for_payment">Thank you for payment!</string>
+    <string name="duma_pay">Duma Pay</string>
+    <string name="cash">Cash</string>
+
+    <string name="vln">VLN:</string>
+    <string name="id">ID:</string>
+    <string name="ref_number">REF NUMBER:</string>
+    <string name="proceed">Proceed</string>
+    <string name="user_does_not_have_access" >User does not have access to %s</string>
+
+</resources>
